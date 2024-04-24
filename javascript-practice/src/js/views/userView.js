@@ -5,18 +5,18 @@ export default class UserView {
     this.loginFormData = document.getElementById('form-login')
   }
 
-  Submit(handler) {
-    this.loginFormData.addEventListener('submit', this.Login(handler));
-  }
+  // Submit(event, handler) {
+  //   this.loginFormData.addEventListener('submit', this.Login(handler));
+  // }
 
-  Login(handler) {
-    return function (event) {
-      event.prevenDefault()
-      const emailData = document.getElementById('email')
-      const passwordData = document.getElementById('password')
-      handler(emailData.value, passwordData.value)
-      console.log(emailData)
-      console.log(passwordData)
-    }
-  }
+  // Login(handler) {
+  //   return function (event) {
+  //     event.prevenDefault()
+  //     const emailData = document.getElementById('email')
+  //     const passwordData = document.getElementById('password')
+  //     handler(emailData.value, passwordData.value)
+  //     console.log(emailData)
+  //     console.log(passwordData)
+  //   }
+  // }
 }

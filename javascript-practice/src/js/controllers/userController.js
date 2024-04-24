@@ -1,25 +1,12 @@
-import UserService from '../services/userService';
 
-class UserController {
-  constructor(view, service) {
+import UserModel from '../models/userModel';
+
+export default class UserController {
+  constructor(view, model) {
     this.view = view;
-    this.service = service;
+    this.model = model;
   }
 
-  login = async (username, password) => {
-    const user = await UserService.login(username, password);
-    if (user) {
-      if (user.role === 'supper_admin') {
-        window.location.href = 'index.html';
-      } else {
-        window.location.href = 'product.html';
-      }
-    } else {
-      alert('Account not found');
-    }
-  };
-
-  handleLogin = async () => {
-    this.view.bindLogin(this.login);
+  init = async () => {
   };
 }

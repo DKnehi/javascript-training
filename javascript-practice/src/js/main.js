@@ -1,9 +1,6 @@
-import UserController from './controllers/userController';
-import UserView from './views/userView';
-import UserService from './services/userService';
+import UserView from "./views/userView";
+import UserController from "./controllers/userController";
+import UserModel from "./models/userModel";
 
-window.addEventListener('load', () => {
-  // call function for page login
-  const managerUser = new UserController(new UserView(), new UserService());
-  
-});
+const userController = new UserController(new UserModel(), new UserView);
+userController.init();
