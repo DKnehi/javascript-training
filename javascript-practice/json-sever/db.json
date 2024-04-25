@@ -1,14 +1,14 @@
 {
-  "user": [
+  "users": [
     {
-    "user_id": "1909",
-    "first_name":"quoc",
-    "last_name": "dat",
-    "email": "truongquocdatlqd@gmail.com",
-    "phone_number": "0359001651",
-    "role": "supper admin",
-    "user_name": "quocdat",
-    "password": "Dat1992002@"
+      "user_id": "1909",
+      "first_name":"quoc",
+      "last_name": "dat",
+      "email": "truongquocdatlqd@gmail.com",
+      "phone_number": "0359001651",
+      "role": "supper admin",
+      "user_name": "quocdat",
+      "password": "Dat1992002@"
     }
   ]
 }
