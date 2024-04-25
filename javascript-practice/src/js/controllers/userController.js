@@ -6,15 +6,13 @@ export default class UserController {
     this.view = new UserView()
     this.model = new UserModel()
 
-    // this.view.bindFormLogin(this.handleFormLogin);
-    this.handleFormLogin()
+    this.view.bindFormLogin(this.handleFormLogin);
+
   }
 
-  handleFormLogin = () => {
-    const value = this.view.bindFormLogin()
-    console.log(value, 'value')
+  handleFormLogin = (email, password) => {
+    //Next pages
+    console.log('Dashboard')
   }
-
-  // init = async () => {
-  // };
 }
+

@@ -7,5 +7,5 @@
 import UserController from './controllers/userController'
 
 const userController = new UserController()
-const init = { userController }
-const app = init
+
+ 
