@@ -1,5 +1,5 @@
-const Regex = {
+const REGEX = {
   EmailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   PasswordRegex: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
 }
-export default Regex;
+export default REGEX;
