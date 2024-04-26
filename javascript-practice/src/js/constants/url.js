@@ -1,4 +1,5 @@
 export const API = {
-  Base_Url: 'http://localhost:3000/',
-  User: '/users',
-}
+  BASE_URL: 'https://662b3007de35f91de157766f.mockapi.io/api',
+  ENDPOINT_USERS: '/users',
+};
+

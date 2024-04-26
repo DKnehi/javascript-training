@@ -10,13 +10,11 @@ export default class UserView {
       e.preventDefault();
       const valueEmail = this.emailData.value;
       const valuePassword = this.passwordData.value;
-      handler(valueEmail, valuePassword); // Pass form data to handler
+      handler(valueEmail, valuePassword); 
     });
   }
   
-  // Emit custom event for successful login
-  emitLoginSuccess = () => {
-    const event = new Event('loginSuccess');
-    document.dispatchEvent(event);
-  }
+  redirectPage = (page) => {
+    window.location.replace(page);
+  };
 }
