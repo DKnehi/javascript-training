@@ -22,6 +22,7 @@ export default class UserService {
         (user) => user.email === email && user.password === password
       );
       return user;
+      
     } catch (error) {
       throw new Error('Failed to get user.');
     }

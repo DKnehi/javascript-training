@@ -14,10 +14,10 @@ export default class UserController {
   handleFormLogin = async (email, password) => {
     try {
       const userData = await this.service.loginUser(email, password);
+
       if (userData) {
         this.view.redirectPage("dashboard.html");
-      }
-      else {
+      } else {
         alert('Login Unsuccessful')
       }
     } catch (error) {

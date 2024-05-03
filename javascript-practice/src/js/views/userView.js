@@ -1,16 +1,14 @@
 export default class UserView {
   constructor() {
-    this.emailEl = document.getElementById('email');
-    this.passwordEl = document.getElementById('password');
     this.loginFormEl = document.getElementById('login-form');
   }
 
-  bindFormLogin = (handler) => {
+  bindFormLogin = (submitCallBack) => {
     this.loginFormEl.addEventListener("submit", e => {
       e.preventDefault();
-      const valueEmail = this.emailEl.value;
-      const valuePassword = this.passwordEl.value;
-      handler(valueEmail, valuePassword); 
+      const valueEmail = document.getElementById('email').value;
+      const valuePassword = document.getElementById('password').value;
+      submitCallBack(valueEmail, valuePassword); 
     });
   }
   
