@@ -1,9 +1,9 @@
 {
   "name": "my-project",
-  "source": "src/index.html",
+  "source": "src/pages/login.html",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "parcel src/pages/login.html",
+    "build": "rm -rf .parcel-cache && parcel build src/pages/login.html"
   },
   "devDependencies": {
     "parcel": "^2.12.0"
