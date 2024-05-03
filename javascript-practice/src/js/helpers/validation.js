@@ -1,16 +1,11 @@
-import { VALIDATE_ERORR } from '../constants/message'
+import {ERROR_MESSAGE} from '../constants/message'
 import { REGEX } from '../constants/regex'
 
-const { Required_Field, Invalid_Email, Invalid_Password } = VALIDATE_ERORR
+const { REQUIRED_FIELD, INVALID_EMAIL, INVALID_PASSWORD } = ERROR_MESSAGE
 
-const { EmailRegex, PasswordRegex } = REGEX
+const { REQUIRD_FIELD,  EMAIL, PASSWORD } = REGEX
 
-const isRequired = value => (value !== '' ? '' : Required_Field);
-const isEmail = value => EmailRegex.test(value) ? '' : Invalid_Email;
-const isPassword = value => PasswordRegex.test(value) ? '' : Invalid_Password;
+export const isRequired = value => REQUIRD_FIELD.test (value !== '' ? '' : REQUIRED_FIELD);
+export const isEmail = value => EMAIL.test(value) ? '' : INVALID_EMAIL;
+export const isPassword = value => PASSWORD.test(value) ? '' : INVALID_PASSWORD;
 
-export {
-  isEmail,
-  isPassword,
-  isRequired
-}
