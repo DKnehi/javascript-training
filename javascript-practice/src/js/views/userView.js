@@ -3,12 +3,12 @@ export default class UserView {
     this.loginFormEl = document.getElementById('login-form');
   }
 
-  bindFormLogin = (submitCallBack) => {
+  bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener("submit", e => {
       e.preventDefault();
       const valueEmail = document.getElementById('email').value;
       const valuePassword = document.getElementById('password').value;
-      submitCallBack(valueEmail, valuePassword); 
+      submitLogin(valueEmail, valuePassword); 
     });
   }
   

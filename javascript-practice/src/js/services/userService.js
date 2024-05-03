@@ -21,8 +21,8 @@ export default class UserService {
       const user = data.find(
         (user) => user.email === email && user.password === password
       );
-      return user;
       
+      return user;
     } catch (error) {
       throw new Error('Failed to get user.');
     }
