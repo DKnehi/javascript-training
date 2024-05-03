@@ -8,6 +8,7 @@ export default class UserView {
       e.preventDefault();
       const valueEmail = document.getElementById('email').value;
       const valuePassword = document.getElementById('password').value;
+      
       submitLogin(valueEmail, valuePassword); 
     });
   }
