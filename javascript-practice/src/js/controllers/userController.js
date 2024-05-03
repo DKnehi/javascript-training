@@ -7,24 +7,21 @@ export default class UserController {
     this.view = new UserView()
     this.model = new UserModel()
     this.service = new UserService()
-    
+
     this.view.bindFormLogin(this.handleFormLogin);
   }
 
   handleFormLogin = async (email, password) => {
-    // call api get 
     try {
-      const userData = await this.service.checkEmailPassword(email, password);
-      console.log(userData);
-      if(userData) {
+      const userData = await this.service.loginUser(email, password);
+      if (userData) {
         this.view.redirectPage("dashboard.html");
       }
       else {
-        alert('Đăng nhập ko thành công')
+        alert('Login Unsuccessful')
       }
-
     } catch (error) {
-     console.error(error);
+      console.error(error);
     }
   }
 }

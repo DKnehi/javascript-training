@@ -9,7 +9,6 @@ const isRequired = value => (value !== '' ? '' : Required_Field);
 const isEmail = value => EmailRegex.test(value) ? '' : Invalid_Email;
 const isPassword = value => PasswordRegex.test(value) ? '' : Invalid_Password;
 
-
 export {
   isEmail,
   isPassword,

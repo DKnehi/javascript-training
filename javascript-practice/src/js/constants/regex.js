@@ -1,6 +1,6 @@
 export const REGEX = {
-  RequiredFieldRegex: /^.*\S+.*$/,
-  EmailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  PasswordRegex: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
+  REQUIRD_FIELD_REGEX: /^.*\S+.*$/,
+  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  PASSWORD_REGEX: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
 }
 
