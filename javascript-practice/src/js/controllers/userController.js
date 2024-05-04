@@ -2,7 +2,7 @@ import showToast from '../views/toast';
 import UserModel from '../models/userModel'
 import UserView from '../views/userView'
 import UserService from '../services/userService'
-import {NOTIFY_MESSAGE}  from '../constants/message'
+import NOTIFY_MESSAGE  from '../constants/message'
 
 const {
   LOGIN_FAILED,
