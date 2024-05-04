@@ -6,5 +6,4 @@ validatePassword = (password) => {
   return PASSWORD.test(password);
 }
 
-export { validateEmail, validatePassword };
-
+export { validatePassword };

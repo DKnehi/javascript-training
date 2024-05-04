@@ -49,17 +49,3 @@
   font-size: var(--font-size-largest);
   line-height: 18.4px;
 }
-
-.error-message {
-  color: var(--color-red);
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-light);
-}
-
-.error-message:empty {
-  display: none;
-}
-
-.error-message:not(:empty) {
-  display: block;
-}

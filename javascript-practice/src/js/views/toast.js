@@ -1,19 +1,14 @@
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+const showToast = (message, type = 'success') => {
+    const toastElement = document.getElementById('toast-message');
 
-const showSuccess = ({ text, duration }) =>
-  notify({ text, state: 'success', duration });
-const showError = ({ text, duration }) =>
-  notify({ text, state: 'error', duration });
-
-const notify = ({ text, state, duration = 2000 }) => {
-  Toastify({
-    text,
-    duration,
-    gravity: 'top',
-    position: 'center',
-    className: state,
-  }).showToast();
+    if (!toastElement) return;
+    toastElement.textContent = message;
+    const toastClass = (type === 'error') ? 'toast-success' : 'toast-error';
+    
+    toastElement.className = `toast-message ${toastClass} show`;
+    setTimeout(() => {
+        toastElement.classList.remove('show');
+    }, 3000);
 };
 
-export { showSuccess, showError };
+export default showToast;
