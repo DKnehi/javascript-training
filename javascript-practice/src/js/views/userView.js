@@ -1,5 +1,5 @@
-import { validateEmail, validatePassword } from '../helpers/validation';
-import { ERROR_MESSAGE } from '../constants/message';
+import { validateEmail, validatePassword } from '../helpers/validation'
+import { ERROR_MESSAGE } from '../constants/message'
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -10,49 +10,49 @@ export const {
 
 export default class UserView {
   constructor() {
-    this.loginFormEl = document.getElementById('login-form');
+    this.loginFormEl = document.getElementById('login-form')
   }
 
   bindFormLogin = (submitLogin) => {
-    this.loginFormEl.addEventListener("submit", e => {
-      e.preventDefault();
-      const valueEmail = document.getElementById('email').value;
-      const valuePassword = document.getElementById('password').value;
-      const emailErrorEl = document.getElementById('email-error');
-      const passwordErrorEl = document.getElementById('password-error');
+    this.loginFormEl.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const valueEmail = document.getElementById('email').value
+      const valuePassword = document.getElementById('password').value
+      const emailErrorEl = document.getElementById('email-error')
+      const passwordErrorEl = document.getElementById('password-error')
 
-      emailErrorEl.textContent = '';
-      passwordErrorEl.textContent = '';
+      emailErrorEl.textContent = ''
+      passwordErrorEl.textContent = ''
 
       if (!valueEmail || !valuePassword) {
         if (!valueEmail) {
-          emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
+          emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`
         }
         if (!valuePassword) {
-          passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
+          passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`
         }
 
-        return;
+        return
       }
 
       if (!validatePassword(valuePassword)) {
-        passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
-        
-        return;
+        passwordErrorEl.textContent = `${INVALID_PASSWORD}`
+
+        return
       }
-      submitLogin(valueEmail, valuePassword);
-    });
+      submitLogin(valueEmail, valuePassword)
+    })
 
     document.getElementById('email').addEventListener('input', () => {
-      document.getElementById('email-error').textContent = '';
-    });
+      document.getElementById('email-error').textContent = ''
+    })
 
     document.getElementById('password').addEventListener('input', () => {
-      document.getElementById('password-error').textContent = '';
-    });
+      document.getElementById('password-error').textContent = ''
+    })
   }
 
   redirectPage = (page) => {
-    window.location.replace(page);
-  };
+    window.location.replace(page)
+  }
 }

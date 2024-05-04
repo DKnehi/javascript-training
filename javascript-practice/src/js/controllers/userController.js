@@ -6,7 +6,7 @@ import NOTIFY_MESSAGE  from '../constants/message'
 
 const {
   LOGIN_FAILED,
-} = NOTIFY_MESSAGE
+} = NOTIFY_MESSAGE 
 
 export default class UserController {
   constructor() {

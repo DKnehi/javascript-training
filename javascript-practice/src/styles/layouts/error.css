@@ -9,5 +9,5 @@
 }
 
 .error-message:not(:empty) {
-  display: block;
+  display: block; 
 }
