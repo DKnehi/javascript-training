@@ -1,7 +1,12 @@
 import UserModel from '../models/userModel'
 import UserView from '../views/userView'
 import UserService from '../services/userService'
+import {NOTIFY_MESSAGE} from '../constants/message'
+import { showError } from '../views/toast';
 
+export const {
+  LOGIN_FAILED,
+} = NOTIFY_MESSAGE
 export default class UserController {
   constructor() {
     this.view = new UserView()
@@ -18,7 +23,7 @@ export default class UserController {
       if (userData) {
         this.view.redirectPage("dashboard.html");
       } else {
-        alert('Login Unsuccessful')
+        showError({ text: LOGIN_FAILED});
       }
     } catch (error) {
       console.error(error);

@@ -1,3 +1,7 @@
-import UserController from './controllers/userController'
+import App from "./app";
 
-const userController = new UserController()
+// Sure that scripts called after DOM loaded
+document.addEventListener("DOMContentLoaded", () => {
+  const myApp = new App();
+  myApp.start();
+});

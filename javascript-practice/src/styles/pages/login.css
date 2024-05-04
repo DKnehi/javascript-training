@@ -20,6 +20,7 @@
   margin-top: 24px;
   padding: 24px;
   width: 320px;
+  gap: 24px;
   text-align: left;
   background-color: var(--color-while);
   border-radius: var(--boder-radius-input-button);
@@ -33,16 +34,12 @@
 }
 
 .input-login {
-  margin: 8px 0 24px 0;
+  margin: 8px 0;
   width: 100%;
   padding: 8px;
   border-radius: var(--boder-radius-login-input);
   color: var(--color-primary-login);
   background-color: var(--color-alabaster);
-}
-
-.input-login::placeholder {
-  color: var(--color-primary-login);
 }
 
 .login-button {
@@ -51,4 +48,18 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-largest);
   line-height: 18.4px;
+}
+
+.error-message {
+  color: var(--color-red);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-light);
+}
+
+.error-message:empty {
+  display: none;
+}
+
+.error-message:not(:empty) {
+  display: block;
 }
