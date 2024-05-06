@@ -18,4 +18,4 @@ export default class UserModel {
     this.userName = userName;
     this.password = password;
   }
-}
+};

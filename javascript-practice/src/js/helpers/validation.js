@@ -1,7 +1,7 @@
-import { REGEX } from '../constants/regex'
+import { REGEX } from '../constants/regex';
 
 validatePassword = (password) => {
-  return REGEX.PASSWORD.test(password)
-}
+  return REGEX.PASSWORD.test(password);
+};
 
-export { validatePassword }
+export { validatePassword };
