@@ -2,6 +2,13 @@
   /* start-login-page */
   --color-primary-login: var(--color-cod-gray);
   /* end-login-page */
+  --color-toast-success: #155724;
+  --color-background-toast-success: #D4EDDA;
+  --color-boder-toast-success: #C3E6CB;
+  --color-background-toast-error: #F8D7DA;
+  --color-boder-toast-error: #F5C6CB;
+  --color-toast-error: #721C24;
+
   --color-cod-gray: #111111;
   --color-azure-radiance: #0095FF;
   --color-cornflower-blue: #4A85F6;
@@ -13,9 +20,11 @@
   --color-bali-hai: #8F9BB3;
   --color-alabaster: #F8F8F8;
   --color-gallery: #EFF4FA;
+  --color-red: #FF0000;
 
   --boder-radius-input-button: 8px;
   --boder-radius-login-input: 4px;
+  --boder-radius-toast: 5px;
 
   --font-size-smallest: 12px;
   --font-size-smaller: 13px;

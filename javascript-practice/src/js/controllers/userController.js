@@ -1,6 +1,10 @@
+import showToast from '../views/toast'
 import UserModel from '../models/userModel'
 import UserView from '../views/userView'
 import UserService from '../services/userService'
+import NOTIFY_MESSAGE from '../constants/message'
+
+const { LOGIN_FAILED } = NOTIFY_MESSAGE
 
 export default class UserController {
   constructor() {
@@ -8,21 +12,20 @@ export default class UserController {
     this.model = new UserModel()
     this.service = new UserService()
 
-    this.view.bindFormLogin(this.handleFormLogin);
+    this.view.bindFormLogin(this.handleFormLogin)
   }
 
   handleFormLogin = async (email, password) => {
     try {
-      const userData = await this.service.loginUser(email, password);
+      const userData = await this.service.loginUser(email, password)
 
       if (userData) {
-        this.view.redirectPage("dashboard.html");
+        this.view.redirectPage('dashboard.html')
       } else {
-        alert('Login Unsuccessful')
+        showToast(`${LOGIN_FAILED}`)
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 }
-

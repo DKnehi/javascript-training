@@ -11,27 +11,34 @@
     <article class="login flex">
       <div class="login-box">
         <h1 class="login-heading">Login</h1>
-        <form class="login-form" id="login-form">
-          <label class="input-label" for="email">Email</label>
-          <input
-            class="input-login input"
-            type="email"
-            name="email"
-            placeholder="example@email.com"
-            id="email"
-          />
-          <label class="input-label" for="password">Password</label>
-          <input
-            class="input-login input"
-            type="password"
-            name="password"
-            placeholder="enter password"
-            id="password"
-          />
+        <form class="login-form flex-column" id="login-form">
+          <div>
+            <label class="input-label" for="email">Email</label>
+            <input
+              class="input-login input"
+              type="email"
+              name="email"
+              placeholder="example@email.com"
+              id="email"
+            />
+            <span id="email-error" class="error-message"></span>
+          </div>
+          <div>
+            <label class="input-label" for="password">Password</label>
+            <input
+              class="input-login input"
+              type="password"
+              name="password"
+              placeholder="enter password"
+              id="password"
+            />
+            <span id="password-error" class="error-message"></span>
+          </div>
           <button class="login-button button" type="submit">Login</button>
         </form>
       </div>
     </article>
+    <div id="toast-message" class="toast-message"></div>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>

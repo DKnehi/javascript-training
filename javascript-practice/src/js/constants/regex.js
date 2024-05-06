@@ -1,6 +1,4 @@
 export const REGEX = {
-  REQUIRD_FIELD: /^.*\S+.*$/,
-  EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  //Must enter 6 characters including capital letters and special characters
   PASSWORD: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
 }
-
