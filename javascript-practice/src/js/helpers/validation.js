@@ -1,9 +1,7 @@
 import { REGEX } from '../constants/regex'
 
-const { PASSWORD } = REGEX
-
 validatePassword = (password) => {
-  return PASSWORD.test(password)
+  return REGEX.PASSWORD.test(password)
 }
 
 export { validatePassword }

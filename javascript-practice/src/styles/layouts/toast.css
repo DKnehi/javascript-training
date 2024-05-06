@@ -21,6 +21,6 @@
   border-color: var(--color-boder-toast-error);
 }
 
-.toast-message.show {
+.toast-show {
   opacity: 1;
 }

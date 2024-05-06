@@ -5,9 +5,9 @@ const showToast = (message, type = 'success') => {
   toastElement.textContent = message
   const toastClass = type === 'error' ? 'toast-success' : 'toast-error'
 
-  toastElement.className = `toast-message ${toastClass} show`
+  toastElement.className = `toast-message ${toastClass} toast-show`
   setTimeout(() => {
-    toastElement.classList.remove('show')
+    toastElement.classList.remove('toast-show')
   }, 3000)
 }
 
