@@ -3,7 +3,12 @@
   --color-primary-login: var(--color-cod-gray);
   /* end-login-page */
   --color-toast-success: #155724;
+  --color-background-toast-success: #d4edda;
+  --color-boder-toast-success: #c3e6cb;
+  --color-background-toast-error: #f8d7da;
+  --color-boder-toast-error: #f5c6cb;
   --color-toast-error: #721c24;
+
   --color-cod-gray: #111111;
   --color-azure-radiance: #0095FF;
   --color-cornflower-blue: #4A85F6;
