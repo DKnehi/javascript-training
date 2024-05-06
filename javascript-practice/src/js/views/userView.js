@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '../helpers/validation'
+import { validatePassword } from '../helpers/validation'
 import { ERROR_MESSAGE } from '../constants/message'
 
 export const {
@@ -11,44 +11,45 @@ export const {
 export default class UserView {
   constructor() {
     this.loginFormEl = document.getElementById('login-form')
+    this.emailFormEl = document.getElementById('email')
+    this.passwordFormEl = document.getElementById('password')
+    this.emailErrorEl = document.getElementById('email-error')
+    this.passwordErrorEl = document.getElementById('password-error')
   }
 
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
       e.preventDefault()
-      const valueEmail = document.getElementById('email').value
-      const valuePassword = document.getElementById('password').value
-      const emailErrorEl = document.getElementById('email-error')
-      const passwordErrorEl = document.getElementById('password-error')
+      const valueEmail = this.emailFormEl.value
+      const valuePassword = this.passwordFormEl.value
 
-      emailErrorEl.textContent = ''
-      passwordErrorEl.textContent = ''
+      this.emailErrorEl.textContent = ''
+      this.passwordErrorEl.textContent = ''
 
-      if (!valueEmail || !valuePassword) {
-        if (!valueEmail) {
-          emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`
-        }
-        if (!valuePassword) {
-          passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`
-        }
+      if (!valueEmail) {
+        this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`
+      }
+
+      if (!valuePassword) {
+        this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`
 
         return
       }
 
       if (!validatePassword(valuePassword)) {
-        passwordErrorEl.textContent = `${INVALID_PASSWORD}`
+        this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`
 
         return
       }
+
       submitLogin(valueEmail, valuePassword)
     })
 
-    document.getElementById('email').addEventListener('input', () => {
-      document.getElementById('email-error').textContent = ''
+    this.emailFormEl.addEventListener('input', () => {
+      this.emailErrorEl.textContent = ''
     })
-
-    document.getElementById('password').addEventListener('input', () => {
-      document.getElementById('password-error').textContent = ''
+    this.passwordFormEl.addEventListener('input', () => {
+      this.passwordErrorEl.textContent = ''
     })
   }
 

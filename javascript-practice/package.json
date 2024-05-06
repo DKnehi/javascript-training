@@ -9,7 +9,6 @@
     "parcel": "^2.12.0"
   },
   "dependencies": {
-    "commitlint": "^19.2.2",
-    "toastify-js": "^1.12.0"
+    "commitlint": "^19.2.2"
   }
 }
