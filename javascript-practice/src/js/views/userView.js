@@ -63,10 +63,10 @@ export default class UserView {
   bindLogoutDropDow = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
-        this.logoutEl.style.display = 'block';
+        this.logoutEl.classList.add('show-logout');
         this.arrowEl.classList.add('arrow-up');
       } else {
-        this.logoutEl.style.display = 'none';
+        this.logoutEl.classList.remove('show-logout');
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
