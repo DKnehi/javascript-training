@@ -12,7 +12,7 @@
   --color-cod-gray: #111111;
   --color-azure-radiance: #0095FF;
   --color-cornflower-blue: #4A85F6;
-  --color-boulder: #757575;
+  --color-grey: #757575;
   --color-black: #0A0A0A;
   --color-tundora: #404040;
   --color-cloud-bust: #222B45;
@@ -21,6 +21,8 @@
   --color-alabaster: #F8F8F8;
   --color-gallery: #EFF4FA;
   --color-red: #FF0000;
+  --color-wind-sand: #F5F5F5;
+  --color-silver: #BFBFBF;
 
   --boder-radius-input-button: 8px;
   --boder-radius-login-input: 4px;
@@ -32,7 +34,8 @@
   --font-size-medium: 15px;
   --font-size-largest: 16px;
   --font-size-larger: 17px;
-  --font-size-large: 24px;
+  --font-size-large: 20px;
+  --font-size-xlarge: 24px;
 
   --font-weight-light: 400;
   --font-weight-nomal: 600;

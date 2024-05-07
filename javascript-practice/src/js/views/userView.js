@@ -15,7 +15,12 @@ export default class UserView {
     this.passwordFormEl = document.getElementById('password');
     this.emailErrorEl = document.getElementById('email-error');
     this.passwordErrorEl = document.getElementById('password-error');
-  }
+    this.arrowEl = document.getElementById('arrow');
+    this.logoutEl = document.getElementById('logout');
+
+    this.isArrowUp = true;
+    this.bindLogoutDropDow();
+  };
 
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
@@ -47,13 +52,28 @@ export default class UserView {
 
     this.emailFormEl.addEventListener('input', () => {
       this.emailErrorEl.textContent = '';
-    })
+    });
+
     this.passwordFormEl.addEventListener('input', () => {
       this.passwordErrorEl.textContent = '';
+    });
+  };
+
+  //After clicking on the arrow in the header, Logout will drop down
+  bindLogoutDropDow = () => {
+    this.arrowEl.addEventListener('click', () => {
+      if (this.isArrowUp) {
+        this.logoutEl.classList.add('show-logout');
+        this.arrowEl.classList.add('arrow-up');
+      } else {
+        this.logoutEl.classList.remove('show-logout');
+        this.arrowEl.classList.remove('arrow-up');
+      }
+      this.isArrowUp = !this.isArrowUp;
     })
   };
 
   redirectPage = (page) => {
     window.location.replace(page);
   };
-};
+}
