@@ -14,7 +14,7 @@
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-light);
   line-height: 21px;
-  color: var(--color-boulder);
+  color: var(--color-grey);
   letter-spacing: 0.25px;
 }
 
@@ -23,7 +23,7 @@
   padding: 31px 23px 25px 43px;
 }
 
-.header-dashboard-profile-nitifi-box {
+.header-dashboard-profile-notification-box {
   gap: 24px;
   align-items: center;
 }
@@ -38,6 +38,7 @@
   height: 45px;
   border-radius: 50%;
   object-fit: cover;
+  background-color: var(--color-silver);
 }
 
 .header-dashboard-profile-name {
@@ -65,4 +66,8 @@
   position: absolute;
   margin-top: 20px;
   margin-left: -15px;
+}
+
+.header-dashboard-profile-name-box {
+  gap: 5px;
 }

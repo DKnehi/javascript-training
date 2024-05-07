@@ -1,5 +1,5 @@
-import { validatePassword } from '../helpers/validation'
-import { ERROR_MESSAGE } from '../constants/message'
+import { validatePassword } from '../helpers/validation';
+import { ERROR_MESSAGE } from '../constants/message';
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -10,68 +10,70 @@ export const {
 
 export default class UserView {
   constructor() {
-    this.loginFormEl = document.getElementById('login-form')
-    this.emailFormEl = document.getElementById('email')
-    this.passwordFormEl = document.getElementById('password')
-    this.emailErrorEl = document.getElementById('email-error')
-    this.passwordErrorEl = document.getElementById('password-error')
-    this.arrowEl = document.getElementById('arrow')
-    this.logoutEl = document.getElementById('logout')
+    this.loginFormEl = document.getElementById('login-form');
+    this.emailFormEl = document.getElementById('email');
+    this.passwordFormEl = document.getElementById('password');
+    this.emailErrorEl = document.getElementById('email-error');
+    this.passwordErrorEl = document.getElementById('password-error');
+    this.arrowEl = document.getElementById('arrow');
+    this.logoutEl = document.getElementById('logout');
 
-    this.isArrowUp = true
-    this.binDropDow()
-  }
+    this.isArrowUp = true;
+    this.bindLogoutDropDow();
+  };
 
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
-      e.preventDefault()
-      const valueEmail = this.emailFormEl.value
-      const valuePassword = this.passwordFormEl.value
+      e.preventDefault();
+      const valueEmail = this.emailFormEl.value;
+      const valuePassword = this.passwordFormEl.value;
 
-      this.emailErrorEl.textContent = ''
-      this.passwordErrorEl.textContent = ''
+      this.emailErrorEl.textContent = '';
+      this.passwordErrorEl.textContent = '';
 
       if (!valueEmail) {
-        this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`
-      }
+        this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
+      };
 
       if (!valuePassword) {
-        this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`
+        this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
 
-        return
-      }
+        return;
+      };
 
       if (!validatePassword(valuePassword)) {
-        this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`
+        this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
 
-        return
-      }
+        return;
+      };
 
-      submitLogin(valueEmail, valuePassword)
+      submitLogin(valueEmail, valuePassword);
     })
 
     this.emailFormEl.addEventListener('input', () => {
-      this.emailErrorEl.textContent = ''
-    })
-    this.passwordFormEl.addEventListener('input', () => {
-      this.passwordErrorEl.textContent = ''
-    })
-  }
+      this.emailErrorEl.textContent = '';
+    });
 
-  binDropDow = () => {
+    this.passwordFormEl.addEventListener('input', () => {
+      this.passwordErrorEl.textContent = '';
+    });
+  };
+
+  //After clicking on the arrow in the header, Logout will drop down
+  bindLogoutDropDow = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
-        // this.arrowEl.style.transform = 'rotate(180deg)'
-        this.logoutEl.style.display = 'block'
+        this.logoutEl.style.display = 'block';
+        this.arrowEl.style.transform = 'rotate(180deg)';
       } else {
-        // this.arrowEl.style.transform = 'rotate(0deg)'
-        this.logoutEl.style.display = 'none'
+        this.logoutEl.style.display = 'none';
+        this.arrowEl.style.transform = 'rotate(0deg)';
       }
-      this.isArrowUp = !this.isArrowUp
+      this.isArrowUp = !this.isArrowUp;
     })
-  }
+  };
 
   redirectPage = (page) => {
-    window.location.replace(page)
-  }
+    window.location.replace(page);
+  };
 }
