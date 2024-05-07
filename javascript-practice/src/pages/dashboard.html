@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header-dashboard flex">
+        <div class="header-dashboard-name-box flex-column">
+          <h2 class="header-dashboard-name">Hello, Dat</h2>
+          <p class="header-dashboard-sub-name">Have a nice day</p>
+        </div>
+        <div class="header-dashboard-profile-nitifi-box flex">
+          <img src="../assets/icons//bell.svg" alt="" />
+          <img src="../assets/icons/stick.svg" alt="" />
+          <div class="header-dashboard-profile-box flex">
+            <img
+              class="header-dashboard-avatar"
+              src="../assets/images/avatar.jpg"
+              alt=""
+            />
+            <div>
+              <h2 class="header-dashboard-profile-name">Dat</h2>
+              <p class="header-dashboard-profile-sub-name">Admin</p>
+            </div>
+            <div class="flex-column">
+              <img
+                id="arrow"
+                class="arrow"
+                src="../assets/icons/arrow.svg"
+                alt=""
+              />
+              <span
+                id="logout"
+                class="header-dashboard-profile-sub-name logout"
+              >
+                Logout
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <script type="module" src="../js/main.js"></script>
+  </body>
 </html>
