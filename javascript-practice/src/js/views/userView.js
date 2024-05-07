@@ -6,7 +6,7 @@ export const {
   REQUIRED_FIELD_PASSWORD,
   INVALID_EMAIL,
   INVALID_PASSWORD,
-} = ERROR_MESSAGE
+} = ERROR_MESSAGE;
 
 export default class UserView {
   constructor() {
