@@ -33,19 +33,19 @@ export default class UserView {
 
       if (!valueEmail) {
         this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
-      };
+      }
 
       if (!valuePassword) {
         this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
 
         return;
-      };
+      }
 
       if (!validatePassword(valuePassword)) {
         this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
 
         return;
-      };
+      }
 
       submitLogin(valueEmail, valuePassword);
     })
@@ -64,10 +64,10 @@ export default class UserView {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
         this.logoutEl.style.display = 'block';
-        this.arrowEl.style.transform = 'rotate(180deg)';
+        this.arrowEl.classList.add('arrow-up');
       } else {
         this.logoutEl.style.display = 'none';
-        this.arrowEl.style.transform = 'rotate(0deg)';
+        this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
     })

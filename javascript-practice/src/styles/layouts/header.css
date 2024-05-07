@@ -71,3 +71,11 @@
 .header-dashboard-profile-name-box {
   gap: 5px;
 }
+
+.header-dashboard-hi-name-box {
+  gap: 5px;
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
