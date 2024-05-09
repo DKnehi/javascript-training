@@ -1,5 +1,6 @@
 import { validatePassword } from '../helpers/validation';
 import { ERROR_MESSAGE } from '../constants/message';
+import { LOCAL_STORAGE } from '../constants/localStorage';
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -76,9 +77,9 @@ export default class UserView {
   };
 
   showUserInfo = () => {
-    const firstName = localStorage.getItem('FIRST_NAME');
-    const lastName = localStorage.getItem('LAST_NAME');
-    const role = localStorage.getItem('ROLE');
+    const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
+    const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
+    const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
 
     if (firstName && lastName && role) {
       this.headerNameEl.textContent = firstName;
@@ -90,7 +91,11 @@ export default class UserView {
   redirectPage = (page) => {
     window.location.replace(page);
   };
-}
 
-const renderUserInfo = new UserView();
-renderUserInfo.showUserInfo()
+  
+}
+renderUserInfo = () => {
+  const userView = new UserView();
+userView.showUserInfo();
+}
+renderUserInfo()
