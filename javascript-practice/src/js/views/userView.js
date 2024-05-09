@@ -23,7 +23,7 @@ export default class UserView {
     this.roleEl = document.getElementById('role');
 
     this.isArrowUp = true;
-  };
+  }
 
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
@@ -51,7 +51,7 @@ export default class UserView {
       }
 
       submitLogin(valueEmail, valuePassword);
-    })
+    });
 
     this.emailFormEl.addEventListener('input', () => {
       this.emailErrorEl.textContent = '';
@@ -73,7 +73,7 @@ export default class UserView {
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
-    })
+    });
   };
 
   showUserInfo = () => {
@@ -91,11 +91,11 @@ export default class UserView {
   redirectPage = (page) => {
     window.location.replace(page);
   };
-
-  
 }
+
 renderUserInfo = () => {
   const userView = new UserView();
-userView.showUserInfo();
-}
-renderUserInfo()
+  userView.showUserInfo();
+};
+
+renderUserInfo();
