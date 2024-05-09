@@ -76,11 +76,14 @@
 /* end-arrow */
 
 /* start-logout */
-.logout {
+.header-dashboard-profile-logout {
   display: none;
   position: absolute;
   margin-top: 20px;
   margin-left: -15px;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-smallest);
+  color: var(--color-black);
 }
 
 .show-logout {

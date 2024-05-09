@@ -1,4 +1,4 @@
-.slide-bar {
+.sidebar {
   height: 100vh;
   grid-row-start: 1;
   padding: 40px 0 0 32px;
@@ -9,7 +9,7 @@
   gap: 16px;
   margin-top: 56px;
 }
-.slide-bar-dashboard-heading {
+.sidebar-dashboard-heading {
   font-weight: var(--font-weight-nomal);
   font-size: var(--font-size-largest);
   line-height: 24px;
