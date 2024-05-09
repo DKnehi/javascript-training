@@ -21,9 +21,9 @@ export default class UserController {
 
       if (userData) {
         this.view.redirectPage('dashboard.html');
-        localStorage.setItem('firstName', userData.firstName);
-        localStorage.setItem('lastName', userData.lastName);
-        localStorage.setItem('role', userData.role);
+        localStorage.setItem('FIRST_NAME', userData.firstName);
+        localStorage.setItem('LAST_NAME', userData.lastName);
+        localStorage.setItem('ROLE', userData.role);
       } else {
         showToast(`${LOGIN_FAILED}`);
       }

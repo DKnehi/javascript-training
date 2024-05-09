@@ -10,16 +10,15 @@ export const {
 
 export default class UserView {
   constructor() {
-    this.loginFormEl = document.getElementById('login-form');
-    this.emailFormEl = document.getElementById('email');
-    this.passwordFormEl = document.getElementById('password');
-    this.emailErrorEl = document.getElementById('email-error');
-    this.passwordErrorEl = document.getElementById('password-error');
     this.arrowEl = document.getElementById('arrow');
-    this.logoutEl = document.getElementById('logout');
-    this.firstNameEl = document.getElementById('firstName');
+    this.emailErrorEl = document.getElementById('email-error');
+    this.emailFormEl = document.getElementById('email');
+    this.fullNameEl = document.getElementById('fullName');
     this.headerNameEl = document.getElementById('headerName');
-    this.lastNameEl = document.getElementById('lastName');
+    this.loginFormEl = document.getElementById('login-form');
+    this.logoutEl = document.getElementById('logout');
+    this.passwordErrorEl = document.getElementById('password-error');
+    this.passwordFormEl = document.getElementById('password');
     this.roleEl = document.getElementById('role');
 
     this.isArrowUp = true;
@@ -51,7 +50,6 @@ export default class UserView {
       }
 
       submitLogin(valueEmail, valuePassword);
-      // window.location.href = 'dashboard.html'
     })
 
     this.emailFormEl.addEventListener('input', () => {
@@ -77,24 +75,22 @@ export default class UserView {
     })
   };
 
-  displayUserInfo = () => {
-    const firstName = localStorage.getItem('firstName');
-    const lastName = localStorage.getItem('lastName');
-    const role = localStorage.getItem('role');
+  showUserInfo = () => {
+    const firstName = localStorage.getItem('FIRST_NAME');
+    const lastName = localStorage.getItem('LAST_NAME');
+    const role = localStorage.getItem('ROLE');
 
     if (firstName && lastName && role) {
-      this.firstNameEl.textContent = firstName;
       this.headerNameEl.textContent = firstName;
-      this.lastNameEl.textContent = lastName;
+      this.fullNameEl.textContent = `${firstName} ${lastName}`;
       this.roleEl.textContent = role;
     }
   };
-
 
   redirectPage = (page) => {
     window.location.replace(page);
   };
 }
 
-const a = new UserView();
-a.displayUserInfo()
+const renderUserInfo = new UserView();
+renderUserInfo.showUserInfo()
