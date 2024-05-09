@@ -51,6 +51,7 @@ export default class UserView {
       }
 
       submitLogin(valueEmail, valuePassword);
+      // window.location.href = 'dashboard.html'
     })
 
     this.emailFormEl.addEventListener('input', () => {
@@ -95,7 +96,5 @@ export default class UserView {
   };
 }
 
-//I will research and edit this later
 const a = new UserView();
-
 a.displayUserInfo()
