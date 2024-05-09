@@ -2,8 +2,8 @@
   "name": "my-project",
   "source": "src/pages/login.html",
   "scripts": {
-    "start": "parcel src/pages/dashboard.html",
-    "build": "rm -rf .parcel-cache && parcel build src/pages/dashboard.html"
+    "start": "parcel src/pages/*.html",
+    "build": "rm -rf .parcel-cache && parcel build src/pages*.html"
   },
   "devDependencies": {
     "parcel": "^2.12.0"

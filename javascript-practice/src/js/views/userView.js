@@ -1,5 +1,6 @@
 import { validatePassword } from '../helpers/validation';
 import { ERROR_MESSAGE } from '../constants/message';
+import { LOCAL_STORAGE } from '../constants/localStorage';
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -10,17 +11,19 @@ export const {
 
 export default class UserView {
   constructor() {
-    this.loginFormEl = document.getElementById('login-form');
-    this.emailFormEl = document.getElementById('email');
-    this.passwordFormEl = document.getElementById('password');
-    this.emailErrorEl = document.getElementById('email-error');
-    this.passwordErrorEl = document.getElementById('password-error');
     this.arrowEl = document.getElementById('arrow');
+    this.emailErrorEl = document.getElementById('email-error');
+    this.emailFormEl = document.getElementById('email');
+    this.fullNameEl = document.getElementById('fullName');
+    this.headerNameEl = document.getElementById('headerName');
+    this.loginFormEl = document.getElementById('login-form');
     this.logoutEl = document.getElementById('logout');
+    this.passwordErrorEl = document.getElementById('password-error');
+    this.passwordFormEl = document.getElementById('password');
+    this.roleEl = document.getElementById('role');
 
     this.isArrowUp = true;
-    this.bindLogoutDropDow();
-  };
+  }
 
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
@@ -48,7 +51,7 @@ export default class UserView {
       }
 
       submitLogin(valueEmail, valuePassword);
-    })
+    });
 
     this.emailFormEl.addEventListener('input', () => {
       this.emailErrorEl.textContent = '';
@@ -70,10 +73,29 @@ export default class UserView {
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
-    })
+    });
+  };
+
+  showUserInfo = () => {
+    const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
+    const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
+    const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
+
+    if (firstName && lastName && role) {
+      this.headerNameEl.textContent = firstName;
+      this.fullNameEl.textContent = `${firstName} ${lastName}`;
+      this.roleEl.textContent = role;
+    }
   };
 
   redirectPage = (page) => {
     window.location.replace(page);
   };
 }
+
+renderUserInfo = () => {
+  const userView = new UserView();
+  userView.showUserInfo();
+};
+
+renderUserInfo();
