@@ -12,8 +12,7 @@
         <div class="flex-column">
           <div class="flex header-dashboard-hi-name-box">
             <h2 class="header-dashboard-name">Hello,</h2>
-            <!-- TODO: this is fake data. I'll update it in the next task -->
-            <h2 class="header-dashboard-name">User</h2>
+            <h2 id="headerName" class="header-dashboard-name"></h2>
           </div>
           <p class="header-dashboard-sub-name">Have a nice day</p>
         </div>
@@ -23,16 +22,16 @@
           <div class="header-dashboard-profile-box flex">
             <div class="header-dashboard-avatar"></div>
             <div>
-              <!-- TODO: this is fake data. I'll update it in the next task -->
               <div class="flex header-dashboard-profile-name-box">
-                <h2 class="header-dashboard-profile-name">FirstName</h2>
-                <h2 class="header-dashboard-profile-name">LastName</h2>
+                <h2 id="firstName" class="header-dashboard-profile-name"></h2>
+                <h2 id="lastName" class="header-dashboard-profile-name"></h2>
               </div>
-              <p class="header-dashboard-profile-sub-name">Your Role</p>
+              <p id="role" class="header-dashboard-profile-sub-name"></p>
             </div>
             <div class="flex-column">
               <img
                 id="arrow"
+                type="click"
                 class="arrow"
                 src="../assets/icons/arrow.svg"
                 alt="arrow"

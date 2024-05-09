@@ -17,9 +17,12 @@ export default class UserView {
     this.passwordErrorEl = document.getElementById('password-error');
     this.arrowEl = document.getElementById('arrow');
     this.logoutEl = document.getElementById('logout');
+    this.firstNameEl = document.getElementById('firstName');
+    this.headerNameEl = document.getElementById('headerName');
+    this.lastNameEl = document.getElementById('lastName');
+    this.roleEl = document.getElementById('role');
 
     this.isArrowUp = true;
-    this.bindLogoutDropDow();
   };
 
   bindFormLogin = (submitLogin) => {
@@ -73,7 +76,26 @@ export default class UserView {
     })
   };
 
+  displayUserInfo = () => {
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const role = localStorage.getItem('role');
+
+    if (firstName && lastName && role) {
+      this.firstNameEl.textContent = firstName;
+      this.headerNameEl.textContent = firstName;
+      this.lastNameEl.textContent = lastName;
+      this.roleEl.textContent = role;
+    }
+  };
+
+
   redirectPage = (page) => {
     window.location.replace(page);
   };
 }
+
+//I will research and edit this later
+const a = new UserView();
+
+a.displayUserInfo()
