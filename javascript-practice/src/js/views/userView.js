@@ -17,7 +17,7 @@ export default class UserView {
     this.fullNameEl = document.getElementById('fullName');
     this.headerNameEl = document.getElementById('headerName');
     this.loginFormEl = document.getElementById('login-form');
-    this.logoutEl = document.getElementById('logout');
+    this.logoutEl = document.getElementById('list-drop');
     this.passwordErrorEl = document.getElementById('password-error');
     this.passwordFormEl = document.getElementById('password');
     this.roleEl = document.getElementById('role');
@@ -66,10 +66,10 @@ export default class UserView {
   bindLogoutDropDow = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
-        this.logoutEl.classList.add('show-logout');
+        this.logoutEl.classList.add('show-list-drop');
         this.arrowEl.classList.add('arrow-up');
       } else {
-        this.logoutEl.classList.remove('show-logout');
+        this.logoutEl.classList.remove('show-list-drop');
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;

@@ -17,10 +17,10 @@
           <p class="header-dashboard-sub-name">Have a nice day</p>
         </div>
         <div class="header-dashboard-profile-notification-box flex">
-          <div>
+          <div class="bell-box">
             <img src="../assets/icons//bell.svg" alt="bell" />
           </div>
-          <div>
+          <div class="stick-box">
             <img src="../assets/icons/stick.svg" alt="stick" />
           </div>
           <div class="header-dashboard-profile-box flex">
@@ -32,25 +32,33 @@
               <p id="role" class="header-dashboard-profile-sub-name"></p>
             </div>
           </div>
-          <div class="flex-column">
+          <div class="arrow-box">
             <img
               id="arrow"
               class="arrow"
               src="../assets/icons/arrow.svg"
               alt="arrow"
             />
-            <span id="logout" class="header-dashboard-profile-logout">
-              Logout
-            </span>
           </div>
+          <ul id="list-drop" class="list-drop">
+            <li class="list-drop-menu">
+              <p class="list-drop-heading">Log out</p>
+            </li>
+          </ul>
         </div>
       </header>
       <aside class="sidebar">
-        <img src="../assets/icons/logo.svg" alt="logo" />
-        <div class="flex align-center sidebar-menu">
-          <img src="../assets/icons/dashboard.svg" alt="logo-dashboard" />
-          <h2 class="sidebar-dashboard-heading">Dashboard</h2>
+        <div class="logo-box">
+          <img src="../assets/icons/logo.svg" alt="logo" />
         </div>
+        <ul class="sidebar-list-menu">
+          <li class="sidebar-menu menu-active">
+            <div class="logo-menu-box">
+              <img src="../assets/icons/dashboard.svg" alt="logo-dashboard" />
+            </div>
+            <h2 class="sidebar-heading">Dashboard</h2>
+          </li>
+        </ul>
       </aside>
     </div>
     <script type="module" src="../js/main.js"></script>

@@ -5,16 +5,34 @@
   background-color: var(--color-while);
 }
 
-.sidebar-menu {
-  border-right: 4px solid var(--color-cornflower-blue);
-  gap: 16px;
+.logo-box {
+  width: 116px;
+  height: 30px;
+}
+
+.sidebar-list-menu {
   margin-top: 56px;
 }
 
-.sidebar-dashboard-heading {
+.sidebar-menu {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-active {
+  border-right: 4px solid var(--color-cornflower-blue);
+  color: var(--color-cornflower-blue);
+}
+
+.logo-menu-box {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-heading {
   font-weight: var(--font-weight-nomal);
   font-size: var(--font-size-largest);
   line-height: 24px;
   letter-spacing: 0.5px;
-  color: var(--color-cornflower-blue);
 }
