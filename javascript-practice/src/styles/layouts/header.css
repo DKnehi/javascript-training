@@ -91,31 +91,31 @@
 /* end-arrow */
 
 /* start-logout */
-.list-drop {
+.select-wrapper-list {
   display: none;
   position: absolute;
 }
 
-.show-list-drop {
+.select-wrapper-active {
   display: block;
   background-color: var(--color-while);
   padding: 10px 0;
   margin-left: 150px;
   margin-top: 80px;
-  border-radius: var(--boder-radius-box);
+  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.list-drop-menu {
+.select-item {
   cursor: pointer;
   padding: 0 15px;
 }
 
-.list-drop-menu:hover {
+.select-item:hover {
   color: var(--color-cornflower-blue);
 }
 
-.list-drop-heading {
+.select-heading {
   font-size: var(--font-size-medium);
 }
 /* end-logout */

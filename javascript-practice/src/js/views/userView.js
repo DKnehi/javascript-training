@@ -12,15 +12,16 @@ export const {
 export default class UserView {
   constructor() {
     this.arrowEl = document.getElementById('arrow');
-    this.emailErrorEl = document.getElementById('email-error');
+    this.emailErrorEl = document.getElementById('emailError');
     this.emailFormEl = document.getElementById('email');
     this.fullNameEl = document.getElementById('fullName');
     this.headerNameEl = document.getElementById('headerName');
-    this.loginFormEl = document.getElementById('login-form');
-    this.logoutEl = document.getElementById('list-drop');
-    this.passwordErrorEl = document.getElementById('password-error');
+    this.loginFormEl = document.getElementById('loginForm');
+    this.passwordErrorEl = document.getElementById('passwordError');
     this.passwordFormEl = document.getElementById('password');
     this.roleEl = document.getElementById('role');
+
+    this.selectWrapperEl = document.querySelector('.select-wrapper-list');
 
     this.isArrowUp = true;
   }
@@ -63,13 +64,13 @@ export default class UserView {
   };
 
   //After clicking on the arrow in the header, Logout will drop down
-  bindLogoutDropDow = () => {
+  bindSelectWrapper = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
-        this.logoutEl.classList.add('show-list-drop');
+        this.selectWrapperEl.classList.add('select-wrapper-active');
         this.arrowEl.classList.add('arrow-up');
       } else {
-        this.logoutEl.classList.remove('show-list-drop');
+        this.selectWrapperEl.classList.remove('select-wrapper-active');
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
