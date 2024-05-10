@@ -17,8 +17,12 @@
           <p class="header-dashboard-sub-name">Have a nice day</p>
         </div>
         <div class="header-dashboard-profile-notification-box flex">
-          <img src="../assets/icons//bell.svg" alt="bell" />
-          <img src="../assets/icons/stick.svg" alt="stick" />
+          <div class="bell-box">
+            <img src="../assets/icons//bell.svg" alt="bell" />
+          </div>
+          <div class="stick-box">
+            <img src="../assets/icons/stick.svg" alt="stick" />
+          </div>
           <div class="header-dashboard-profile-box flex">
             <div class="header-dashboard-avatar"></div>
             <div>
@@ -27,23 +31,35 @@
               </div>
               <p id="role" class="header-dashboard-profile-sub-name"></p>
             </div>
-            <div class="flex-column">
-              <img
-                id="arrow"
-                class="arrow"
-                src="../assets/icons/arrow.svg"
-                alt="arrow"
-              />
-              <span
-                id="logout"
-                class="header-dashboard-profile-sub-name logout"
-              >
-                Logout
-              </span>
-            </div>
           </div>
+          <div class="arrow-box">
+            <img
+              id="arrow"
+              class="arrow"
+              src="../assets/icons/arrow.svg"
+              alt="arrow"
+            />
+          </div>
+          <ul class="select-wrapper-list">
+            <li class="select-wrapper-item">
+              <p class="select-wrapper-heading">Log out</p>
+            </li>
+          </ul>
         </div>
       </header>
+      <aside class="sidebar">
+        <div class="logo-box">
+          <img src="../assets/icons/logo.svg" alt="logo" />
+        </div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item item-active">
+            <div class="sidebar-item-logo-box">
+              <img src="../assets/icons/dashboard.svg" alt="logo-dashboard" />
+            </div>
+            <h2 class="sidebar-item-heading">Dashboard</h2>
+          </li>
+        </ul>
+      </aside>
     </div>
     <script type="module" src="../js/main.js"></script>
   </body>

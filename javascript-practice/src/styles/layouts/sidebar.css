@@ -1,0 +1,38 @@
+.sidebar {
+  height: 100vh;
+  grid-row-start: 1;
+  padding: 40px 0 0 32px;
+  background-color: var(--color-while);
+}
+
+.logo-box {
+  width: 116px;
+  height: 30px;
+}
+
+.sidebar-list {
+  margin-top: 56px;
+}
+
+.sidebar-item {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.item-active {
+  border-right: 4px solid var(--color-cornflower-blue);
+  color: var(--color-cornflower-blue);
+}
+
+.sidebar-item-logo-box {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-item-heading {
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-largest);
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
