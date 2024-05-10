@@ -1,0 +1,71 @@
+.user-dashboard {
+  grid-column-start: 2;
+  padding: 0 29px 23px 24px;
+}
+
+.user-dashboard-heading {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  line-height: 32.68px;
+  color: var(--color-cornflower-blue);
+  margin-left: 20px;
+  margin-bottom: 16px;
+}
+
+.user-dashboard-content {
+  gap: 30px;
+}
+
+.search-box {
+  background-color: var(--color-while);
+  border-radius: 16px;
+  width: 100%;
+  padding: 16px 20px;
+  gap: 16px;
+}
+
+.user-dashboard-icon-box {
+  width: 16px;
+  height: 16px;
+}
+
+.search-input {
+  border: none;
+  font-size: var(--font-size-largest);
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: var(--color-tundora);
+  width: 100%;
+  padding: 0;
+}
+
+.add-user-button {
+  padding: 18px 23px;
+  border-radius: 10%;
+  background-color: var(--color-cornflower-blue);
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-larger);
+  white-space: nowrap;
+  box-shadow: 2.5px 4.3px 10px 0px #0000001a;
+}
+
+.dropdow-content {
+  gap: 19px;
+}
+
+.dropdow-box {
+  gap: 9px;
+}
+
+.dropdow-main-content {
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-larger);
+  line-height: 16px;
+  color: var(--color-tundora);
+  white-space: nowrap;
+}
+
+.setting-box {
+  width: 19px;
+  height: 19px;
+}
