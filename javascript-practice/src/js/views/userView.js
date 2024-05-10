@@ -64,7 +64,7 @@ export default class UserView {
   };
 
   //After clicking on the arrow in the header, Logout will drop down
-  bindSelectWrapper = () => {
+  toggleDropDownMenu = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
         this.selectWrapperEl.classList.add('select-wrapper-active');
