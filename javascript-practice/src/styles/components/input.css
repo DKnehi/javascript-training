@@ -5,10 +5,8 @@
   border-radius: var(--boder-radius-input-button);
   outline: none;
   font-weight: var(--font-weight-light);
-  font-family: 'OpenSans';
 }
 
 .input::placeholder {
   font-weight: var(--font-weight-light);
-  font-family: 'OpenSans';
 }

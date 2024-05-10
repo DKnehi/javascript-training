@@ -24,7 +24,7 @@
   gap: 16px;
 }
 
-.search-logo-box {
+.user-dashboard-icon-box{
   width: 16px;
   height: 16px;
 }
@@ -63,11 +63,6 @@
   line-height: 16px;
   color: var(--color-tundora);
   white-space: nowrap;
-}
-
-.arrow-dow-box {
-  width: 16px;
-  height: 16px;
 }
 
 .setting-box {
