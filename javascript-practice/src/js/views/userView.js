@@ -26,6 +26,7 @@ export default class UserView {
     this.selectWrapperEl = document.querySelector('.select-wrapper-list');
     this.popupOverlayEl = document.querySelector('.popup-overlay');
     this.bindPopupUser();
+    this.toggleDropDownMenu();
     this.isArrowUp = true;
   }
 
@@ -71,9 +72,11 @@ export default class UserView {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
         this.selectWrapperEl.classList.add('select-wrapper-active');
+        this.selectWrapperEl.classList.add('active-layout');
         this.arrowEl.classList.add('arrow-up');
       } else {
         this.selectWrapperEl.classList.remove('select-wrapper-active');
+        this.selectWrapperEl.classList.remove('active-layout');
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
@@ -94,13 +97,13 @@ export default class UserView {
 
   bindPopupUser = () => {
     this.openPopupEl.addEventListener('click', () => {
-      this.popupContainerEl.classList.add('popup-active');
       this.popupOverlayEl.classList.add('popup-overlay-active');
+      this.popupOverlayEl.classList.add('active-layout');
     });
 
     this.closePopupEl.addEventListener('click', () => {
-      this.popupContainerEl.classList.remove('popup-active');
       this.popupOverlayEl.classList.remove('popup-overlay-active');
+      this.popupOverlayEl.classList.remove('active-layout');
     });
   };
 
