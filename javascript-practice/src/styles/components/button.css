@@ -1,8 +1,19 @@
-.button {
+.primary-button {
   border: none;
   color: var(--color-while);
   cursor: pointer;
   background-color: var(--color-azure-radiance);
   padding: 5px 15px;
   border-radius: var(--boder-radius-input-button);
+  font-size: var(--font-size-smaller);
+  font-weight: var(--font-weight-nomal);
+}
+
+.secondary-button {
+  border: none;
+  background: none;
+  font-size: var(--font-size-smaller);
+  font-weight: var(--font-weight-light);
+  color: var(--color-bali-hai);
+  cursor: pointer;
 }

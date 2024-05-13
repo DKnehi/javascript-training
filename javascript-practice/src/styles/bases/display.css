@@ -14,3 +14,7 @@
 .space-between {
   justify-content: space-between;
 }
+
+.block {
+  display: block !important;
+}

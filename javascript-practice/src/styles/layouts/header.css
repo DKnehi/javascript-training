@@ -90,13 +90,12 @@
 /* end-arrow */
 
 /* start-logout */
-.select-wrapper-list {
+.select-account-setting-list {
   display: none;
   position: absolute;
 }
 
-.select-wrapper-active {
-  display: block;
+.select-account-setting-active {
   background-color: var(--color-while);
   padding: 10px 0;
   margin-left: 150px;
@@ -105,16 +104,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.select-item {
+.select-account-setting-item {
   cursor: pointer;
   padding: 0 15px;
 }
 
-.select-item:hover {
+.select-account-setting-item:hover {
   color: var(--color-cornflower-blue);
 }
 
-.select-heading {
+.select-account-setting-heading {
   font-size: var(--font-size-medium);
 }
 /* end-logout */

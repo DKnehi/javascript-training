@@ -19,10 +19,14 @@ export default class UserView {
     this.loginFormEl = document.getElementById('loginForm');
     this.passwordErrorEl = document.getElementById('passwordError');
     this.passwordFormEl = document.getElementById('password');
-    this.roleEl = document.getElementById('role');
+    this.openPopupEl = document.getElementById('openPopup');
+    this.closePopupEl = document.getElementById('closePopup');
+    this.popupContainerEl = document.getElementById('popupContainer');
 
-    this.selectWrapperEl = document.querySelector('.select-wrapper-list');
-
+    this.selectWrapperEl = document.querySelector('.select-account-setting-list');
+    this.popupOverlayEl = document.querySelector('.popup-overlay');
+    this.bindPopupUser();
+    this.toggleDropDownMenu();
     this.isArrowUp = true;
   }
 
@@ -67,10 +71,12 @@ export default class UserView {
   toggleDropDownMenu = () => {
     this.arrowEl.addEventListener('click', () => {
       if (this.isArrowUp) {
-        this.selectWrapperEl.classList.add('select-wrapper-active');
+        this.selectWrapperEl.classList.add('select-account-setting-active');
+        this.selectWrapperEl.classList.add('block');
         this.arrowEl.classList.add('arrow-up');
       } else {
-        this.selectWrapperEl.classList.remove('select-wrapper-active');
+        this.selectWrapperEl.classList.remove('select-account-setting-active');
+        this.selectWrapperEl.classList.remove('block');
         this.arrowEl.classList.remove('arrow-up');
       }
       this.isArrowUp = !this.isArrowUp;
@@ -87,6 +93,18 @@ export default class UserView {
       this.fullNameEl.textContent = `${firstName} ${lastName}`;
       this.roleEl.textContent = role;
     }
+  };
+
+  bindPopupUser = () => {
+    this.openPopupEl.addEventListener('click', () => {
+      this.popupOverlayEl.classList.add('popup-overlay-active');
+      this.popupOverlayEl.classList.add('block');
+    });
+
+    this.closePopupEl.addEventListener('click', () => {
+      this.popupOverlayEl.classList.remove('popup-overlay-active');
+      this.popupOverlayEl.classList.remove('block');
+    });
   };
 
   redirectPage = (page) => {
