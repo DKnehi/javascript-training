@@ -35,9 +35,8 @@
 }
 
 .popup-form-box {
-  padding: 30px 20px;
+  padding: 30px 20px 0 20px;
   gap: 15px;
-  border-bottom: 1px solid var(--color-link-water);
 }
 
 .popup-area-form-box {
