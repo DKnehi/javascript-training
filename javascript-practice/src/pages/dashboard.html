@@ -9,14 +9,14 @@
   <body>
     <div class="container">
       <header class="header-dashboard flex">
-        <section class="flex-column">
+        <div class="flex-column">
           <div class="flex header-dashboard-hi-name-box">
             <h2 class="header-dashboard-name">Hello,</h2>
             <h2 id="headerName" class="header-dashboard-name"></h2>
           </div>
           <p class="header-dashboard-sub-name">Have a nice day</p>
-        </section>
-        <section class="header-dashboard-profile-notification-box flex">
+        </div>
+        <div class="header-dashboard-profile-notification-box flex">
           <div class="bell-box">
             <img src="../assets/icons//bell.svg" alt="bell" />
           </div>
@@ -45,7 +45,7 @@
               <p class="select-account-setting-heading">Log out</p>
             </li>
           </ul>
-        </section>
+        </div>
       </header>
       <aside class="sidebar">
         <div class="logo-box">
@@ -75,7 +75,11 @@
               id=""
             />
           </div>
-          <button class="add-user-button primary-button" id="openPopup" type="button">
+          <button
+            class="add-user-button primary-button"
+            id="openPopup"
+            type="button"
+          >
             Add user +
           </button>
           <div class="flex align-center dropdow-content">
@@ -113,7 +117,7 @@
               name=""
               id=""
             />
-            <section class="flex popup-area-form-box">
+            <div class="flex popup-area-form-box">
               <input
                 class="input popup-input"
                 type="text"
@@ -128,8 +132,8 @@
                 name=""
                 id=""
               />
-            </section>
-            <section class="flex popup-area-form-box">
+            </div>
+            <div class="flex popup-area-form-box">
               <input
                 class="input popup-input"
                 type="text"
@@ -151,8 +155,8 @@
                   </option>
                 </select>
               </div>
-            </section>
-            <section class="flex popup-area-form-box">
+            </div>
+            <div class="flex popup-area-form-box">
               <input
                 class="input popup-input"
                 type="text"
@@ -174,14 +178,16 @@
                 name=""
                 id=""
               />
-            </section>
+            </div>
           </form>
-          <section class="popup-button-box align-center">
+          <div class="popup-button-box align-center">
             <button class="primary-button popup-button" type="submit">
               Add User
             </button>
-            <button class="secondary-button popup-button-cancel" type="button">Cancel</button>
-          </section>
+            <button class="secondary-button popup-button-cancel" type="button">
+              Cancel
+            </button>
+          </div>
         </section>
       </article>
     </div>
