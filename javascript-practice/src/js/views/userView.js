@@ -19,10 +19,13 @@ export default class UserView {
     this.loginFormEl = document.getElementById('loginForm');
     this.passwordErrorEl = document.getElementById('passwordError');
     this.passwordFormEl = document.getElementById('password');
-    this.roleEl = document.getElementById('role');
+    this.openPopupEl = document.getElementById('openPopup');
+    this.closePopupEl = document.getElementById('closePopup');
+    this.popupContainerEl = document.getElementById('popupContainer');
 
     this.selectWrapperEl = document.querySelector('.select-wrapper-list');
-
+    this.popupOverlayEl = document.querySelector('.popup-overlay');
+    this.bindPopupUser();
     this.isArrowUp = true;
   }
 
@@ -87,6 +90,18 @@ export default class UserView {
       this.fullNameEl.textContent = `${firstName} ${lastName}`;
       this.roleEl.textContent = role;
     }
+  };
+
+  bindPopupUser = () => {
+    this.openPopupEl.addEventListener('click', () => {
+      this.popupContainerEl.classList.add('popup-active');
+      this.popupOverlayEl.classList.add('popup-overlay-active');
+    });
+
+    this.closePopupEl.addEventListener('click', () => {
+      this.popupContainerEl.classList.remove('popup-active');
+      this.popupOverlayEl.classList.remove('popup-overlay-active');
+    });
   };
 
   redirectPage = (page) => {

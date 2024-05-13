@@ -75,7 +75,9 @@
               id=""
             />
           </div>
-          <button class="add-user-button button">Add user +</button>
+          <button class="add-user-button button" id="openPopup">
+            Add user +
+          </button>
           <div class="flex align-center dropdow-content">
             <div class="flex align-center dropdow-box">
               <p class="dropdow-main-content">Sort by</p>
@@ -95,6 +97,99 @@
           </div>
         </div>
       </section>
+      <div class="popup-overlay">
+        <div id="popupContainer" class="popup-container">
+          <div class="flex align-center popup-heading-box">
+            <h2 class="popup-heading">Add User</h2>
+            <div id="closePopup" class="close-popup-box">
+              <img src="../assets/icons/alert-circle.svg" alt="" />
+            </div>
+          </div>
+          <form action="" class="popup-form-box flex-column">
+            <input
+              class="input popup-input"
+              type="text"
+              placeholder="User ID *"
+              name=""
+              id=""
+            />
+            <div class="flex popup-area-form-box">
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="First Name *"
+                name=""
+                id=""
+              />
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Last Name *"
+                name=""
+                id=""
+              />
+            </div>
+            <div class="flex popup-area-form-box">
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Email ID *"
+                name=""
+                id=""
+              />
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Mobile No"
+                name=""
+                id=""
+              />
+              <div class="input popup-input flex align-center space-between">
+                <select name="" id="" class="popup-select">
+                  <option class="popup-option" value="" disabled selected>
+                    Select Role Type
+                  </option>
+                  <option class="popup-option" value="">Supper Admin</option>
+                  <option class="popup-option" value="">Admin</option>
+                  <option class="popup-option" value="">HR Admin</option>
+                  <option class="popup-option" value="">Employee</option>
+                </select>
+                <img
+                  src="../assets/icons/arrow-choose.svg"
+                  alt="arrow-choose"
+                />
+              </div>
+            </div>
+            <div class="flex popup-area-form-box">
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Username *"
+                name=""
+                id=""
+              />
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Password *"
+                name=""
+                id=""
+              />
+              <input
+                class="input popup-input"
+                type="text"
+                placeholder="Confirm Password *"
+                name=""
+                id=""
+              />
+            </div>
+          </form>
+          <div class="popup-button-box">
+            <button class="button popup-button">Add User</button>
+            <button class="button popup-button-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="module" src="../js/main.js"></script>
   </body>

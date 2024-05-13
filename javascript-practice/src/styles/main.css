@@ -3,7 +3,7 @@
 @import './components/index.css';
 @import './layouts/index.css';
 @import './pages/login.css';
-@import './sections/userdashboard.css';
+@import './sections/index.css';
 
 * {
   margin: 0;
