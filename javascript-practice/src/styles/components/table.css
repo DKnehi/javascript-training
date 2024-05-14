@@ -1,0 +1,17 @@
+.table-header-row {
+  background-color: var(--color-link-water);
+  text-align: left;
+}
+
+.table-header {
+  padding: 22px 0 22px 60px;
+}
+
+.table-body-row {
+  border-bottom: 1px solid var(--color-link-water);
+}
+
+.table-data {
+  padding: 22px 0 22px 60px;
+  align-content: center;
+}

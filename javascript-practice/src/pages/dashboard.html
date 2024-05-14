@@ -8,125 +8,112 @@
   </head>
   <body>
     <div class="container">
-      <header class="header-dashboard flex">
-        <div class="flex-column">
-          <div class="flex header-dashboard-hi-name-box">
-            <h2 class="header-dashboard-name">Hello,</h2>
-            <h2 id="headerName" class="header-dashboard-name"></h2>
+      <main class="main-container">
+        <header class="header-dashboard flex">
+          <div class="flex-column">
+            <div class="flex header-dashboard-hi-name-box">
+              <h2 class="header-dashboard-name">Hello,</h2>
+              <h2 id="headerName" class="header-dashboard-name"></h2>
+            </div>
+            <p class="header-dashboard-sub-name">Have a nice day</p>
           </div>
-          <p class="header-dashboard-sub-name">Have a nice day</p>
-        </div>
-        <div class="header-dashboard-profile-notification-box flex">
-          <div class="bell-box">
-            <img src="../assets/icons//bell.svg" alt="bell" />
-          </div>
-          <div class="stick-box">
-            <img src="../assets/icons/stick.svg" alt="stick" />
-          </div>
-          <div class="header-dashboard-profile-box flex">
-            <div class="header-dashboard-avatar"></div>
-            <div>
-              <div class="flex header-dashboard-profile-name-box">
-                <h2 id="fullName" class="header-dashboard-profile-name"></h2>
+          <div class="header-dashboard-profile-notification-box flex">
+            <div class="bell-box">
+              <img src="../assets/icons//bell.svg" alt="bell" />
+            </div>
+            <div class="stick-box">
+              <img src="../assets/icons/stick.svg" alt="stick" />
+            </div>
+            <div class="header-dashboard-profile-box flex">
+              <div class="header-dashboard-avatar"></div>
+              <div>
+                <div class="flex header-dashboard-profile-name-box">
+                  <h2 id="fullName" class="header-dashboard-profile-name"></h2>
+                </div>
+                <p id="role" class="header-dashboard-profile-sub-name"></p>
               </div>
-              <p id="role" class="header-dashboard-profile-sub-name"></p>
             </div>
-          </div>
-          <div class="arrow-box">
-            <img
-              id="arrow"
-              class="arrow"
-              src="../assets/icons/arrow.svg"
-              alt="arrow"
-            />
-          </div>
-          <ul class="select-account-setting-list">
-            <li class="select-account-setting-item">
-              <p class="select-account-setting-heading">Log out</p>
-            </li>
-          </ul>
-        </div>
-      </header>
-      <aside class="sidebar">
-        <div class="logo-box">
-          <img src="../assets/icons/logo.svg" alt="logo" />
-        </div>
-        <ul class="sidebar-list">
-          <li class="sidebar-item item-active">
-            <div class="sidebar-item-logo-box">
-              <img src="../assets/icons/dashboard.svg" alt="logo-dashboard" />
+            <div class="arrow-box">
+              <img
+                id="arrow"
+                class="arrow"
+                src="../assets/icons/arrow.svg"
+                alt="arrow"
+              />
             </div>
-            <h2 class="sidebar-item-heading">Dashboard</h2>
-          </li>
-        </ul>
-      </aside>
-      <section class="user-dashboard">
-        <h2 class="user-dashboard-heading">Users Dashboard</h2>
-        <div class="flex align-center space-between user-dashboard-content">
-          <div class="flex align-center search-box">
-            <div class="user-dashboard-icon-box">
-              <img src="../assets/icons/search.svg" alt="search" />
-            </div>
-            <input
-              class="search-input input"
-              type="text"
-              name=""
-              placeholder="Search"
-              id=""
-            />
+            <ul class="select-account-setting-list">
+              <li class="select-account-setting-item">
+                <p class="select-account-setting-heading">Log out</p>
+              </li>
+            </ul>
           </div>
-          <button
-            class="add-user-button primary-button"
-            id="openPopup"
-            type="button"
-          >
-            Add user +
-          </button>
-          <div class="flex align-center dropdow-content">
-            <div class="flex align-center dropdow-box">
-              <p class="dropdow-main-content">Sort by</p>
+        </header>
+        <section class="user-dashboard">
+          <h2 class="user-dashboard-heading">Users Dashboard</h2>
+          <div class="flex align-center space-between user-dashboard-content">
+            <div class="flex align-center search-box">
               <div class="user-dashboard-icon-box">
-                <img src="../assets/icons/arrow-down.svg" alt="arrow-dow" />
+                <img src="../assets/icons/search.svg" alt="search" />
               </div>
+              <input
+                class="search-input input"
+                type="text"
+                name=""
+                placeholder="Search"
+                id=""
+              />
             </div>
-            <div class="flex align-center dropdow-box">
-              <p class="dropdow-main-content">Saved search</p>
-              <div class="user-dashboard-icon-box">
-                <img src="../assets/icons/arrow-down.svg" alt="arrow-dow" />
+            <button
+              class="add-user-button primary-button"
+              id="openPopup"
+              type="button"
+            >
+              Add user +
+            </button>
+            <div class="flex align-center dropdow-content">
+              <div class="flex align-center dropdow-box">
+                <p class="dropdow-main-content">Sort by</p>
+                <div class="user-dashboard-icon-box">
+                  <img src="../assets/icons/arrow-down.svg" alt="arrow-dow" />
+                </div>
               </div>
-            </div>
-            <div class="setting-box">
-              <img src="../assets/icons/setting.svg" alt="setting" />
+              <div class="flex align-center dropdow-box">
+                <p class="dropdow-main-content">Saved search</p>
+                <div class="user-dashboard-icon-box">
+                  <img src="../assets/icons/arrow-down.svg" alt="arrow-dow" />
+                </div>
+              </div>
+              <div class="setting-box">
+                <img src="../assets/icons/setting.svg" alt="setting" />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <!-- TODO: This is a UI test, I'll update later -->
-      <section class="list-users-box">
-        <div class="list-user">
+        </section>
+        <!-- TODO: This is a UI test, I'll update later -->
+        <section class="list-user">
           <table class="list-users-table">
             <caption class="list-users-caption-box">
               <h2 class="list-users-caption">List Users</h2>
             </caption>
             <thead>
-              <tr class="table-header flex space-between">
-                <th class="table-header-heading">Name</th>
-                <th class="table-header-heading">Create Date</th>
-                <th class="table-header-heading">Role</th>
-                <th class="table-header-heading">Action</th>
+              <tr class="table-header-row">
+                <th class="table-header table-heading">Name</th>
+                <th class="table-header table-heading">Create Date</th>
+                <th class="table-header table-heading">Role</th>
+                <th class="table-header table-heading">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="table-body flex space-between align-center">
-                <td>
+              <tr class="table-body-row">
+                <td class="table-data">
                   <p class="table-body-name">User Name</p>
                   <p class="table-body-email">user@gmail.com</p>
                 </td>
-                <td class="table-body-date">dd mm, yyyy</td>
-                <td>
+                <td class="table-body-date table-data">dd mm, yyyy</td>
+                <td class="table-data">
                   <button class="primary-button">Your Role</button>
                 </td>
-                <td class="flex align-center table-body-icons-box">
+                <td class="table-data">
                   <div class="table-body-icon">
                     <img src="../assets/icons/arrow-circle-down.svg" alt="" />
                   </div>
@@ -140,8 +127,8 @@
               </tr>
             </tbody>
           </table>
-        </div>
-      </section>
+        </section>
+      </main>
       <article class="popup-overlay">
         <section id="popupContainer" class="popup-container">
           <div class="flex align-center space-between popup-heading-box">
@@ -234,6 +221,19 @@
           </form>
         </section>
       </article>
+      <aside class="sidebar">
+        <div class="logo-box">
+          <img src="../assets/icons/logo.svg" alt="logo" />
+        </div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item item-active">
+            <div class="sidebar-item-logo-box">
+              <img src="../assets/icons/dashboard.svg" alt="logo-dashboard" />
+            </div>
+            <h2 class="sidebar-item-heading">Dashboard</h2>
+          </li>
+        </ul>
+      </aside>
     </div>
     <script type="module" src="../js/main.js"></script>
   </body>
