@@ -101,6 +101,47 @@
           </div>
         </div>
       </section>
+      <!-- TODO: This is a UI test, I'll update later -->
+      <section class="list-users-box">
+        <div class="list-user">
+          <table class="list-users-table">
+            <caption class="list-users-caption-box">
+              <h2 class="list-users-caption">List Users</h2>
+            </caption>
+            <thead>
+              <tr class="table-header flex space-between">
+                <th class="table-header-heading">Name</th>
+                <th class="table-header-heading">Create Date</th>
+                <th class="table-header-heading">Role</th>
+                <th class="table-header-heading">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-body flex space-between align-center">
+                <td>
+                  <p class="table-body-name">User Name</p>
+                  <p class="table-body-email">user@gmail.com</p>
+                </td>
+                <td class="table-body-date">dd mm, yyyy</td>
+                <td>
+                  <button class="primary-button">Your Role</button>
+                </td>
+                <td class="flex align-center table-body-icons-box">
+                  <div class="table-body-icon">
+                    <img src="../assets/icons/arrow-circle-down.svg" alt="" />
+                  </div>
+                  <div class="table-body-icon">
+                    <img
+                      src="../assets/icons/arrow-circle-down-copy.svg"
+                      alt=""
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
       <article class="popup-overlay">
         <section id="popupContainer" class="popup-container">
           <div class="flex align-center space-between popup-heading-box">
@@ -183,12 +224,14 @@
               <button class="primary-button popup-button" type="submit">
                 Add User
               </button>
-              <button class="secondary-button popup-button-cancel" type="button">
+              <button
+                class="secondary-button popup-button-cancel"
+                type="button"
+              >
                 Cancel
               </button>
             </div>
           </form>
-          
         </section>
       </article>
     </div>
