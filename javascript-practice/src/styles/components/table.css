@@ -20,6 +20,7 @@
 
 .table-header-row {
   text-align: left;
+  background-color: var(--color-link-water);
 }
 
 .table-cell {
@@ -36,7 +37,7 @@
 .table-data {
   align-content: center;
   font-weight: var(--font-weight-light);
-  font-size: var(--font-size-smaller);
+  font-size: var(--font-size-smallest);
   color: var(--color-cloud-bust);
 }
 

@@ -7,6 +7,7 @@
 
 .table-data-name {
   font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-smaller);
 }
 
 .table-data-email {
