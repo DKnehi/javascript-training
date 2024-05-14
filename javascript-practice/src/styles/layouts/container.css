@@ -3,3 +3,7 @@
   grid-template-columns: 254px 1fr;
   grid-template-rows: 107px;
 }
+
+.main-container {
+  padding: 0 24px;
+}

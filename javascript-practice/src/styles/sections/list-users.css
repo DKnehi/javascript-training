@@ -1,0 +1,23 @@
+.list-user {
+  background-color: var(--color-while);
+  border-radius: 16px;
+  width: 100%;
+  border: 1px solid var(--color-link-water);
+}
+
+.table-data-name {
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-smaller);
+}
+
+.table-data-email {
+  color: var(--color-bali-hai);
+}
+
+.table-data-date {
+  line-height: 15px;
+}
+
+.list-user-table-icon {
+  margin-right: 20px;
+}
