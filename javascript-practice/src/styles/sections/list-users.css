@@ -5,54 +5,18 @@
   border: 1px solid var(--color-link-water);
 }
 
-.list-users-table {
-  width: 100%;
-}
-
-.list-users-caption-box {
-  padding: 20px;
-}
-
-.list-users-caption {
-  text-align: left;
+.table-data-name {
   font-weight: var(--font-weight-nomal);
-  font-size: var(--font-size-larger);
-  line-height: 16px;
-  color: var(--color-cloud-bust);
 }
 
-.table-heading {
-  font-weight: var(--font-weight-nomal);
-  font-size: var(--font-size-medium);
-  line-height: 16px;
+.table-data-email {
   color: var(--color-bali-hai);
 }
 
-.table-body-name {
-  font-weight: var(--font-weight-nomal);
-  font-size: var(--font-size-smaller);
-  line-height: 16px;
-  color: var(--color-cloud-bust);
-}
-
-.table-body-email {
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-smallest);
-  line-height: 16px;
-  color: var(--color-bali-hai);
-}
-
-.table-body-date {
-  font-size: var(--font-size-smallest);
-  font-weight: var(--font-weight-light);
+.table-data-date {
   line-height: 15px;
-  color: var(--color-cloud-bust);
 }
 
-.table-body-icon {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  display: inline;
+.list-user-table-icon {
   margin-right: 20px;
 }
