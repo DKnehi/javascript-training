@@ -1,4 +1,4 @@
-import { API } from '../constants/url';
+import { API } from '../constants/urls';
 
 export default class UserService {
   getAllUser = async () => {
