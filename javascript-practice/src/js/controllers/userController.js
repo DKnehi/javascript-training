@@ -14,17 +14,17 @@ export default class UserController {
     this.service = new UserService();
 
     this.view.bindFormLogin(this.handleFormLogin);
-  };
+  }
 
   handleFormLogin = async (email, password) => {
     try {
       const userData = await this.service.loginUser(email, password);
 
       if (userData) {
-        this.view.redirectPage('dashboard.html');
         localStorage.setItem(LOCAL_STORAGE.FIRST_NAME, userData.firstName);
         localStorage.setItem(LOCAL_STORAGE.LAST_NAME, userData.lastName);
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
+        this.view.redirectPage('dashboard.html');
       } else {
         showToast(`${LOGIN_FAILED}`);
       }
@@ -32,4 +32,4 @@ export default class UserController {
       console.error(error);
     }
   };
-};
+}
