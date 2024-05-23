@@ -1,6 +1,5 @@
 import { validatePassword } from '../helpers/validation';
 import { ERROR_MESSAGE } from '../constants/message';
-import { LOCAL_STORAGE } from '../constants/localStorage';
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -11,23 +10,11 @@ export const {
 
 export default class UserView {
   constructor() {
-    this.arrowEl = document.getElementById('arrow');
     this.emailErrorEl = document.getElementById('emailError');
     this.emailFormEl = document.getElementById('email');
-    this.fullNameEl = document.getElementById('fullName');
-    this.headerNameEl = document.getElementById('headerName');
     this.loginFormEl = document.getElementById('loginForm');
     this.passwordErrorEl = document.getElementById('passwordError');
     this.passwordFormEl = document.getElementById('password');
-    this.openPopupEl = document.getElementById('openPopup');
-    this.closePopupEl = document.getElementById('closePopup');
-    this.popupContainerEl = document.getElementById('popupContainer');
-
-    this.selectWrapperEl = document.querySelector('.select-account-setting-list');
-    this.popupOverlayEl = document.querySelector('.popup-overlay');
-    this.bindPopupUser();
-    this.toggleDropDownMenu();
-    this.isArrowUp = true;
   }
 
   bindFormLogin = (submitLogin) => {
@@ -67,54 +54,7 @@ export default class UserView {
     });
   };
 
-  //After clicking on the arrow in the header, Logout will drop down
-  toggleDropDownMenu = () => {
-    this.arrowEl.addEventListener('click', () => {
-      if (this.isArrowUp) {
-        this.selectWrapperEl.classList.add('select-account-setting-active');
-        this.selectWrapperEl.classList.add('block');
-        this.arrowEl.classList.add('arrow-up');
-      } else {
-        this.selectWrapperEl.classList.remove('select-account-setting-active');
-        this.selectWrapperEl.classList.remove('block');
-        this.arrowEl.classList.remove('arrow-up');
-      }
-      this.isArrowUp = !this.isArrowUp;
-    });
-  };
-
-  showUserInfo = () => {
-    const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
-    const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
-    const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
-
-    if (firstName && lastName && role) {
-      this.headerNameEl.textContent = firstName;
-      this.fullNameEl.textContent = `${firstName} ${lastName}`;
-      this.roleEl.textContent = role;
-    }
-  };
-
-  bindPopupUser = () => {
-    this.openPopupEl.addEventListener('click', () => {
-      this.popupOverlayEl.classList.add('popup-overlay-active');
-      this.popupOverlayEl.classList.add('block');
-    });
-
-    this.closePopupEl.addEventListener('click', () => {
-      this.popupOverlayEl.classList.remove('popup-overlay-active');
-      this.popupOverlayEl.classList.remove('block');
-    });
-  };
-
   redirectPage = (page) => {
     window.location.replace(page);
   };
 }
-
-renderUserInfo = () => {
-  const userView = new UserView();
-  userView.showUserInfo();
-};
-
-renderUserInfo();
