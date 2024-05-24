@@ -1,7 +1,7 @@
 import UserController from './controllers/userController';
 import UserModel from './models/userModel';
 import UserView from './views/userView';
-// import DashboardController from './controllers/dashboardController'
+import DashboardController from './controllers/dashboardController'
 import DashboardView from './views/dashboardView';
 import { PATHS } from './constants/urls';
 
@@ -16,7 +16,8 @@ export default class App {
       view.bindFormLogin(controller.handleFormLogin);
     } else if (path.includes(PATHS.DASHBOARD)) {
       const view = new DashboardView();
-      // const controller = new DashboardController(model, view);
+      const controller = new DashboardController(model, view);
+      view.bindFormAddUser(controller.addUser);
       view.showUserInfo();
       view.toggleDropDownMenu();
       view.bindPopupUser();

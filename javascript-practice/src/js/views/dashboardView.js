@@ -10,6 +10,17 @@ export default class DashboardView {
     this.popupContainerEl = document.getElementById('popupContainer');
     this.roleEl = document.getElementById('role');
 
+    this.addUserFormEl = document.getElementById('addUserForm');
+    this.addUserIdEl = document.getElementById('addUserId');
+    this.addFirstNameEl = document.getElementById('addFirstName');
+    this.addLastNameEl = document.getElementById('addLastName');
+    this.addEmailIdEl = document.getElementById('addEmailId');
+    this.addMobileNoEl = document.getElementById('addMobileNo');
+    this.addRoleEl = document.getElementById('addRole');
+    this.addUserNameEl = document.getElementById('addUserName');
+    this.addPasswordEl = document.getElementById('addPassword');
+    this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
+
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
     );
@@ -46,6 +57,38 @@ export default class DashboardView {
 
     this.closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
+    });
+  };
+
+  bindRoleSelection = (event) => {
+    const valueSelectRole = event.target.value;
+    console.log(valueSelectRole);
+  };
+
+  bindFormAddUser = (submitAddUser) => {
+    this.addUserFormEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const valueAddUserId = this.addUserIdEl.value;
+      const valueAddFirstNameId = this.addFirstNameEl.value;
+      const valueAddLastNameId = this.addLastNameEl.value;
+      const valueAddEmailId = this.addEmailIdEl.value;
+      const valueAddMobileNoId = this.addMobileNoEl.value;
+      const valueAddRole = this.addRoleEl.value;
+      const valueAddUserName = this.addUserNameEl.value;
+      const valueAddPassword = this.addPasswordEl.value;
+      const valueAddConfirmPassword = this.addConfirmPasswordEl.value;
+
+      submitAddUser(
+        valueAddUserId,
+        valueAddFirstNameId,
+        valueAddLastNameId,
+        valueAddEmailId,
+        valueAddMobileNoId,
+        valueAddRole,
+        valueAddUserName,
+        valueAddPassword,
+        valueAddConfirmPassword
+      );
     });
   };
 
