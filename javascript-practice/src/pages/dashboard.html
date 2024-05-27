@@ -108,7 +108,9 @@
                   <p class="table-data-name">User Name</p>
                   <p class="table-data-email">user@gmail.com</p>
                 </td>
-                <td class="table-data-date table-data table-cell">dd mm, yyyy</td>
+                <td class="table-data-date table-data table-cell">
+                  dd mm, yyyy
+                </td>
                 <td class="table-data table-cell">
                   <p>Your Role</p>
                 </td>
@@ -136,13 +138,13 @@
               <img src="../assets/icons/alert-circle.svg" alt="" />
             </div>
           </div>
-          <form action="" class="popup-form-box flex-column">
+          <form action="" class="popup-form-box flex-column" id="addUserForm">
             <input
               class="input popup-input"
               type="text"
               placeholder="User ID *"
               name=""
-              id=""
+              id="addUserId"
             />
             <div class="flex popup-area-form-box">
               <input
@@ -150,14 +152,14 @@
                 type="text"
                 placeholder="First Name *"
                 name=""
-                id=""
+                id="addFirstName"
               />
               <input
                 class="input popup-input"
                 type="text"
                 placeholder="Last Name *"
                 name=""
-                id=""
+                id="addLastName"
               />
             </div>
             <div class="flex popup-area-form-box">
@@ -166,20 +168,24 @@
                 type="text"
                 placeholder="Email ID *"
                 name=""
-                id=""
+                id="addEmailId"
               />
               <input
                 class="input popup-input"
                 type="text"
                 placeholder="Mobile No"
                 name=""
-                id=""
+                id="addMobileNo"
               />
               <div class="input popup-input">
-                <select name="" id="" class="popup-select">
+                <select name="" id="addRole" class="popup-select">
                   <option class="popup-option" value="" disabled selected>
                     Select Role Type
                   </option>
+                  <option value="Supper Admin">Supper Admin</option>
+                  <option value="Admin">Admin</option>
+                  <option value="HR Admin">HR Admin</option>
+                  <option value="Employee">Employee</option>
                 </select>
               </div>
             </div>
@@ -189,21 +195,21 @@
                 type="text"
                 placeholder="Username *"
                 name=""
-                id=""
+                id="addUserName"
               />
               <input
                 class="input popup-input"
                 type="text"
                 placeholder="Password *"
                 name=""
-                id=""
+                id="addPassword"
               />
               <input
                 class="input popup-input"
                 type="text"
                 placeholder="Confirm Password *"
                 name=""
-                id=""
+                id="addConfirmPassword"
               />
             </div>
             <div class="popup-button-box align-center">
@@ -234,6 +240,7 @@
         </ul>
       </aside>
     </div>
+    <div id="toast-message" class="toast-message"></div>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>

@@ -4,8 +4,8 @@ export default class UserService {
   getAllUser = async () => {
     try {
       const res = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}`, {
-        method: "GET",
-        headers: { "content-type": "application/json" },
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
       });
       if (res.ok) {
         return await res.json();
@@ -21,10 +21,25 @@ export default class UserService {
       const user = data.find(
         (user) => user.email === email && user.password === password
       );
-      
+
       return user;
     } catch (error) {
       throw new Error('Failed to get user.');
+    }
+  };
+
+  addUser = async (user) => {
+    try {
+      const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      throw new Error('Failed to add user.');
     }
   };
 }
