@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
+import showToast from '../views/toast';
 
 export default class DashboardView {
   constructor() {
@@ -38,7 +39,7 @@ export default class DashboardView {
     });
   };
 
-  showUserInfo = () => {
+  showUserInfo = (userInfo) => {
     const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
     const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
@@ -90,6 +91,10 @@ export default class DashboardView {
       );
     });
   };
+
+  addUserMessage(message) {
+    showToast(message);
+  }
 
   redirectPage = (page) => {
     window.location.replace(page);

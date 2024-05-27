@@ -1,5 +1,6 @@
 import { validatePassword } from '../helpers/validation';
 import { ERROR_MESSAGE } from '../constants/message';
+import showToast from '../views/toast';
 
 export const {
   REQUIRED_FIELD_EMAIL,
@@ -53,6 +54,10 @@ export default class UserView {
       this.passwordErrorEl.textContent = '';
     });
   };
+
+  showLoginFailedMessage(message) {
+    showToast(message, 'error');
+  }
 
   redirectPage = (page) => {
     window.location.replace(page);

@@ -1,16 +1,20 @@
 import UserModel from '../models/userModel';
 import UserService from '../services/userService';
 import DashboardView from '../views/dashboardView';
-import showToast from '../views/toast';
 import NOTIFY_MESSAGE from '../constants/message';
 
 const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
 
 export default class DashboardController {
-  constructor() {
+  constructor(view, model, service) {
     this.view = new DashboardView();
     this.model = new UserModel();
     this.service = new UserService();
+
+    this.view.bindFormAddUser(this.addUser.bind(this));
+    this.view.toggleDropDownMenu();
+    this.view.showUserInfo();
+    this.view.bindPopupUser();
   }
 
   addUser = async (
@@ -35,10 +39,10 @@ export default class DashboardController {
         password
       );
       const addedUser = await this.service.addUser(newUser);
-      showToast(`${ADD_USER_SUCCES}`);
+      this.view.addUserMessage(`${ADD_USER_SUCCES}`);
       return addedUser;
     } catch (error) {
-      showToast(`${ADD_USER_FAILED}`, 'error');
+      this.view.addUserMessage(`${ADD_USER_FAILED}`, 'error');
       throw new Error('Failed to add user.');
     }
   };

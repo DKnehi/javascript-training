@@ -1,4 +1,3 @@
-import showToast from '../views/toast';
 import UserModel from '../models/userModel';
 import UserView from '../views/userView';
 import UserService from '../services/userService';
@@ -9,10 +8,12 @@ import { LOCAL_STORAGE } from '../constants/localStorage';
 const { LOGIN_FAILED } = NOTIFY_MESSAGE;
 
 export default class UserController {
-  constructor() {
+  constructor(view, model, service) {
     this.view = new UserView();
     this.model = new UserModel();
     this.service = new UserService();
+
+    this.view.bindFormLogin(this.handleFormLogin.bind(this));
   }
 
   handleFormLogin = async (email, password) => {
@@ -25,7 +26,7 @@ export default class UserController {
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
         this.view.redirectPage(URLS.DASHBOARD);
       } else {
-        showToast(`${LOGIN_FAILED}`);
+        this.view.showLoginFailedMessage(`${LOGIN_FAILED}`);
       }
     } catch (error) {
       console.error(error);
