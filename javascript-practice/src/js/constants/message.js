@@ -6,6 +6,8 @@ export const ERROR_MESSAGE = {
 
 const NOTIFY_MESSAGE = {
   LOGIN_FAILED: 'Login failed. Wrong login information or account does not exist!',
+  ADD_USER_SUCCES: 'User added successfully!',
+  ADD_USER_FAILED: 'Failed to add user.',
 };
 
 export default NOTIFY_MESSAGE;

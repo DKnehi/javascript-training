@@ -62,7 +62,6 @@ export default class DashboardView {
 
   bindRoleSelection = (event) => {
     const valueSelectRole = event.target.value;
-    console.log(valueSelectRole);
   };
 
   bindFormAddUser = (submitAddUser) => {

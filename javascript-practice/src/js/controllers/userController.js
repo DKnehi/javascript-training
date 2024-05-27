@@ -27,7 +27,7 @@ export default class UserController {
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
         this.view.redirectPage(URLS.DASHBOARD);
       } else {
-        showToast(`${LOGIN_FAILED}`);
+        showToast(`${LOGIN_FAILED}`, 'error');
       }
     } catch (error) {
       console.error(error);

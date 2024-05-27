@@ -3,7 +3,7 @@ const showToast = (message, type = 'success') => {
 
   if (!toastElement) return;
   toastElement.textContent = message;
-  const toastClass = type === 'error' ? 'toast-success' : 'toast-error';
+  const toastClass = type === 'error' ? 'toast-error' : 'toast-success';
 
   toastElement.className = `toast-message ${toastClass} toast-show`;
   setTimeout(() => {
