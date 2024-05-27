@@ -12,11 +12,11 @@ export default class App {
 
     if (path.includes(PATHS.LOGIN)) {
       const view = new UserView();
-      const controller = new UserController(model, view);
+      const controller = new UserController();
       view.bindFormLogin(controller.handleFormLogin);
     } else if (path.includes(PATHS.DASHBOARD)) {
       const view = new DashboardView();
-      const controller = new DashboardController(model, view);
+      const controller = new DashboardController();
       view.bindFormAddUser(controller.addUser);
       view.showUserInfo();
       view.toggleDropDownMenu();

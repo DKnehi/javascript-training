@@ -13,8 +13,6 @@ export default class UserController {
     this.view = new UserView();
     this.model = new UserModel();
     this.service = new UserService();
-
-    this.view.bindFormLogin(this.handleFormLogin);
   }
 
   handleFormLogin = async (email, password) => {
@@ -27,7 +25,7 @@ export default class UserController {
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
         this.view.redirectPage(URLS.DASHBOARD);
       } else {
-        showToast(`${LOGIN_FAILED}`, 'error');
+        showToast(`${LOGIN_FAILED}`);
       }
     } catch (error) {
       console.error(error);
