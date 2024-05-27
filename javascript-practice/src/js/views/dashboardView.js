@@ -1,5 +1,14 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
+import { validateInputLength, validateEmail, validatePassword, validatePhoneNumber } from '../helpers/validation';
 import showToast from '../views/toast';
+import { ERROR_MESSAGE } from '../constants/message';
+
+export const {
+  REQUIRED_FIELD_EMAIL,
+  REQUIRED_FIELD_PASSWORD,
+  REQUIRED_FIELD,
+  INVALID_PASSWORD,
+} = ERROR_MESSAGE;
 
 export default class DashboardView {
   constructor() {
@@ -22,6 +31,7 @@ export default class DashboardView {
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
 
+    this.addUserErrorEl = document.querySelectorAll('.add-user-error')
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
     );
@@ -77,6 +87,17 @@ export default class DashboardView {
       const valueAddUserName = this.addUserNameEl.value;
       const valueAddPassword = this.addPasswordEl.value;
       const valueAddConfirmPassword = this.addConfirmPasswordEl.value;
+
+      if (!valueAddUserId || !valueAddFirstNameId || !valueAddLastNameId || !valueAddEmailId || !valueAddMobileNoId || !valueAddUserName || !valueAddPassword || !valueAddConfirmPassword) {
+        this.addUserErrorEl.textContent = `${REQUIRED_FIELD}`;
+      }
+      
+      if (!validateInputLength(valueAddUserId) || !validateInputLength(valueAddFirstNameId) || !validateInputLength(valueAddLastNameId)) {
+        // Ví dụ: this.addUserIdErrorEl.textContent = 'Tên người dùng phải có ít nhất 3 ký tự';
+        this.addUserErrorEl.textContent = `${REQUIRED_FIELD}`;
+
+        return;
+      }
 
       submitAddUser(
         valueAddUserId,

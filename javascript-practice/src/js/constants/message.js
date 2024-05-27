@@ -1,7 +1,8 @@
 export const ERROR_MESSAGE = {
   REQUIRED_FIELD_EMAIL: 'Invalid email. Please re-enter.',
   REQUIRED_FIELD_PASSWORD: 'Invalid password. Please re-enter.',
-  INVALID_PASSWORD: 'Password must be more than 6 characters, including uppercase letters and special characters!',
+  INVALID_PASSWORD: 'Password must be more than 6 characters, including uppercase letters and special characters.',
+  REQUIRED_FIELD: 'Please enter data.',
 };
 
 const NOTIFY_MESSAGE = {

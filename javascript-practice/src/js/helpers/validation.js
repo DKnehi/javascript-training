@@ -1,7 +1,30 @@
 import { REGEX } from '../constants/regex';
 
-validatePassword = (password) => {
-  return REGEX.PASSWORD.test(password);
+validateEmail = (email) => {
+  return REGEX.EMAIL.test(email);
 };
 
-export { validatePassword };
+validatePhoneNumber = (phoneNumber) => {
+  return REGEX.PHONE_NUMBER.test(phoneNumber);
+};
+
+validatePassword = (password, confirmPassword) => {
+  if (!REGEX.PASSWORD.test(password)) {
+    return false;
+  }
+  if (password !== confirmPassword) {
+    return false;
+  }
+  return true;
+};
+
+validateInputLength = (value) => {
+  return value.length > 3;
+};
+
+export {
+  validatePassword,
+  validateEmail,
+  validatePhoneNumber,
+  validateInputLength,
+};
