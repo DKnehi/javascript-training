@@ -1,30 +1,24 @@
 import { REGEX } from '../constants/regex';
 
-validateEmail = (email) => {
-  return REGEX.EMAIL.test(email);
-};
-
 validatePhoneNumber = (phoneNumber) => {
   return REGEX.PHONE_NUMBER.test(phoneNumber);
 };
 
-validatePassword = (password, confirmPassword) => {
-  if (!REGEX.PASSWORD.test(password)) {
-    return false;
-  }
-  if (password !== confirmPassword) {
-    return false;
-  }
-  return true;
+validatePassword = (password) => {
+  return REGEX.PASSWORD.test(password);
+};
+
+validateConfirmPassword = (password, confirmPassword) => {
+  return password === confirmPassword;
 };
 
 validateInputLength = (value) => {
-  return value.length > 3;
+  return value.length > 2;
 };
 
 export {
   validatePassword,
-  validateEmail,
+  validateConfirmPassword,
   validatePhoneNumber,
   validateInputLength,
 };

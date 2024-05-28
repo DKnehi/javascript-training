@@ -1,5 +1,10 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
-import { validateInputLength, validateEmail, validatePassword, validatePhoneNumber } from '../helpers/validation';
+import {
+  validateInputLength,
+  validatePassword,
+  validateConfirmPassword,
+  validatePhoneNumber,
+} from '../helpers/validation';
 import showToast from '../views/toast';
 import { ERROR_MESSAGE } from '../constants/message';
 
@@ -8,6 +13,10 @@ export const {
   REQUIRED_FIELD_PASSWORD,
   REQUIRED_FIELD,
   INVALID_PASSWORD,
+  REQUIRED_FIELD_THREE,
+  INVALID_CONFIRM_PASSWORD,
+  INVALID_PHONE_NUMBER,
+  REQUIRED_ROLE,
 } = ERROR_MESSAGE;
 
 export default class DashboardView {
@@ -31,7 +40,19 @@ export default class DashboardView {
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
 
-    this.addUserErrorEl = document.querySelectorAll('.add-user-error')
+    this.addUserErrorEls = {
+      addUserIdEl: document.querySelector('.add-user-error.add-user-id'),
+      addFirstNameEl: document.querySelector('.add-user-error.add-first-name'),
+      addLastNameEl: document.querySelector('.add-user-error.add-last-name'),
+      addEmailIdEl: document.querySelector('.add-user-error.add-email-id'),
+      addMobileNoEl: document.querySelector('.add-user-error.add-mobile-no'),
+      addRoleEl: document.querySelector('.add-user-error.add-role'),
+      addUserNameEl: document.querySelector('.add-user-error.add-user-name'),
+      addPasswordEl: document.querySelector('.add-user-error.add-password'),
+      addConfirmPasswordEl: document.querySelector(
+        '.add-user-error.add-confirm-password'
+      ),
+    };
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
     );
@@ -72,7 +93,13 @@ export default class DashboardView {
   };
 
   bindRoleSelection = (event) => {
-    const valueSelectRole = event.target.value;
+    if (event && event.target) {
+      const valueSelectRole = event.target.value;
+    } else {
+      console.error(
+        'The event is undefined or does not have a target attribute.'
+      );
+    }
   };
 
   bindFormAddUser = (submitAddUser) => {
@@ -88,29 +115,115 @@ export default class DashboardView {
       const valueAddPassword = this.addPasswordEl.value;
       const valueAddConfirmPassword = this.addConfirmPasswordEl.value;
 
-      if (!valueAddUserId || !valueAddFirstNameId || !valueAddLastNameId || !valueAddEmailId || !valueAddMobileNoId || !valueAddUserName || !valueAddPassword || !valueAddConfirmPassword) {
-        this.addUserErrorEl.textContent = `${REQUIRED_FIELD}`;
+      Object.values(this.addUserErrorEls).forEach((el) => {
+        el.textContent = '';
+      });
+
+      if (
+        !valueAddUserId ||
+        !valueAddFirstNameId ||
+        !valueAddLastNameId ||
+        !valueAddEmailId ||
+        !valueAddMobileNoId ||
+        !valueAddUserName ||
+        !valueAddPassword ||
+        !valueAddConfirmPassword
+      ) {
+        Object.entries(this.addUserErrorEls).forEach(([key, el]) => {
+          if (!this[key].value) {
+            el.textContent = `${REQUIRED_FIELD}`;
+          }
+        });
+
+        return;
       }
-      
-      if (!validateInputLength(valueAddUserId) || !validateInputLength(valueAddFirstNameId) || !validateInputLength(valueAddLastNameId)) {
-        // Ví dụ: this.addUserIdErrorEl.textContent = 'Tên người dùng phải có ít nhất 3 ký tự';
-        this.addUserErrorEl.textContent = `${REQUIRED_FIELD}`;
+      let isValid = true;
+      if (isValid) {
+        if (
+          !validateInputLength(valueAddUserId) ||
+          !validateInputLength(valueAddFirstNameId) ||
+          !validateInputLength(valueAddLastNameId) ||
+          !validateInputLength(valueAddUserName)
+        ) {
+          if (
+            !validateInputLength(valueAddUserId) &&
+            this.addUserErrorEls.addUserIdEl
+          )
+            this.addUserErrorEls.addUserIdEl.textContent = `${REQUIRED_FIELD_THREE}`;
+          if (
+            !validateInputLength(valueAddFirstNameId) &&
+            this.addUserErrorEls.addFirstNameEl
+          )
+            this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+          if (
+            !validateInputLength(valueAddLastNameId) &&
+            this.addUserErrorEls.addLastNameEl
+          )
+            this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+          if (
+            !validateInputLength(valueAddUserName) &&
+            this.addUserErrorEls.addUserNameEl
+          )
+            this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+          isValid = false;
+        }
+      }
+
+      if (!valueAddRole) {
+        this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_ROLE}`;
+        isValid = false;
+      }
+
+      if (!validatePhoneNumber(valueAddMobileNoId)) {
+        this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
 
         return;
       }
 
-      submitAddUser(
-        valueAddUserId,
-        valueAddFirstNameId,
-        valueAddLastNameId,
-        valueAddEmailId,
-        valueAddMobileNoId,
-        valueAddRole,
-        valueAddUserName,
-        valueAddPassword,
-        valueAddConfirmPassword
-      );
+      if (!validatePassword(valueAddPassword)) {
+        this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+
+        return;
+      }
+
+      if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)) {
+        this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+        isValid = false;
+      }
+
+      if (isValid) {
+        submitAddUser(
+          valueAddUserId,
+          valueAddFirstNameId,
+          valueAddLastNameId,
+          valueAddEmailId,
+          valueAddMobileNoId,
+          valueAddRole,
+          valueAddUserName,
+          valueAddPassword,
+          valueAddConfirmPassword
+        );
+      }
     });
+
+    const clearError = (inputEl, errorEl) => {
+      inputEl.addEventListener('input', () => {
+        if (errorEl) errorEl.textContent = '';
+      });
+    };
+
+    clearError(this.addUserIdEl, this.addUserErrorEls.addUserIdEl);
+    clearError(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
+    clearError(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
+    clearError(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
+    clearError(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
+    clearError(this.addRoleEl, this.addUserErrorEls.addRoleEl);
+    clearError(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
+    clearError(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
+    clearError(
+      this.addConfirmPasswordEl,
+      this.addUserErrorEls.addConfirmPasswordEl
+    );
   };
 
   addUserMessage(message) {
