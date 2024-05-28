@@ -12,13 +12,13 @@ validateConfirmPassword = (password, confirmPassword) => {
   return password === confirmPassword;
 };
 
-validateInputLength = (value) => {
-  return value.length > 2;
+validateInputText = (text) => {
+  return REGEX.TEXT.test(text)
 };
 
 export {
   validatePassword,
   validateConfirmPassword,
   validatePhoneNumber,
-  validateInputLength,
+  validateInputText,
 };

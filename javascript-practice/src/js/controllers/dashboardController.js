@@ -15,7 +15,6 @@ export default class DashboardController {
     this.view.toggleDropDownMenu();
     this.view.showUserInfo();
     this.view.bindPopupUser();
-    this.view.bindRoleSelection();
   }
 
   addUser = async (

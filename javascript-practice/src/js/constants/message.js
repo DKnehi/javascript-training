@@ -4,7 +4,7 @@ export const ERROR_MESSAGE = {
   INVALID_PASSWORD:
     'Password must be more than 6 characters, including uppercase letters and special characters!',
   REQUIRED_FIELD: 'Not be empty. Please Enter!',
-  REQUIRED_FIELD_THREE: 'Please enter more than 3 characters!',
+  REQUIRED_TEXT: 'Must not contain numbers!',
   REQUIRED_ROLE: 'Please select role!',
   INVALID_CONFIRM_PASSWORD:
     'Does not match the entered password. Please re-enter!',

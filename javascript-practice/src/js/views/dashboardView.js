@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import {
-  validateInputLength,
+  validateInputText,
   validatePassword,
   validateConfirmPassword,
   validatePhoneNumber,
@@ -13,10 +13,9 @@ export const {
   REQUIRED_FIELD_PASSWORD,
   REQUIRED_FIELD,
   INVALID_PASSWORD,
-  REQUIRED_FIELD_THREE,
+  REQUIRED_TEXT,
   INVALID_CONFIRM_PASSWORD,
   INVALID_PHONE_NUMBER,
-  REQUIRED_ROLE,
 } = ERROR_MESSAGE;
 
 export default class DashboardView {
@@ -41,17 +40,15 @@ export default class DashboardView {
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
 
     this.addUserErrorEls = {
-      addUserIdEl: document.querySelector('.add-user-error.add-user-id'),
-      addFirstNameEl: document.querySelector('.add-user-error.add-first-name'),
-      addLastNameEl: document.querySelector('.add-user-error.add-last-name'),
-      addEmailIdEl: document.querySelector('.add-user-error.add-email-id'),
-      addMobileNoEl: document.querySelector('.add-user-error.add-mobile-no'),
-      addRoleEl: document.querySelector('.add-user-error.add-role'),
-      addUserNameEl: document.querySelector('.add-user-error.add-user-name'),
-      addPasswordEl: document.querySelector('.add-user-error.add-password'),
-      addConfirmPasswordEl: document.querySelector(
-        '.add-user-error.add-confirm-password'
-      ),
+      addUserIdEl: document.querySelector('.add-user-id'),
+      addFirstNameEl: document.querySelector('.add-first-name'),
+      addLastNameEl: document.querySelector('.add-last-name'),
+      addEmailIdEl: document.querySelector('.add-email-id'),
+      addMobileNoEl: document.querySelector('.add-mobile-no'),
+      addRoleEl: document.querySelector('.add-role'),
+      addUserNameEl: document.querySelector('.add-user-name'),
+      addPasswordEl: document.querySelector('.add-password'),
+      addConfirmPasswordEl: document.querySelector('.add-confirm-password'),
     };
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
@@ -92,17 +89,13 @@ export default class DashboardView {
     });
   };
 
-  bindRoleSelection = (event) => {
-    if (event && event.target) {
-      const valueSelectRole = event.target.value;
-    } else {
-      console.error(
-        'The event is undefined or does not have a target attribute.'
-      );
-    }
-  };
-
   bindFormAddUser = (submitAddUser) => {
+    const clearError = (inputEl, errorEl) => {
+      inputEl.addEventListener('input', () => {
+        if (errorEl) errorEl.textContent = '';
+      });
+    };
+
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
       const valueAddUserId = this.addUserIdEl.value;
@@ -118,7 +111,9 @@ export default class DashboardView {
       Object.values(this.addUserErrorEls).forEach((el) => {
         el.textContent = '';
       });
-
+      let isValid = true;
+      
+      //Show error if user does not enter
       if (
         !valueAddUserId ||
         !valueAddFirstNameId ||
@@ -133,57 +128,63 @@ export default class DashboardView {
           if (!this[key].value) {
             el.textContent = `${REQUIRED_FIELD}`;
           }
-        });
 
-        return;
+        });
+        isValid = false;
       }
-      let isValid = true;
+
+      //Displays an error if the user enters numbers in this input
       if (isValid) {
         if (
-          !validateInputLength(valueAddUserId) ||
-          !validateInputLength(valueAddFirstNameId) ||
-          !validateInputLength(valueAddLastNameId) ||
-          !validateInputLength(valueAddUserName)
+          !validateInputText(valueAddUserId) ||
+          !validateInputText(valueAddFirstNameId) ||
+          !validateInputText(valueAddLastNameId) ||
+          !validateInputText(valueAddUserName)
         ) {
+          
           if (
-            !validateInputLength(valueAddUserId) &&
+            !validateInputText(valueAddUserId) &&
             this.addUserErrorEls.addUserIdEl
           )
-            this.addUserErrorEls.addUserIdEl.textContent = `${REQUIRED_FIELD_THREE}`;
+
+            this.addUserErrorEls.addUserIdEl.textContent = `${REQUIRED_TEXT}`;
           if (
-            !validateInputLength(valueAddFirstNameId) &&
+            !validateInputText(valueAddFirstNameId) &&
             this.addUserErrorEls.addFirstNameEl
           )
-            this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+
+            this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
-            !validateInputLength(valueAddLastNameId) &&
+            !validateInputText(valueAddLastNameId) &&
             this.addUserErrorEls.addLastNameEl
           )
-            this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+
+            this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
-            !validateInputLength(valueAddUserName) &&
+            !validateInputText(valueAddUserName) &&
             this.addUserErrorEls.addUserNameEl
           )
-            this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_FIELD_THREE}`;
+
+            this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
           isValid = false;
         }
       }
 
+      //Show an error if the user does not select a role
       if (!valueAddRole) {
-        this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_ROLE}`;
+        this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
         isValid = false;
       }
 
+      //Show an error if this case is not in the correct format
       if (!validatePhoneNumber(valueAddMobileNoId)) {
         this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
-
-        return;
+        isValid = false;
       }
 
       if (!validatePassword(valueAddPassword)) {
         this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
-
-        return;
+        isValid = false;
       }
 
       if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)) {
@@ -205,12 +206,6 @@ export default class DashboardView {
         );
       }
     });
-
-    const clearError = (inputEl, errorEl) => {
-      inputEl.addEventListener('input', () => {
-        if (errorEl) errorEl.textContent = '';
-      });
-    };
 
     clearError(this.addUserIdEl, this.addUserErrorEls.addUserIdEl);
     clearError(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
