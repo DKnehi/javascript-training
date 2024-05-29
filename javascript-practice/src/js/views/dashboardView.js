@@ -96,14 +96,14 @@ export default class DashboardView {
   bindFormAddUser = (submitAddUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const valueAddFirstNameId = this.addFirstNameEl.value;
-      const valueAddLastNameId = this.addLastNameEl.value;
-      const valueAddEmailId = this.addEmailIdEl.value;
-      const valueAddMobileNoId = this.addMobileNoEl.value;
-      const valueAddRole = this.addRoleEl.value;
-      const valueAddUserName = this.addUserNameEl.value;
-      const valueAddPassword = this.addPasswordEl.value;
-      const valueAddConfirmPassword = this.addConfirmPasswordEl.value;
+      const firstName = this.addFirstNameEl.value;
+      const lastName = this.addLastNameEl.value;
+      const Email = this.addEmailIdEl.value;
+      const Mobile = this.addMobileNoEl.value;
+      const Role = this.addRoleEl.value;
+      const userName = this.addUserNameEl.value;
+      const Password = this.addPasswordEl.value;
+      const confirmPassword = this.addConfirmPasswordEl.value;
 
       Object.values(this.addUserErrorEls).forEach((el) => {
         el.textContent = '';
@@ -112,55 +112,55 @@ export default class DashboardView {
       let isValid = true;
 
       if (
-        !valueAddEmailId ||
-        !valueAddRole ||
-        !validateName(valueAddFirstNameId, valueAddLastNameId, valueAddUserName) ||
-        !validatePhoneNumber(valueAddMobileNoId) ||
-        !validatePassword(valueAddPassword) ||
-        !validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)
+        !Email ||
+        !Role ||
+        !validateName(firstName, lastName, userName ) ||
+        !validatePhoneNumber(Mobile) ||
+        !validatePassword(Password) ||
+        !validateConfirmPassword(Password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
-        if (!valueAddEmailId && this.addUserErrorEls.addEmailIdEl) {
+        if (!Email && this.addUserErrorEls.addEmailIdEl) {
           this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Show an error if the user enters nothing
-        if (!valueAddRole && this.addUserErrorEls.addRoleEl) {
+        if (!Role && this.addUserErrorEls.addRoleEl) {
           this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Show an error if the user enters nothing
-        if (!valueAddConfirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!confirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(valueAddFirstNameId) && this.addUserErrorEls.addFirstNameEl) {
+        if (!validateName(firstName) && this.addUserErrorEls.addFirstNameEl) {
           this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(valueAddLastNameId) && this.addUserErrorEls.addLastNameEl) {
+        if (!validateName(lastName) && this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(valueAddUserName) && this.addUserErrorEls.addUserNameEl) {
+        if (!validateName(userName) && this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters the wrong phonenumber format
-        if (!validatePhoneNumber(valueAddMobileNoId) && this.addUserErrorEls.addMobileNoEl) {
+        if (!validatePhoneNumber(Mobile) && this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
         //Displays an error if the user enters the wrong password format
-        if (!validatePassword(valueAddPassword) && this.addUserErrorEls.addPasswordEl) {
+        if (!validatePassword(Password) && this.addUserErrorEls.addPasswordEl) {
           this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!validateConfirmPassword(Password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
@@ -168,14 +168,14 @@ export default class DashboardView {
 
       if (isValid) {
         submitAddUser(
-          valueAddFirstNameId,
-          valueAddLastNameId,
-          valueAddEmailId,
-          valueAddMobileNoId,
-          valueAddRole,
-          valueAddUserName,
-          valueAddPassword,
-          valueAddConfirmPassword
+          firstName,
+          lastName,
+          Email,
+          Mobile,
+          Role,
+          userName,
+          Password,
+          confirmPassword
         );
       }
     });

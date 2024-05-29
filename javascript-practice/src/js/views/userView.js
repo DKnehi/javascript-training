@@ -20,32 +20,32 @@ export default class UserView {
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const valueEmail = this.emailFormEl.value;
-      const valuePassword = this.passwordFormEl.value;
+      const Email = this.emailFormEl.value;
+      const Password = this.passwordFormEl.value;
 
       this.emailErrorEl.textContent = '';
       this.passwordErrorEl.textContent = '';
 
       //Show an error if the user enters nothing
-      if (!valueEmail) {
+      if (!Email) {
         this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
       }
 
       //Show an error if the user enters nothing
-      if (!valuePassword) {
+      if (!Password) {
         this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
 
         return;
       }
 
       //Displays an error if the user enters the wrong password format
-      if (!validatePassword(valuePassword)) {
+      if (!validatePassword(Password)) {
         this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
 
         return;
       }
 
-      submitLogin(valueEmail, valuePassword);
+      submitLogin(Email, Password);
     });
 
     this.emailFormEl.addEventListener('input', () => {
