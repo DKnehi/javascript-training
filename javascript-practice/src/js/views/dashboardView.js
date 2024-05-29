@@ -120,7 +120,7 @@ export default class DashboardView {
         !validateConfirmPassword(password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
-        if (!Email && this.addUserErrorEls.addEmailIdEl) {
+        if (!email && this.addUserErrorEls.addEmailIdEl) {
           this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
         }
 
