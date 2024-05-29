@@ -16,7 +16,6 @@ export default class DashboardController {
     this.view.showUserInfo();
     this.view.bindPopupUser();
     this.view.clearInputs();
-    this.view.clearErrorOnInput();
   }
 
   addUser = async (
