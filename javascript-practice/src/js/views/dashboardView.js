@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import {
-  validateInputText,
+  validateName,
   validatePassword,
   validateConfirmPassword,
   validatePhoneNumber,
@@ -114,9 +114,7 @@ export default class DashboardView {
       if (
         !valueAddEmailId ||
         !valueAddRole ||
-        !validateInputText(valueAddFirstNameId) ||
-        !validateInputText(valueAddLastNameId) ||
-        !validateInputText(valueAddUserName) ||
+        !validateName(valueAddFirstNameId, valueAddLastNameId, valueAddUserName) ||
         !validatePhoneNumber(valueAddMobileNoId) ||
         !validatePassword(valueAddPassword) ||
         !validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)
@@ -137,17 +135,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(valueAddFirstNameId) && this.addUserErrorEls.addFirstNameEl) {
+        if (!validateName(valueAddFirstNameId) && this.addUserErrorEls.addFirstNameEl) {
           this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(valueAddLastNameId) && this.addUserErrorEls.addLastNameEl) {
+        if (!validateName(valueAddLastNameId) && this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(valueAddUserName) && this.addUserErrorEls.addUserNameEl) {
+        if (!validateName(valueAddUserName) && this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 

@@ -12,7 +12,7 @@ validateConfirmPassword = (password, confirmPassword) => {
   return password === confirmPassword;
 };
 
-validateInputText = (text) => {
+validateName = (text) => {
   return REGEX.TEXT.test(text)
 };
 
@@ -20,5 +20,5 @@ export {
   validatePassword,
   validateConfirmPassword,
   validatePhoneNumber,
-  validateInputText,
+  validateName,
 };
