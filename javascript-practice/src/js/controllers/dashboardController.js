@@ -15,10 +15,10 @@ export default class DashboardController {
     this.view.toggleDropDownMenu();
     this.view.showUserInfo();
     this.view.bindPopupUser();
+    this.view.clearInputs();
   }
 
   addUser = async (
-    userId,
     firstName,
     lastName,
     email,
@@ -29,7 +29,6 @@ export default class DashboardController {
   ) => {
     try {
       const newUser = new UserModel(
-        userId,
         firstName,
         lastName,
         email,

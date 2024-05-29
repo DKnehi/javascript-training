@@ -145,72 +145,122 @@
               placeholder="User ID *"
               name=""
               id="addUserId"
+              disabled
             />
+            <span id="" class="error-message add-user-id"></span>
             <div class="flex popup-area-form-box">
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="First Name *"
-                name=""
-                id="addFirstName"
-              />
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Last Name *"
-                name=""
-                id="addLastName"
-              />
-            </div>
-            <div class="flex popup-area-form-box">
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Email ID *"
-                name=""
-                id="addEmailId"
-              />
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Mobile No"
-                name=""
-                id="addMobileNo"
-              />
-              <div class="input popup-input">
-                <select name="" id="addRole" class="popup-select">
-                  <option class="popup-option" value="" disabled selected>
-                    Select Role Type
-                  </option>
-                  <option value="Supper Admin">Supper Admin</option>
-                  <option value="Admin">Admin</option>
-                  <option value="HR Admin">HR Admin</option>
-                  <option value="Employee">Employee</option>
-                </select>
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="text"
+                  placeholder="First Name *"
+                  name=""
+                  id="addFirstName"
+                />
+                <span
+                  id=""
+                  class="error-message add-first-name"
+                ></span>
+              </div>
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="text"
+                  placeholder="Last Name *"
+                  name=""
+                  id="addLastName"
+                />
+                <span
+                  id=""
+                  class="error-message add-last-name"
+                ></span>
               </div>
             </div>
             <div class="flex popup-area-form-box">
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Username *"
-                name=""
-                id="addUserName"
-              />
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Password *"
-                name=""
-                id="addPassword"
-              />
-              <input
-                class="input popup-input"
-                type="text"
-                placeholder="Confirm Password *"
-                name=""
-                id="addConfirmPassword"
-              />
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="email"
+                  placeholder="Email ID *"
+                  name=""
+                  id="addEmailId"
+                />
+                <span
+                  id=""
+                  class="error-message add-email-id"
+                ></span>
+              </div>
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="text"
+                  placeholder="Mobile No"
+                  name=""
+                  id="addMobileNo"
+                />
+                <span
+                  id=""
+                  class="error-message add-mobile-no"
+                ></span>
+              </div>
+              <div class="popup-area-form flex flex-column">
+                <div class="input popup-input">
+                  <select name="" id="addRole" class="popup-select">
+                    <option class="popup-option" value="" disabled selected>
+                      Select Role Type
+                    </option>
+                    <option value="Supper Admin">Supper Admin</option>
+                    <option value="Admin">Admin</option>
+                    <option value="HR Admin">HR Admin</option>
+                    <option value="Employee">Employee</option>
+                  </select>
+                </div>
+                <span
+                  id=""
+                  class="error-message add-role"
+                ></span>
+              </div>
+            </div>
+            <div class="flex popup-area-form-box">
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="text"
+                  placeholder="Username *"
+                  name=""
+                  id="addUserName"
+                />
+                <span
+                  id=""
+                  class="error-message add-user-name"
+                ></span>
+              </div>
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="password"
+                  placeholder="Password *"
+                  name=""
+                  id="addPassword"
+                />
+                <span
+                  id=""
+                  class="error-message add-password"
+                ></span>
+              </div>
+              <div class="popup-area-form flex flex-column">
+                <input
+                  class="input popup-input"
+                  type="password"
+                  placeholder="Confirm Password *"
+                  name=""
+                  id="addConfirmPassword"
+                />
+                <span
+                  id=""
+                  class="error-message add-confirm-password"
+                ></span>
+              </div>
             </div>
             <div class="popup-button-box align-center">
               <button class="primary-button popup-button" type="submit">
@@ -219,6 +269,7 @@
               <button
                 class="secondary-button popup-button-cancel"
                 type="button"
+                id="cancelForm"
               >
                 Cancel
               </button>

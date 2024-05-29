@@ -5,7 +5,6 @@ import showToast from '../views/toast';
 export const {
   REQUIRED_FIELD_EMAIL,
   REQUIRED_FIELD_PASSWORD,
-  INVALID_EMAIL,
   INVALID_PASSWORD,
 } = ERROR_MESSAGE;
 
@@ -21,29 +20,32 @@ export default class UserView {
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const valueEmail = this.emailFormEl.value;
-      const valuePassword = this.passwordFormEl.value;
+      const email = this.emailFormEl.value;
+      const password = this.passwordFormEl.value;
 
       this.emailErrorEl.textContent = '';
       this.passwordErrorEl.textContent = '';
 
-      if (!valueEmail) {
+      //Show an error if the user enters nothing
+      if (!email) {
         this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
       }
 
-      if (!valuePassword) {
+      //Show an error if the user enters nothing
+      if (!password) {
         this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
 
         return;
       }
 
-      if (!validatePassword(valuePassword)) {
+      //Displays an error if the user enters the wrong password format
+      if (!validatePassword(password)) {
         this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
 
         return;
       }
 
-      submitLogin(valueEmail, valuePassword);
+      submitLogin(email, password);
     });
 
     this.emailFormEl.addEventListener('input', () => {

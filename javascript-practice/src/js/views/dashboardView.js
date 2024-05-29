@@ -1,8 +1,25 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
+import {
+  validateInputText,
+  validatePassword,
+  validateConfirmPassword,
+  validatePhoneNumber,
+} from '../helpers/validation';
 import showToast from '../views/toast';
+import { ERROR_MESSAGE } from '../constants/message';
+
+export const {
+  REQUIRED_FIELD_PASSWORD,
+  REQUIRED_FIELD,
+  INVALID_PASSWORD,
+  REQUIRED_TEXT,
+  INVALID_CONFIRM_PASSWORD,
+  INVALID_PHONE_NUMBER,
+} = ERROR_MESSAGE;
 
 export default class DashboardView {
   constructor() {
+    // Dashboard header elements
     this.arrowEl = document.getElementById('arrow');
     this.fullNameEl = document.getElementById('fullName');
     this.headerNameEl = document.getElementById('headerName');
@@ -11,8 +28,8 @@ export default class DashboardView {
     this.popupContainerEl = document.getElementById('popupContainer');
     this.roleEl = document.getElementById('role');
 
+    // Add User Form Element
     this.addUserFormEl = document.getElementById('addUserForm');
-    this.addUserIdEl = document.getElementById('addUserId');
     this.addFirstNameEl = document.getElementById('addFirstName');
     this.addLastNameEl = document.getElementById('addLastName');
     this.addEmailIdEl = document.getElementById('addEmailId');
@@ -21,7 +38,22 @@ export default class DashboardView {
     this.addUserNameEl = document.getElementById('addUserName');
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
+    this.cancelFormEl = document.getElementById('cancelForm');
+    this.inputEl = this.addUserFormEl.querySelectorAll('input');
 
+    // Error Add User Form Element
+    this.addUserErrorEls = {
+      addFirstNameEl: document.querySelector('.add-first-name'),
+      addLastNameEl: document.querySelector('.add-last-name'),
+      addEmailIdEl: document.querySelector('.add-email-id'),
+      addMobileNoEl: document.querySelector('.add-mobile-no'),
+      addRoleEl: document.querySelector('.add-role'),
+      addUserNameEl: document.querySelector('.add-user-name'),
+      addPasswordEl: document.querySelector('.add-password'),
+      addConfirmPasswordEl: document.querySelector('.add-confirm-password'),
+    };
+
+    // Other Dashboard Element
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
     );
@@ -61,40 +93,120 @@ export default class DashboardView {
     });
   };
 
-  bindRoleSelection = (event) => {
-    const valueSelectRole = event.target.value;
-  };
-
   bindFormAddUser = (submitAddUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const valueAddUserId = this.addUserIdEl.value;
-      const valueAddFirstNameId = this.addFirstNameEl.value;
-      const valueAddLastNameId = this.addLastNameEl.value;
-      const valueAddEmailId = this.addEmailIdEl.value;
-      const valueAddMobileNoId = this.addMobileNoEl.value;
-      const valueAddRole = this.addRoleEl.value;
-      const valueAddUserName = this.addUserNameEl.value;
-      const valueAddPassword = this.addPasswordEl.value;
-      const valueAddConfirmPassword = this.addConfirmPasswordEl.value;
+      const firstName = this.addFirstNameEl.value;
+      const lastName = this.addLastNameEl.value;
+      const email = this.addEmailIdEl.value;
+      const mobile = this.addMobileNoEl.value;
+      const role = this.addRoleEl.value;
+      const userName = this.addUserNameEl.value;
+      const password = this.addPasswordEl.value;
+      const confirmPassword = this.addConfirmPasswordEl.value;
 
-      submitAddUser(
-        valueAddUserId,
-        valueAddFirstNameId,
-        valueAddLastNameId,
-        valueAddEmailId,
-        valueAddMobileNoId,
-        valueAddRole,
-        valueAddUserName,
-        valueAddPassword,
-        valueAddConfirmPassword
-      );
+      Object.values(this.addUserErrorEls).forEach((el) => {
+        el.textContent = '';
+      });
+
+      let isValid = true;
+
+      if (
+        !email ||
+        !role ||
+        !validateInputText(firstName, lastName, userName ) ||
+        !validatePhoneNumber(mobile) ||
+        !validatePassword(password) ||
+        !validateConfirmPassword(password, confirmPassword)
+      ) {
+        //Show an error if the user enters nothing
+        if (!email && this.addUserErrorEls.addEmailIdEl) {
+          this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
+        }
+
+        //Show an error if the user enters nothing
+        if (!role && this.addUserErrorEls.addRoleEl) {
+          this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
+        }
+
+        //Show an error if the user enters nothing
+        if (!confirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
+        }
+
+        //Displays an error if the user enters digits
+        if (!validateInputText(firstName) && this.addUserErrorEls.addFirstNameEl) {
+          this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
+
+        //Displays an error if the user enters digits
+        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
+          this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
+
+        //Displays an error if the user enters digits
+        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
+          this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
+
+        //Displays an error if the user enters the wrong phonenumber format
+        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
+          this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
+        }
+
+        //Displays an error if the user enters the wrong password format
+        if (!validatePassword(password) && this.addUserErrorEls.addPasswordEl) {
+          this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+        }
+
+        //Displays an error if the user enters a confirm password that is not the same as the password
+        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+        }
+        isValid = false;
+      }
+
+      if (isValid) {
+        submitAddUser(
+          firstName,
+          lastName,
+          email,
+          mobile,
+          role,
+          userName,
+          password,
+          confirmPassword
+        );
+      }
+    });
+
+    this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
+    this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
+    this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
+    this.clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
+    this.clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
+    this.clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
+    this.clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
+    this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
+  };
+
+  clearErrorOnInput = (inputEl, errorEl) => {
+    inputEl.addEventListener('input', () => {
+      if (errorEl) errorEl.textContent = '';
+    });
+  };
+
+  //Clears entered data on input cells
+  clearInputs = () => {
+    this.cancelFormEl.addEventListener('click', this.clearInputs);
+    this.inputEl.forEach((input) => {
+      input.value = '';
     });
   };
 
   addUserMessage(message) {
     showToast(message);
-  }
+  };
 
   redirectPage = (page) => {
     window.location.replace(page);
