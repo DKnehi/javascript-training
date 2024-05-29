@@ -26,16 +26,19 @@ export default class UserView {
       this.emailErrorEl.textContent = '';
       this.passwordErrorEl.textContent = '';
 
+      //Show an error if the user enters nothing
       if (!valueEmail) {
         this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
       }
 
+      //Show an error if the user enters nothing
       if (!valuePassword) {
         this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
 
         return;
       }
 
+      //Displays an error if the user enters the wrong password format
       if (!validatePassword(valuePassword)) {
         this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
 

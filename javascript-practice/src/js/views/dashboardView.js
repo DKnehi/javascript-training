@@ -9,7 +9,6 @@ import showToast from '../views/toast';
 import { ERROR_MESSAGE } from '../constants/message';
 
 export const {
-  REQUIRED_FIELD_EMAIL,
   REQUIRED_FIELD_PASSWORD,
   REQUIRED_FIELD,
   INVALID_PASSWORD,
@@ -39,7 +38,7 @@ export default class DashboardView {
     this.addUserNameEl = document.getElementById('addUserName');
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
-    this.clearButtonEl = document.getElementById('cancelForm');
+    this.cancelFormEl = document.getElementById('cancelForm');
     this.inputEl = this.addUserFormEl.querySelectorAll('input');
 
     // Error Add User Form Element
@@ -95,12 +94,6 @@ export default class DashboardView {
   };
 
   bindFormAddUser = (submitAddUser) => {
-    const clearErrorOnInput = (inputEl, errorEl) => {
-      inputEl.addEventListener('input', () => {
-        if (errorEl) errorEl.textContent = '';
-      });
-    };
-
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
       const valueAddFirstNameId = this.addFirstNameEl.value;
@@ -115,76 +108,63 @@ export default class DashboardView {
       Object.values(this.addUserErrorEls).forEach((el) => {
         el.textContent = '';
       });
+
       let isValid = true;
 
-      //Show error if user does not enter
       if (
-        !valueAddFirstNameId ||
-        !valueAddLastNameId ||
         !valueAddEmailId ||
-        !valueAddMobileNoId ||
-        !valueAddUserName ||
-        !valueAddPassword ||
-        !valueAddConfirmPassword
+        !valueAddRole ||
+        !validateInputText(valueAddFirstNameId) ||
+        !validateInputText(valueAddLastNameId) ||
+        !validateInputText(valueAddUserName) ||
+        !validatePhoneNumber(valueAddMobileNoId) ||
+        !validatePassword(valueAddPassword) ||
+        !validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)
       ) {
-        Object.entries(this.addUserErrorEls).forEach(([key, el]) => {
-          if (!this[key].value) {
-            el.textContent = `${REQUIRED_FIELD}`;
-          }
-        });
-        isValid = false;
-      }
-
-      //Displays an error if the user enters numbers in this input
-      if (isValid) {
-        if (
-          !validateInputText(valueAddFirstNameId) ||
-          !validateInputText(valueAddLastNameId) ||
-          !validateInputText(valueAddUserName)
-        ) {
-          if (
-            !validateInputText(valueAddFirstNameId) &&
-            this.addUserErrorEls.addFirstNameEl
-          )
-
-            this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
-          if (
-            !validateInputText(valueAddLastNameId) &&
-            this.addUserErrorEls.addLastNameEl
-          )
-
-            this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
-          if (
-            !validateInputText(valueAddUserName) &&
-            this.addUserErrorEls.addUserNameEl
-          )
-          
-            this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
-          isValid = false;
+        //Show an error if the user enters nothing
+        if (!valueAddEmailId && this.addUserErrorEls.addEmailIdEl) {
+          this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
         }
-      }
 
-      //Show an error if the user does not select a role
-      if (!valueAddRole) {
-        this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
-        isValid = false;
-      }
+        //Show an error if the user enters nothing
+        if (!valueAddRole && this.addUserErrorEls.addRoleEl) {
+          this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
+        }
 
-      //Show an error if this case is not in the correct format
-      if (!validatePhoneNumber(valueAddMobileNoId)) {
-        this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
-        isValid = false;
-      }
+        //Show an error if the user enters nothing
+        if (!valueAddConfirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
+        }
 
-      //Displays an error if the password format is incorrect
-      if (!validatePassword(valueAddPassword)) {
-        this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
-        isValid = false;
-      }
+        //Displays an error if the user enters digits
+        if (!validateInputText(valueAddFirstNameId) && this.addUserErrorEls.addFirstNameEl) {
+          this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
 
-      //Show error if confirm password does not match password
-      if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)) {
-        this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+        //Displays an error if the user enters digits
+        if (!validateInputText(valueAddLastNameId) && this.addUserErrorEls.addLastNameEl) {
+          this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
+
+        //Displays an error if the user enters digits
+        if (!validateInputText(valueAddUserName) && this.addUserErrorEls.addUserNameEl) {
+          this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
+        }
+
+        //Displays an error if the user enters the wrong phonenumber format
+        if (!validatePhoneNumber(valueAddMobileNoId) && this.addUserErrorEls.addMobileNoEl) {
+          this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
+        }
+
+        //Displays an error if the user enters the wrong password format
+        if (!validatePassword(valueAddPassword) && this.addUserErrorEls.addPasswordEl) {
+          this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+        }
+
+        //Displays an error if the user enters a confirm password that is not the same as the password
+        if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+        }
         isValid = false;
       }
 
@@ -202,25 +182,25 @@ export default class DashboardView {
       }
     });
 
-    clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
-    clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
-    clearErrorOnInput(
-      this.addEmailIdEl,
-      this.addUserErrorEls.addEmailIdEl
-    );
-    clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
-    clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
-    clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
-    clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
-    clearErrorOnInput(
-      this.addConfirmPasswordEl,
-      this.addUserErrorEls.addConfirmPasswordEl
-    );
+    this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
+    this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
+    this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
+    this.clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
+    this.clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
+    this.clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
+    this.clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
+    this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
+  };
+
+  clearErrorOnInput = (inputEl, errorEl) => {
+    inputEl.addEventListener('input', () => {
+      if (errorEl) errorEl.textContent = '';
+    });
   };
 
   //Clears entered data on input cells
   clearInputs = () => {
-    this.clearButtonEl.addEventListener('click', this.clearInputs);
+    this.cancelFormEl.addEventListener('click', this.clearInputs);
     this.inputEl.forEach((input) => {
       input.value = '';
     });
