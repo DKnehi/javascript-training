@@ -18,7 +18,6 @@ export default class DashboardController {
   }
 
   addUser = async (
-    userId,
     firstName,
     lastName,
     email,
@@ -29,7 +28,6 @@ export default class DashboardController {
   ) => {
     try {
       const newUser = new UserModel(
-        userId,
         firstName,
         lastName,
         email,

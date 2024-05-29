@@ -29,7 +29,6 @@ export default class DashboardView {
     this.roleEl = document.getElementById('role');
 
     this.addUserFormEl = document.getElementById('addUserForm');
-    this.addUserIdEl = document.getElementById('addUserId');
     this.addFirstNameEl = document.getElementById('addFirstName');
     this.addLastNameEl = document.getElementById('addLastName');
     this.addEmailIdEl = document.getElementById('addEmailId');
@@ -38,9 +37,11 @@ export default class DashboardView {
     this.addUserNameEl = document.getElementById('addUserName');
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
+    this.clearButtonEl = document.getElementById('clearInputs');
+    this.inputEl = this.addUserFormEl.querySelectorAll('input');
+    this.init();
 
     this.addUserErrorEls = {
-      addUserIdEl: document.querySelector('.add-user-id'),
       addFirstNameEl: document.querySelector('.add-first-name'),
       addLastNameEl: document.querySelector('.add-last-name'),
       addEmailIdEl: document.querySelector('.add-email-id'),
@@ -90,7 +91,7 @@ export default class DashboardView {
   };
 
   bindFormAddUser = (submitAddUser) => {
-    const clearError = (inputEl, errorEl) => {
+    const clearErrorOnInput = (inputEl, errorEl) => {
       inputEl.addEventListener('input', () => {
         if (errorEl) errorEl.textContent = '';
       });
@@ -98,7 +99,6 @@ export default class DashboardView {
 
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const valueAddUserId = this.addUserIdEl.value;
       const valueAddFirstNameId = this.addFirstNameEl.value;
       const valueAddLastNameId = this.addLastNameEl.value;
       const valueAddEmailId = this.addEmailIdEl.value;
@@ -112,10 +112,9 @@ export default class DashboardView {
         el.textContent = '';
       });
       let isValid = true;
-      
+
       //Show error if user does not enter
       if (
-        !valueAddUserId ||
         !valueAddFirstNameId ||
         !valueAddLastNameId ||
         !valueAddEmailId ||
@@ -128,7 +127,6 @@ export default class DashboardView {
           if (!this[key].value) {
             el.textContent = `${REQUIRED_FIELD}`;
           }
-
         });
         isValid = false;
       }
@@ -136,35 +134,24 @@ export default class DashboardView {
       //Displays an error if the user enters numbers in this input
       if (isValid) {
         if (
-          !validateInputText(valueAddUserId) ||
           !validateInputText(valueAddFirstNameId) ||
           !validateInputText(valueAddLastNameId) ||
           !validateInputText(valueAddUserName)
         ) {
-          
-          if (
-            !validateInputText(valueAddUserId) &&
-            this.addUserErrorEls.addUserIdEl
-          )
-
-            this.addUserErrorEls.addUserIdEl.textContent = `${REQUIRED_TEXT}`;
           if (
             !validateInputText(valueAddFirstNameId) &&
             this.addUserErrorEls.addFirstNameEl
           )
-
             this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
             !validateInputText(valueAddLastNameId) &&
             this.addUserErrorEls.addLastNameEl
           )
-
             this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
             !validateInputText(valueAddUserName) &&
             this.addUserErrorEls.addUserNameEl
           )
-
             this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
           isValid = false;
         }
@@ -194,7 +181,6 @@ export default class DashboardView {
 
       if (isValid) {
         submitAddUser(
-          valueAddUserId,
           valueAddFirstNameId,
           valueAddLastNameId,
           valueAddEmailId,
@@ -207,18 +193,31 @@ export default class DashboardView {
       }
     });
 
-    clearError(this.addUserIdEl, this.addUserErrorEls.addUserIdEl);
-    clearError(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
-    clearError(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
-    clearError(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
-    clearError(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
-    clearError(this.addRoleEl, this.addUserErrorEls.addRoleEl);
-    clearError(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
-    clearError(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
-    clearError(
+    clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
+    clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
+    clearErrorOnInputclearErrorOnInput(
+      this.addEmailIdEl,
+      this.addUserErrorEls.addEmailIdEl
+    );
+    clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
+    clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
+    clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
+    clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
+    clearErrorOnInput(
       this.addConfirmPasswordEl,
       this.addUserErrorEls.addConfirmPasswordEl
     );
+  };
+
+  //Clears entered data on input cells
+  init = () => {
+    this.clearButtonEl.addEventListener('click', this.clearInputs);
+  };
+
+  clearInputs = () => {
+    this.inputEl.forEach((input) => {
+      input.value = '';
+    });
   };
 
   addUserMessage(message) {
