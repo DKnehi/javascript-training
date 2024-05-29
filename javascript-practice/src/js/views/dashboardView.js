@@ -20,6 +20,7 @@ export const {
 
 export default class DashboardView {
   constructor() {
+    // Dashboard header elements
     this.arrowEl = document.getElementById('arrow');
     this.fullNameEl = document.getElementById('fullName');
     this.headerNameEl = document.getElementById('headerName');
@@ -28,6 +29,7 @@ export default class DashboardView {
     this.popupContainerEl = document.getElementById('popupContainer');
     this.roleEl = document.getElementById('role');
 
+    // Add User Form Element
     this.addUserFormEl = document.getElementById('addUserForm');
     this.addFirstNameEl = document.getElementById('addFirstName');
     this.addLastNameEl = document.getElementById('addLastName');
@@ -37,10 +39,10 @@ export default class DashboardView {
     this.addUserNameEl = document.getElementById('addUserName');
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
-    this.clearButtonEl = document.getElementById('clearInputs');
+    this.clearButtonEl = document.getElementById('cancelForm');
     this.inputEl = this.addUserFormEl.querySelectorAll('input');
-    this.init();
 
+    // Error Add User Form Element
     this.addUserErrorEls = {
       addFirstNameEl: document.querySelector('.add-first-name'),
       addLastNameEl: document.querySelector('.add-last-name'),
@@ -51,6 +53,8 @@ export default class DashboardView {
       addPasswordEl: document.querySelector('.add-password'),
       addConfirmPasswordEl: document.querySelector('.add-confirm-password'),
     };
+
+    // Other Dashboard Element
     this.selectWrapperEl = document.querySelector(
       '.select-account-setting-list'
     );
@@ -142,16 +146,19 @@ export default class DashboardView {
             !validateInputText(valueAddFirstNameId) &&
             this.addUserErrorEls.addFirstNameEl
           )
+
             this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
             !validateInputText(valueAddLastNameId) &&
             this.addUserErrorEls.addLastNameEl
           )
+
             this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
           if (
             !validateInputText(valueAddUserName) &&
             this.addUserErrorEls.addUserNameEl
           )
+          
             this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
           isValid = false;
         }
@@ -169,11 +176,13 @@ export default class DashboardView {
         isValid = false;
       }
 
+      //Displays an error if the password format is incorrect
       if (!validatePassword(valueAddPassword)) {
         this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
         isValid = false;
       }
 
+      //Show error if confirm password does not match password
       if (!validateConfirmPassword(valueAddPassword, valueAddConfirmPassword)) {
         this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         isValid = false;
@@ -195,7 +204,7 @@ export default class DashboardView {
 
     clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
     clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
-    clearErrorOnInputclearErrorOnInput(
+    clearErrorOnInput(
       this.addEmailIdEl,
       this.addUserErrorEls.addEmailIdEl
     );
@@ -210,11 +219,8 @@ export default class DashboardView {
   };
 
   //Clears entered data on input cells
-  init = () => {
-    this.clearButtonEl.addEventListener('click', this.clearInputs);
-  };
-
   clearInputs = () => {
+    this.clearButtonEl.addEventListener('click', this.clearInputs);
     this.inputEl.forEach((input) => {
       input.value = '';
     });
@@ -222,7 +228,7 @@ export default class DashboardView {
 
   addUserMessage(message) {
     showToast(message);
-  }
+  };
 
   redirectPage = (page) => {
     window.location.replace(page);
