@@ -98,11 +98,11 @@ export default class DashboardView {
       e.preventDefault();
       const firstName = this.addFirstNameEl.value;
       const lastName = this.addLastNameEl.value;
-      const Email = this.addEmailIdEl.value;
-      const Mobile = this.addMobileNoEl.value;
-      const Role = this.addRoleEl.value;
+      const email = this.addEmailIdEl.value;
+      const mobile = this.addMobileNoEl.value;
+      const role = this.addRoleEl.value;
       const userName = this.addUserNameEl.value;
-      const Password = this.addPasswordEl.value;
+      const password = this.addPasswordEl.value;
       const confirmPassword = this.addConfirmPasswordEl.value;
 
       Object.values(this.addUserErrorEls).forEach((el) => {
@@ -112,12 +112,12 @@ export default class DashboardView {
       let isValid = true;
 
       if (
-        !Email ||
-        !Role ||
+        !email ||
+        !role ||
         !validateName(firstName, lastName, userName ) ||
-        !validatePhoneNumber(Mobile) ||
-        !validatePassword(Password) ||
-        !validateConfirmPassword(Password, confirmPassword)
+        !validatePhoneNumber(mobile) ||
+        !validatePassword(password) ||
+        !validateConfirmPassword(password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
         if (!Email && this.addUserErrorEls.addEmailIdEl) {
@@ -125,7 +125,7 @@ export default class DashboardView {
         }
 
         //Show an error if the user enters nothing
-        if (!Role && this.addUserErrorEls.addRoleEl) {
+        if (!role && this.addUserErrorEls.addRoleEl) {
           this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
         }
 
@@ -150,17 +150,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters the wrong phonenumber format
-        if (!validatePhoneNumber(Mobile) && this.addUserErrorEls.addMobileNoEl) {
+        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
         //Displays an error if the user enters the wrong password format
-        if (!validatePassword(Password) && this.addUserErrorEls.addPasswordEl) {
+        if (!validatePassword(password) && this.addUserErrorEls.addPasswordEl) {
           this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(Password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
@@ -170,11 +170,11 @@ export default class DashboardView {
         submitAddUser(
           firstName,
           lastName,
-          Email,
-          Mobile,
-          Role,
+          email,
+          mobile,
+          role,
           userName,
-          Password,
+          password,
           confirmPassword
         );
       }
