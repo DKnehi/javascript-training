@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import {
-  validateName,
+  validateInputText,
   validatePassword,
   validateConfirmPassword,
   validatePhoneNumber,
@@ -114,7 +114,7 @@ export default class DashboardView {
       if (
         !email ||
         !role ||
-        !validateName(firstName, lastName, userName ) ||
+        !validateInputText(firstName, lastName, userName ) ||
         !validatePhoneNumber(mobile) ||
         !validatePassword(password) ||
         !validateConfirmPassword(password, confirmPassword)
@@ -135,17 +135,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(firstName) && this.addUserErrorEls.addFirstNameEl) {
+        if (!validateInputText(firstName) && this.addUserErrorEls.addFirstNameEl) {
           this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(lastName) && this.addUserErrorEls.addLastNameEl) {
+        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateName(userName) && this.addUserErrorEls.addUserNameEl) {
+        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
