@@ -213,6 +213,7 @@ export default class DashboardView {
   };
 
   renderTableListUsers = (data) => {
+    
     const tableHTML = generateTableHTML(data);
     if (this.tableContainer) {
       this.tableContainer.innerHTML = tableHTML;
