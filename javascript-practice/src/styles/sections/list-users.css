@@ -14,6 +14,11 @@
   color: var(--color-bali-hai);
 }
 
+.table-data-role {
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-smaller);
+}
+
 .table-data-date {
   line-height: 15px;
 }

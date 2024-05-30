@@ -7,6 +7,7 @@ import {
 } from '../helpers/validation';
 import showToast from '../views/toast';
 import { ERROR_MESSAGE } from '../constants/message';
+import { generateTableHTML } from '../templates/userTemplate';
 
 export const {
   REQUIRED_FIELD_PASSWORD,
@@ -27,6 +28,7 @@ export default class DashboardView {
     this.closePopupEl = document.getElementById('closePopup');
     this.popupContainerEl = document.getElementById('popupContainer');
     this.roleEl = document.getElementById('role');
+    this.logoutEl = document.getElementById('logout')
 
     // Add User Form Element
     this.addUserFormEl = document.getElementById('addUserForm');
@@ -58,7 +60,9 @@ export default class DashboardView {
       '.select-account-setting-list'
     );
     this.popupOverlayEl = document.querySelector('.popup-overlay');
+    this.tableContainer = document.querySelector('.list-user')
     this.isArrowUp = true;
+    this.bindLogout();
   }
 
   //After clicking on the arrow in the header, Logout will drop down
@@ -206,6 +210,20 @@ export default class DashboardView {
 
   addUserMessage(message) {
     showToast(message);
+  };
+
+  renderTableListUsers = (data) => {
+    const tableHTML = generateTableHTML(data);
+    
+    if (this.tableContainer) {
+      this.tableContainer.innerHTML = tableHTML;
+    } else {
+      console.error('Table container element not found.');
+    }
+  };
+
+  bindLogout(callback) {
+    this.logoutEl.addEventListener('click', callback);
   };
 
   redirectPage = (page) => {

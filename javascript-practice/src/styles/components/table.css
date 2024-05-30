@@ -45,5 +45,24 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
-  display: inline;
+  display: inline-block;
+}
+
+.table-role-box {
+  width: 111px;
+  height: 26px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary-role {
+  background-color: var(--color-azure-radiance);
+  color: var(--color-while);
+}
+
+.secondary-role {
+  background-color: var(--color-link-water);
+  color: var(--color-bali-hai);
 }

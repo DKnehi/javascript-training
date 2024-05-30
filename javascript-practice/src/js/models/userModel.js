@@ -7,6 +7,7 @@ export default class UserModel {
     role,
     userName,
     password,
+    addedDate
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -15,5 +16,6 @@ export default class UserModel {
     this.role = role;
     this.userName = userName;
     this.password = password;
+    this.addedDate = addedDate ? new Date(addedDate) : new Date();
   }
-};
+}
