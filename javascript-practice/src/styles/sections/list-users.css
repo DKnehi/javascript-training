@@ -14,10 +14,20 @@
   color: var(--color-bali-hai);
 }
 
+.table-data-role {
+  font-weight: var(--font-weight-nomal);
+  font-size: var(--font-size-smaller);
+}
+
 .table-data-date {
   line-height: 15px;
 }
 
 .list-user-table-icon {
   margin-right: 20px;
+}
+
+.data-icon {
+  width: 100%;
+  height: 100%;
 }

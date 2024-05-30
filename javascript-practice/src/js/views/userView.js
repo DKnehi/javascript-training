@@ -3,7 +3,7 @@ import { ERROR_MESSAGE } from '../constants/message';
 import showToast from '../views/toast';
 
 export const {
-  REQUIRED_FIELD_EMAIL,
+  REQUIRED_FIELD,
   REQUIRED_FIELD_PASSWORD,
   INVALID_PASSWORD,
 } = ERROR_MESSAGE;
@@ -28,7 +28,7 @@ export default class UserView {
 
       //Show an error if the user enters nothing
       if (!email) {
-        this.emailErrorEl.textContent = `${REQUIRED_FIELD_EMAIL}`;
+        this.emailErrorEl.textContent = `${REQUIRED_FIELD}`;
       }
 
       //Show an error if the user enters nothing
