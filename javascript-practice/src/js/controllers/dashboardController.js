@@ -2,7 +2,6 @@ import UserModel from '../models/userModel';
 import UserService from '../services/userService';
 import DashboardView from '../views/dashboardView';
 import NOTIFY_MESSAGE from '../constants/message';
-import { generateTableHTML } from '../templates/userTemplate';
 import { URLS } from '../constants/urls';
 
 const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
@@ -19,7 +18,7 @@ export default class DashboardController {
     this.view.showUserInfo();
     this.view.bindPopupUser();
     this.view.clearInputs();
-    this.renderTable();
+    this.renderTableListUsers();
   }
 
   addUser = async (
@@ -50,11 +49,10 @@ export default class DashboardController {
     }
   };
 
-  renderTable = async () => {
+  renderTableListUsers = async () => {
     try {
-      const data = await this.service.getAllUser(); 
-      const tableHTML = generateTableHTML(data); 
-      this.view.renderTable(tableHTML); 
+      const data = await this.service.getAllUser();
+      this.view.renderTableListUsers(data); 
     } catch (error) {
       console.error('Error rendering table:', error);
     }

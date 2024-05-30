@@ -42,18 +42,4 @@ export default class UserService {
       throw new Error('Failed to add user.');
     }
   };
-
-//   fetchDataFromMockAPI = async () => {
-//     try {
-//       const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}`);
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch data');
-//       }
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//       return [];
-//     }
-//   };
 }

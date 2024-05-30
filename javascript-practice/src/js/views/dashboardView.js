@@ -7,6 +7,7 @@ import {
 } from '../helpers/validation';
 import showToast from '../views/toast';
 import { ERROR_MESSAGE } from '../constants/message';
+import { generateTableHTML } from '../templates/userTemplate';
 
 export const {
   REQUIRED_FIELD_PASSWORD,
@@ -211,7 +212,8 @@ export default class DashboardView {
     showToast(message);
   };
 
-  renderTable = (tableHTML) => {
+  renderTableListUsers = (data) => {
+    const tableHTML = generateTableHTML(data);
     if (this.tableContainer) {
       this.tableContainer.innerHTML = tableHTML;
     } else {
