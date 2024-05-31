@@ -1,7 +1,7 @@
 import editIcon from '../../assets/icons/arrow-circle-down.svg';
 import deleteIcon from '../../assets/icons/arrow-circle-down-copy.svg';
 import { MONTH_NAMES} from '../constants/month';
-import { PRIMARY_ROLES, ROLES } from '../constants/role';
+import { PRIMARY_ROLES } from '../constants/role';
 
 const generateTableRowHTML = (item) => {
   const role = item.role.toLowerCase();
