@@ -16,6 +16,7 @@ validateInputText = (text) => {
   return REGEX.TEXT.test(text)
 };
 
+
 export {
   validatePassword,
   validateConfirmPassword,

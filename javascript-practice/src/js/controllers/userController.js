@@ -24,7 +24,11 @@ export default class UserController {
         localStorage.setItem(LOCAL_STORAGE.FIRST_NAME, userData.firstName);
         localStorage.setItem(LOCAL_STORAGE.LAST_NAME, userData.lastName);
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
-        this.view.redirectPage(URLS.DASHBOARD);
+        if (userData.role.toLowerCase() === 'supper admin') {
+          this.view.redirectPage(URLS.DASHBOARD);
+        } else {
+          this.view.redirectPage(URLS.INDEX);
+        }
       } else {
         this.view.showLoginFailedMessage(`${LOGIN_FAILED}`);
       }

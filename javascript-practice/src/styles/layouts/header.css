@@ -94,8 +94,8 @@
 .select-account-setting-active {
   background-color: var(--color-while);
   padding: 10px 0;
-  margin-left: 150px;
-  margin-top: 80px;
+  margin-left: -60px;
+  margin-top: 15px;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -103,6 +103,7 @@
 .select-account-setting-item {
   cursor: pointer;
   padding: 0 15px;
+  white-space: nowrap;
 }
 
 .select-account-setting-item:hover {

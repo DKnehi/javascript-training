@@ -42,6 +42,10 @@ export default class DashboardController {
       );
       const addedUser = await this.service.addUser(newUser);
       this.view.addUserMessage(`${ADD_USER_SUCCES}`);
+      setTimeout(() => {
+        this.view.closePopupUser();
+        this.renderTableListUsers();
+      }, 1500);
       return addedUser;
     } catch (error) {
       this.view.addUserMessage(`${ADD_USER_FAILED}`, 'error');

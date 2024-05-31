@@ -6,6 +6,7 @@ export const API = {
 export const URLS = {
   DASHBOARD: 'dashboard.html',
   LOGIN: 'login.html',
+  INDEX: 'index.html'
 };
 
 export const PATHS = {
