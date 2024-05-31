@@ -4,6 +4,7 @@ import DashboardView from '../views/dashboardView';
 import NOTIFY_MESSAGE from '../constants/message';
 import { URLS } from '../constants/urls';
 import { LOCAL_STORAGE } from '../constants/localStorage';
+import { ROLES } from '../constants/role';
 
 const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
 
@@ -25,7 +26,7 @@ export default class DashboardController {
 
   checkAccess() {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
-    if (!role || role.toLowerCase() !== 'super admin') {
+    if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
       window.location.href = URLS.INDEX;
     }
   };
