@@ -12,4 +12,4 @@ export const MONTH_NAMES = [
   'Nov',
   'Dec',
 ];
-export const PRIMARY_ROLES = ['supper admin', 'admin', 'hr admin'];
+export const PRIMARY_ROLES = ['super admin', 'admin', 'hr admin'];
