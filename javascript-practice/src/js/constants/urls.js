@@ -5,11 +5,10 @@ export const API = {
 
 export const URLS = {
   DASHBOARD: 'dashboard.html',
-  LOGIN: 'login.html',
+  USER: 'user.html',
   INDEX: 'index.html'
 };
 
 export const PATHS = {
   DASHBOARD: '/dashboard',
-  LOGIN: '/login',
 };

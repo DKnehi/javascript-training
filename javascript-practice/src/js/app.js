@@ -4,18 +4,26 @@ import UserModel from './models/userModel';
 import DashboardController from './controllers/dashboardController';
 import DashboardView from './views/dashboardView';
 import { PATHS } from './constants/urls';
+import { LOCAL_STORAGE } from './constants/localStorage';
 
 export default class App {
   async start() {
     const path = window.location.pathname;
-    const model = new UserModel();
+    const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
 
-    if (path.includes(PATHS.LOGIN)) {
-      const view = new UserView();
-      const controller = new UserController(view, model);
-    } else if (path.includes(PATHS.DASHBOARD)) {
-      const view = new DashboardView();
-      const controller = new DashboardController(view, model);
+    if (path.includes(PATHS.DASHBOARD)) {
+      if (!role || role.toLowerCase() !== 'super admin') {
+        window.location.href = PATHS.LOGIN;
+        return;
+      } else {
+        const model = new UserModel();
+        const view = new DashboardView();
+        new DashboardController(view, model);
+        return;
+      }
     }
+    const model = new UserModel();
+    const view = new UserView();
+    new UserController(view, model);
   }
 }
