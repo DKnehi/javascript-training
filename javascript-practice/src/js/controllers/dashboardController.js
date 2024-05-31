@@ -28,7 +28,7 @@ export default class DashboardController {
     if (!role || role.toLowerCase() !== 'super admin') {
       window.location.href = URLS.INDEX;
     }
-  }
+  };
 
   addUser = async (
     firstName,

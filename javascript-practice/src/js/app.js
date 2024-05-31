@@ -5,6 +5,7 @@ import DashboardController from './controllers/dashboardController';
 import DashboardView from './views/dashboardView';
 import { PATHS } from './constants/urls';
 import { LOCAL_STORAGE } from './constants/localStorage';
+import { ROLES } from './constants/role';
 
 export default class App {
   async start() {
@@ -12,18 +13,21 @@ export default class App {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
 
     if (path.includes(PATHS.DASHBOARD)) {
-      if (!role || role.toLowerCase() !== 'super admin') {
+      if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
         window.location.href = PATHS.LOGIN;
         return;
       } else {
         const model = new UserModel();
         const view = new DashboardView();
+
         new DashboardController(view, model);
         return;
       }
     }
+
     const model = new UserModel();
     const view = new UserView();
+
     new UserController(view, model);
   }
 }
