@@ -97,6 +97,10 @@ export default class DashboardView {
     });
   };
 
+  closePopupUser = () => {
+    this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
+  }
+
   bindFormAddUser = (submitAddUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();

@@ -4,6 +4,7 @@ import UserService from '../services/userService';
 import NOTIFY_MESSAGE from '../constants/message';
 import { URLS } from '../constants/urls';
 import { LOCAL_STORAGE } from '../constants/localStorage';
+import { ROLES } from '../constants/role';
 
 const { LOGIN_FAILED } = NOTIFY_MESSAGE;
 
@@ -24,7 +25,11 @@ export default class UserController {
         localStorage.setItem(LOCAL_STORAGE.FIRST_NAME, userData.firstName);
         localStorage.setItem(LOCAL_STORAGE.LAST_NAME, userData.lastName);
         localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
-        this.view.redirectPage(URLS.DASHBOARD);
+        if (userData.role.toLowerCase() === ROLES.SUPER_ADMIN) {
+          this.view.redirectPage(URLS.DASHBOARD);
+        } else {
+          this.view.redirectPage(URLS.INDEX);
+        }
       } else {
         this.view.showLoginFailedMessage(`${LOGIN_FAILED}`);
       }
