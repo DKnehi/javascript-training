@@ -1,6 +1,7 @@
 import { API } from '../constants/urls';
 
 export default class UserService {
+  //This function provides a convenient way to send GET requests to the API and process the returned results or catch errors if any.
   getAllUser = async () => {
     try {
       const res = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}`, {
@@ -15,6 +16,7 @@ export default class UserService {
     }
   };
 
+  //This function provides a convenient way to authenticate users by matching email and password with data from the API.
   loginUser = async (email, password) => {
     try {
       const data = await this.getAllUser();
@@ -28,6 +30,7 @@ export default class UserService {
     }
   };
 
+  //This function provides a convenient way to add a new user to the system by sending a POST request to the API with the user's data.
   addUser = async (user) => {
     try {
       const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}`, {

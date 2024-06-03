@@ -10,6 +10,7 @@ export const {
 
 export default class UserView {
   constructor() {
+    //Login page elements
     this.emailErrorEl = document.getElementById('emailError');
     this.emailFormEl = document.getElementById('email');
     this.loginFormEl = document.getElementById('loginForm');
@@ -17,6 +18,7 @@ export default class UserView {
     this.passwordFormEl = document.getElementById('password');
   }
 
+  //The function checks and sends the submit event for the login form
   bindFormLogin = (submitLogin) => {
     this.loginFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -57,6 +59,7 @@ export default class UserView {
     });
   };
 
+  //Function displays a notification when the user logs in
   showLoginFailedMessage(message) {
     showToast(message, 'error');
   }

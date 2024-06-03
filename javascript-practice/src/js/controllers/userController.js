@@ -17,6 +17,7 @@ export default class UserController {
     this.view.bindFormLogin(this.handleFormLogin.bind(this));
   }
 
+  //The handleFormLogin function is used to handle user login after they have entered their email and password into the login form.
   handleFormLogin = async (email, password) => {
     try {
       const userData = await this.service.loginUser(email, password);
