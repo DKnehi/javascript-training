@@ -24,7 +24,10 @@ export default class DashboardController {
     this.renderTableListUsers();
   }
 
-  //The checkAccess function is used to check user access by checking the roles saved in localStorage.
+  /**
+   * Check user access by checking the roles saved in localStorage.
+   * Redirect to the index page if the role is not SUPER_ADMIN.
+   */
   checkAccess() {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
     if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
@@ -32,7 +35,9 @@ export default class DashboardController {
     }
   };
 
-  //The addUser function is used to add a new user to the system.
+  /**
+   * The function is used to add a new user to the system.
+   */
   addUser = async (
     firstName,
     lastName,
@@ -65,7 +70,9 @@ export default class DashboardController {
     }
   };
 
-  //The renderTableListUsers function is used to display a list of users in a table on the user interface.
+  /**
+   * The function is used to display a list of users in a table on the user interface.
+   */
   renderTableListUsers = async () => {
     try {
       const data = await this.service.getAllUser();
@@ -75,7 +82,10 @@ export default class DashboardController {
     }
   };
 
-  //The handleLogout function is used to handle user logout.
+   /**
+   * Handle user logout.
+   * Clear localStorage and redirect to the login page.
+   */
   handleLogout() {
     localStorage.clear(); 
     window.location.href = URLS.LOGIN; 

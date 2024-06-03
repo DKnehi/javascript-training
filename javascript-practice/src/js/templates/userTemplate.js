@@ -4,7 +4,7 @@ import { MONTH_NAMES} from '../constants/month';
 import { PRIMARY_ROLES } from '../constants/role';
 
 const generateTableRowHTML = (item) => {
-  //The function checks the value and assigns the corresponding value
+  // Check the role value and assign the corresponding CSS class
   const role = item.role.toLowerCase();
   const roleClass = PRIMARY_ROLES.includes(role) ? 'primary-role' : 'secondary-role';
 
