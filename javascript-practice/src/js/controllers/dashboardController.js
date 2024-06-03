@@ -3,6 +3,8 @@ import UserService from '../services/userService';
 import DashboardView from '../views/dashboardView';
 import NOTIFY_MESSAGE from '../constants/message';
 import { URLS } from '../constants/urls';
+import { LOCAL_STORAGE } from '../constants/localStorage';
+import { ROLES } from '../constants/role';
 
 const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
 
@@ -12,6 +14,7 @@ export default class DashboardController {
     this.model = new UserModel();
     this.service = new UserService();
 
+    this.checkAccess();
     this.view.bindFormAddUser(this.addUser.bind(this));
     this.view.bindLogout(this.handleLogout.bind(this));
     this.view.toggleDropDownMenu();
@@ -20,6 +23,13 @@ export default class DashboardController {
     this.view.clearInputs();
     this.renderTableListUsers();
   }
+
+  checkAccess() {
+    const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
+    if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
+      window.location.href = URLS.INDEX;
+    }
+  };
 
   addUser = async (
     firstName,

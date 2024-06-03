@@ -10,12 +10,12 @@ export default class App {
     const path = window.location.pathname;
     const model = new UserModel();
 
-    if (path.includes(PATHS.LOGIN)) {
-      const view = new UserView();
-      const controller = new UserController(view, model);
-    } else if (path.includes(PATHS.DASHBOARD)) {
+    if (path.includes(PATHS.DASHBOARD)) {
       const view = new DashboardView();
-      const controller = new DashboardController(view, model);
+      new DashboardController(view, model);
     }
+
+    const view = new UserView();
+    new UserController(view, model);
   }
 }

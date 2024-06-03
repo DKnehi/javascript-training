@@ -28,7 +28,7 @@ export default class UserController {
         if (userData.role.toLowerCase() === ROLES.SUPER_ADMIN) {
           this.view.redirectPage(URLS.DASHBOARD);
         } else {
-          this.view.redirectPage(URLS.INDEX);
+          this.view.redirectPage(URLS.USER);
         }
       } else {
         this.view.showLoginFailedMessage(`${LOGIN_FAILED}`);
