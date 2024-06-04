@@ -4,9 +4,11 @@ import { MONTH_NAMES} from '../constants/month';
 import { PRIMARY_ROLES } from '../constants/role';
 
 const generateTableRowHTML = (item) => {
+  // Check the role value and assign the corresponding CSS class
   const role = item.role.toLowerCase();
   const roleClass = PRIMARY_ROLES.includes(role) ? 'primary-role' : 'secondary-role';
 
+  //The function contains a string representing a date formatted in the format "dd month, year".
   const addedDate = new Date(item.addedDate);
   const day = addedDate.getDate().toString().padStart(2, '0');
   const month = MONTH_NAMES[addedDate.getMonth()];

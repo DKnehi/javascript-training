@@ -37,6 +37,7 @@ export default class DashboardView {
     this.addEmailIdEl = document.getElementById('addEmailId');
     this.addMobileNoEl = document.getElementById('addMobileNo');
     this.addRoleEl = document.getElementById('addRole');
+    this.addRoleDiv = this.addRoleEl.parentElement,
     this.addUserNameEl = document.getElementById('addUserName');
     this.addPasswordEl = document.getElementById('addPassword');
     this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
@@ -45,14 +46,15 @@ export default class DashboardView {
 
     // Error Add User Form Element
     this.addUserErrorEls = {
-      addFirstNameEl: document.querySelector('.add-first-name'),
-      addLastNameEl: document.querySelector('.add-last-name'),
-      addEmailIdEl: document.querySelector('.add-email-id'),
-      addMobileNoEl: document.querySelector('.add-mobile-no'),
-      addRoleEl: document.querySelector('.add-role'),
-      addUserNameEl: document.querySelector('.add-user-name'),
-      addPasswordEl: document.querySelector('.add-password'),
-      addConfirmPasswordEl: document.querySelector('.add-confirm-password'),
+      addFirstNameEl: this.addFirstNameEl.nextElementSibling,
+      addLastNameEl: this.addLastNameEl.nextElementSibling,
+      addEmailIdEl: this.addEmailIdEl.nextElementSibling,
+      addMobileNoEl: this.addMobileNoEl.nextElementSibling,
+      addUserNameEl: this.addUserNameEl.nextElementSibling,
+      addPasswordEl: this.addPasswordEl.nextElementSibling,
+      addConfirmPasswordEl: this.addConfirmPasswordEl.nextElementSibling,
+      addFirstNameEl: this.addFirstNameEl.nextElementSibling,
+      addRoleEl: this.addRoleDiv.nextElementSibling,
     };
 
     // Other Dashboard Element
@@ -62,10 +64,11 @@ export default class DashboardView {
     this.popupOverlayEl = document.querySelector('.popup-overlay');
     this.tableContainer = document.querySelector('.list-user')
     this.isArrowUp = true;
-    this.bindLogout();
   }
 
-  //After clicking on the arrow in the header, Logout will drop down
+  /**
+   * After clicking on the arrow in the header, Logout will drop down.
+   */
   toggleDropDownMenu = () => {
     this.arrowEl.addEventListener('click', () => {
       this.selectWrapperEl.classList.toggle('select-account-setting-active');
@@ -75,6 +78,10 @@ export default class DashboardView {
     });
   };
 
+  /**
+   * After successful login, the name and role will be displayed on the page header.
+   * @param {object} userInfo - Object containing user information.
+   */
   showUserInfo = (userInfo) => {
     const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
     const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
@@ -87,6 +94,9 @@ export default class DashboardView {
     }
   };
 
+  /**
+   * After clicking on the add user button, a popup containing the add user form appears.
+   */
   bindPopupUser = () => {
     this.openPopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
@@ -97,9 +107,17 @@ export default class DashboardView {
     });
   };
 
+   /**
+   * After clicking on the x button, turn off the popup containing the add user form.
+   */
   closePopupUser = () => {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
   }
+
+   /**
+   * The function binds the submit event of the add user form to the provided callback. It validates the form fields and displays error messages if validation fails.
+   * @param {function} submitAddUser - Function to handle the form submission event.
+   */
 
   bindFormAddUser = (submitAddUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
@@ -114,6 +132,7 @@ export default class DashboardView {
       const confirmPassword = this.addConfirmPasswordEl.value;
 
       Object.values(this.addUserErrorEls).forEach((el) => {
+        console.log(this.addUserErrorEls);
         el.textContent = '';
       });
 
@@ -188,6 +207,7 @@ export default class DashboardView {
       }
     });
 
+    // Clear error messages on input
     this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
     this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
     this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
@@ -198,13 +218,20 @@ export default class DashboardView {
     this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
   };
 
+  /**
+   * The function handles if the user re-enters from an input that is reporting an error, then clears that error.
+   * @param {HTMLElement} inputEl - The input element being validated.
+   * @param {HTMLElement} errorEl - The element displaying the error message.
+   */
   clearErrorOnInput = (inputEl, errorEl) => {
     inputEl.addEventListener('input', () => {
       if (errorEl) errorEl.textContent = '';
     });
   };
 
-  //Clears entered data on input cells
+   /**
+   * Clears entered data on input cells.
+   */
   clearInputs = () => {
     this.cancelFormEl.addEventListener('click', this.clearInputs);
     this.inputEl.forEach((input) => {
@@ -212,10 +239,18 @@ export default class DashboardView {
     });
   };
 
+  /**
+   * Message notification function.
+   * @param {string} message - The message to be displayed.
+   */
   addUserMessage(message) {
     showToast(message);
   };
 
+  /**
+   * The function generates and displays the table of users.
+   * @param {Array} data - Array of user data.
+   */
   renderTableListUsers = (data) => {
     const tableHTML = generateTableHTML(data);
     
@@ -226,6 +261,10 @@ export default class DashboardView {
     }
   };
 
+  /**
+   * The function assigns a callback function to the click event on the logout element.
+   * @param {function} callback - Function to handle the logout event.
+   */
   bindLogout(callback) {
     this.logoutEl.addEventListener('click', callback);
   };
