@@ -12,11 +12,11 @@ export const {
 export default class UserView {
   constructor() {
     // DOM elements for login form
-    this.emailErrorEl = document.getElementById('emailError');
-    this.emailFormEl = document.getElementById('email');
     this.loginFormEl = document.getElementById('loginForm');
-    this.passwordErrorEl = document.getElementById('passwordError');
+    this.emailFormEl = document.getElementById('email');
+    this.emailErrorEl = this.emailFormEl.nextElementSibling;
     this.passwordFormEl = document.getElementById('password');
+    this.passwordErrorEl = this.passwordFormEl.nextElementSibling;
   }
 
   /**

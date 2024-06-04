@@ -21,9 +21,9 @@ export const {
 export default class DashboardView {
   constructor() {
     // Dashboard header elements
-    this.arrowEl = document.getElementById('arrow');
+    this.arrowEl = document.querySelector('.arrow');
     this.fullNameEl = document.getElementById('fullName');
-    this.headerNameEl = document.getElementById('headerName');
+    this.headerNameEl = document.querySelector('.header-dashboard-name');
     this.openPopupEl = document.getElementById('openPopup');
     this.closePopupEl = document.getElementById('closePopup');
     this.popupContainerEl = document.getElementById('popupContainer');
@@ -32,15 +32,15 @@ export default class DashboardView {
 
     // Add User Form Element
     this.addUserFormEl = document.getElementById('addUserForm');
-    this.addFirstNameEl = document.getElementById('addFirstName');
-    this.addLastNameEl = document.getElementById('addLastName');
-    this.addEmailIdEl = document.getElementById('addEmailId');
-    this.addMobileNoEl = document.getElementById('addMobileNo');
-    this.addRoleEl = document.getElementById('addRole');
-    this.addRoleDiv = this.addRoleEl.parentElement,
-    this.addUserNameEl = document.getElementById('addUserName');
-    this.addPasswordEl = document.getElementById('addPassword');
-    this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
+    this.addFirstNameEl = this.addUserFormEl.querySelector('input[name="firstName"]');
+    this.addLastNameEl = this.addUserFormEl.querySelector('input[name="lastName"]');
+    this.addEmailIdEl = this.addUserFormEl.querySelector('input[name="email"]');
+    this.addMobileNoEl = this.addUserFormEl.querySelector('input[name="mobileNo"]');
+    this.addRoleEl = this.addUserFormEl.querySelector('select[name="addRole"]');
+    this.addRoleDiv = this.addRoleEl.parentElement;
+    this.addUserNameEl = this.addUserFormEl.querySelector('input[name="userName"]');
+    this.addPasswordEl = this.addUserFormEl.querySelector('input[name="password"]');
+    this.addConfirmPasswordEl = this.addUserFormEl.querySelector('input[name="confirmPassword"]');
     this.cancelFormEl = document.getElementById('cancelForm');
     this.inputEl = this.addUserFormEl.querySelectorAll('input');
 
@@ -132,7 +132,6 @@ export default class DashboardView {
       const confirmPassword = this.addConfirmPasswordEl.value;
 
       Object.values(this.addUserErrorEls).forEach((el) => {
-        console.log(this.addUserErrorEls);
         el.textContent = '';
       });
 
