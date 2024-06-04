@@ -231,7 +231,6 @@ export default class DashboardView {
 
    /**
    * Clears entered data on input cells.
-   * @returns {void} - This function does not return a value.
    */
   clearInputs = () => {
     this.cancelFormEl.addEventListener('click', this.clearInputs);

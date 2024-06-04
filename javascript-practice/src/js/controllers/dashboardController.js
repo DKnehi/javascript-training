@@ -26,10 +26,10 @@ export default class DashboardController {
 
   /**
    * Check user access by checking the roles saved in localStorage.
-   * Redirect to the index page if the role is not SUPER_ADMIN.
    */
   checkAccess() {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
+    //Redirect to the index page if the role is not SUPER_ADMIN
     if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
       window.location.href = URLS.INDEX;
     }

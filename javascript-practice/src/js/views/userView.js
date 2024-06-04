@@ -80,6 +80,6 @@ export default class UserView {
    * @param {string} page - The URL of the page to redirect to.
    */
   redirectPage = (page) => {
-    window.location.replace(page); // Redirect to the specified page
+    window.location.replace(page);
   };
 }
