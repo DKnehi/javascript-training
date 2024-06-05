@@ -12,8 +12,7 @@
         <header class="header-dashboard flex">
           <div class="flex-column">
             <div class="flex header-dashboard-hi-name-box">
-              <h2 class="header-dashboard-name">Hello,</h2>
-              <h2 id="headerName" class="header-dashboard-name"></h2>
+              <h2 class="header-dashboard-name"></h2>
             </div>
             <p class="header-dashboard-sub-name">Have a nice day</p>
           </div>
@@ -30,12 +29,11 @@
                 <div class="flex header-dashboard-profile-name-box">
                   <h2 id="fullName" class="header-dashboard-profile-name"></h2>
                 </div>
-                <p id="role" class="header-dashboard-profile-sub-name"></p>
+                <p class="header-dashboard-profile-sub-name"></p>
               </div>
             </div>
             <div class="arrow-box">
               <img
-                id="arrow"
                 class="arrow"
                 src="../assets/icons/arrow.svg"
                 alt="arrow"
@@ -65,7 +63,6 @@
             </div>
             <button
               class="add-user-button primary-button"
-              id="openPopup"
               type="button"
             >
               Add user +
@@ -91,11 +88,11 @@
         </section>
         <section class="list-user"></section>
       </main>
-      <article class="popup-overlay">
-        <section id="popupContainer" class="popup-container">
+      <article class="popup-overlay-add-user">
+        <section class="popup-container">
           <div class="flex align-center space-between popup-heading-box">
             <h2 class="popup-heading">Add User</h2>
-            <div id="closePopup" class="close-popup-box">
+            <div class="close-popup-box">
               <img src="../assets/icons/alert-circle.svg" alt="" />
             </div>
           </div>
@@ -105,18 +102,16 @@
               type="text"
               placeholder="User ID *"
               name=""
-              id="addUserId"
               disabled
             />
-            <span id="" class="error-message add-user-id"></span>
+            <span class="error-message"></span>
             <div class="flex popup-area-form-box">
               <div class="popup-area-form flex flex-column">
                 <input
                   class="input popup-input"
                   type="text"
                   placeholder="First Name *"
-                  name=""
-                  id="addFirstName"
+                  name="firstName"
                 />
                 <span class="error-message"></span>
               </div>
@@ -125,8 +120,7 @@
                   class="input popup-input"
                   type="text"
                   placeholder="Last Name *"
-                  name=""
-                  id="addLastName"
+                  name="lastName"
                 />
                 <span class="error-message"></span>
               </div>
@@ -137,8 +131,7 @@
                   class="input popup-input"
                   type="email"
                   placeholder="Email ID *"
-                  name=""
-                  id="addEmailId"
+                  name="email"
                 />
                 <span class="error-message"></span>
               </div>
@@ -147,14 +140,13 @@
                   class="input popup-input"
                   type="text"
                   placeholder="Mobile No"
-                  name=""
-                  id="addMobileNo"
+                  name="mobileNo"
                 />
                 <span class="error-message"></span>
               </div>
               <div class="popup-area-form flex flex-column">
                 <div class="input popup-input">
-                  <select name="" id="addRole" class="popup-select">
+                  <select name="addRole" class="popup-select">
                     <option class="popup-option" value="" disabled selected>
                       Select Role Type
                     </option>
@@ -172,8 +164,7 @@
                   class="input popup-input"
                   type="text"
                   placeholder="Username *"
-                  name=""
-                  id="addUserName"
+                  name="userName"
                 />
                 <span class="error-message"></span>
               </div>
@@ -182,8 +173,7 @@
                   class="input popup-input"
                   type="password"
                   placeholder="Password *"
-                  name=""
-                  id="addPassword"
+                  name="password"
                 />
                 <span class="error-message"></span>
               </div>
@@ -192,8 +182,7 @@
                   class="input popup-input"
                   type="password"
                   placeholder="Confirm Password *"
-                  name=""
-                  id="addConfirmPassword"
+                  name="confirmPassword" 
                 />
                 <span class="error-message"></span>
               </div>
@@ -205,7 +194,6 @@
               <button
                 class="secondary-button popup-button-cancel"
                 type="button"
-                id="cancelForm"
               >
                 Cancel
               </button>

@@ -20,61 +20,25 @@ export const {
 
 export default class DashboardView {
   constructor() {
-    // Dashboard header elements
-    this.arrowEl = document.getElementById('arrow');
-    this.fullNameEl = document.getElementById('fullName');
-    this.headerNameEl = document.getElementById('headerName');
-    this.openPopupEl = document.getElementById('openPopup');
-    this.closePopupEl = document.getElementById('closePopup');
-    this.popupContainerEl = document.getElementById('popupContainer');
-    this.roleEl = document.getElementById('role');
-    this.logoutEl = document.getElementById('logout')
-
-    // Add User Form Element
-    this.addUserFormEl = document.getElementById('addUserForm');
-    this.addFirstNameEl = document.getElementById('addFirstName');
-    this.addLastNameEl = document.getElementById('addLastName');
-    this.addEmailIdEl = document.getElementById('addEmailId');
-    this.addMobileNoEl = document.getElementById('addMobileNo');
-    this.addRoleEl = document.getElementById('addRole');
-    this.addRoleDiv = this.addRoleEl.parentElement,
-    this.addUserNameEl = document.getElementById('addUserName');
-    this.addPasswordEl = document.getElementById('addPassword');
-    this.addConfirmPasswordEl = document.getElementById('addConfirmPassword');
-    this.cancelFormEl = document.getElementById('cancelForm');
-    this.inputEl = this.addUserFormEl.querySelectorAll('input');
-
-    // Error Add User Form Element
-    this.addUserErrorEls = {
-      addFirstNameEl: this.addFirstNameEl.nextElementSibling,
-      addLastNameEl: this.addLastNameEl.nextElementSibling,
-      addEmailIdEl: this.addEmailIdEl.nextElementSibling,
-      addMobileNoEl: this.addMobileNoEl.nextElementSibling,
-      addUserNameEl: this.addUserNameEl.nextElementSibling,
-      addPasswordEl: this.addPasswordEl.nextElementSibling,
-      addConfirmPasswordEl: this.addConfirmPasswordEl.nextElementSibling,
-      addFirstNameEl: this.addFirstNameEl.nextElementSibling,
-      addRoleEl: this.addRoleDiv.nextElementSibling,
-    };
-
-    // Other Dashboard Element
-    this.selectWrapperEl = document.querySelector(
-      '.select-account-setting-list'
-    );
-    this.popupOverlayEl = document.querySelector('.popup-overlay');
-    this.tableContainer = document.querySelector('.list-user')
-    this.isArrowUp = true;
+    //Dashboard Element
+    this.popupOverlayEl = document.querySelector('.popup-overlay-add-user');
+    this.inputEl = document.querySelectorAll('#addUserForm input');
+    this.cancelFormEl = document.querySelector('#addUserForm .popup-button-cancel');
   }
 
   /**
    * After clicking on the arrow in the header, Logout will drop down.
    */
   toggleDropDownMenu = () => {
-    this.arrowEl.addEventListener('click', () => {
-      this.selectWrapperEl.classList.toggle('select-account-setting-active');
-      this.selectWrapperEl.classList.toggle('block');
-      this.arrowEl.classList.toggle('arrow-up');
-      this.isArrowUp = !this.isArrowUp;
+    const selectWrapperEl = document.querySelector('.select-account-setting-list');
+    const arrowEl = document.querySelector('.header-dashboard-profile-notification-box .arrow');
+    const isArrowUp = true;
+
+    arrowEl.addEventListener('click', () => {
+      selectWrapperEl.classList.toggle('select-account-setting-active');
+      selectWrapperEl.classList.toggle('block');
+      arrowEl.classList.toggle('arrow-up');
+      isArrowUp = !isArrowUp;
     });
   };
 
@@ -83,14 +47,17 @@ export default class DashboardView {
    * @param {object} userInfo - Object containing user information.
    */
   showUserInfo = (userInfo) => {
+    const fullNameEl = document.querySelector('.header-dashboard-profile-name');
+    const headerNameEl = document.querySelector('.header-dashboard-name');
+    const roleEl = fullNameEl.closest('.header-dashboard-profile-name-box').parentElement.querySelector('p');
     const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
     const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
 
     if (firstName && lastName && role) {
-      this.headerNameEl.textContent = firstName;
-      this.fullNameEl.textContent = `${firstName} ${lastName}`;
-      this.roleEl.textContent = role;
+      headerNameEl.textContent = `Hello, ${firstName}`;
+      fullNameEl.textContent = `${firstName} ${lastName}`;
+      roleEl.textContent = role;
     }
   };
 
@@ -98,11 +65,14 @@ export default class DashboardView {
    * After clicking on the add user button, a popup containing the add user form appears.
    */
   bindPopupUser = () => {
-    this.openPopupEl.addEventListener('click', () => {
+    const openPopupEl = document.querySelector('.user-dashboard .add-user-button');
+    const closePopupEl = document.querySelector('.popup-overlay-add-user .close-popup-box');
+
+    openPopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
     });
 
-    this.closePopupEl.addEventListener('click', () => {
+    closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
   };
@@ -112,7 +82,7 @@ export default class DashboardView {
    */
   closePopupUser = () => {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
-  }
+  };
 
    /**
    * The function binds the submit event of the add user form to the provided callback. It validates the form fields and displays error messages if validation fails.
@@ -120,19 +90,42 @@ export default class DashboardView {
    */
 
   bindFormAddUser = (submitAddUser) => {
-    this.addUserFormEl.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const firstName = this.addFirstNameEl.value;
-      const lastName = this.addLastNameEl.value;
-      const email = this.addEmailIdEl.value;
-      const mobile = this.addMobileNoEl.value;
-      const role = this.addRoleEl.value;
-      const userName = this.addUserNameEl.value;
-      const password = this.addPasswordEl.value;
-      const confirmPassword = this.addConfirmPasswordEl.value;
+    // Add User Form Element
+    const addUserFormEl = document.getElementById('addUserForm');
+    const addFirstNameEl = addUserFormEl.querySelector('input[name="firstName"]');
+    const addLastNameEl = addUserFormEl.querySelector('input[name="lastName"]');
+    const addEmailIdEl = addUserFormEl.querySelector('input[name="email"]');
+    const addMobileNoEl = addUserFormEl.querySelector('input[name="mobileNo"]');
+    const addRoleEl = addUserFormEl.querySelector('select[name="addRole"]');
+    const addUserNameEl = addUserFormEl.querySelector('input[name="userName"]');
+    const addPasswordEl = addUserFormEl.querySelector('input[name="password"]');
+    const addConfirmPasswordEl = addUserFormEl.querySelector('input[name="confirmPassword"]');
 
-      Object.values(this.addUserErrorEls).forEach((el) => {
-        console.log(this.addUserErrorEls);
+    // Error Add User Form Element
+    const addUserErrorEls = {
+      addFirstNameEl: addFirstNameEl.nextElementSibling,
+      addLastNameEl: addLastNameEl.nextElementSibling,
+      addEmailIdEl: addEmailIdEl.nextElementSibling,
+      addMobileNoEl: addMobileNoEl.nextElementSibling,
+      addUserNameEl: addUserNameEl.nextElementSibling,
+      addPasswordEl: addPasswordEl.nextElementSibling,
+      addConfirmPasswordEl: addConfirmPasswordEl.nextElementSibling,
+      addFirstNameEl: addFirstNameEl.nextElementSibling,
+      addRoleEl: addRoleEl.closest('.input').nextElementSibling,
+    };
+
+    addUserFormEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstName = addFirstNameEl.value;
+      const lastName = addLastNameEl.value;
+      const email = addEmailIdEl.value;
+      const mobile = addMobileNoEl.value;
+      const role = addRoleEl.value;
+      const userName = addUserNameEl.value;
+      const password = addPasswordEl.value;
+      const confirmPassword = addConfirmPasswordEl.value;
+
+      Object.values(addUserErrorEls).forEach((el) => {
         el.textContent = '';
       });
 
@@ -147,48 +140,48 @@ export default class DashboardView {
         !validateConfirmPassword(password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
-        if (!email && this.addUserErrorEls.addEmailIdEl) {
-          this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
+        if (!email && addUserErrorEls.addEmailIdEl) {
+          addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Show an error if the user enters nothing
-        if (!role && this.addUserErrorEls.addRoleEl) {
-          this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
+        if (!role && addUserErrorEls.addRoleEl) {
+          addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Show an error if the user enters nothing
-        if (!confirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
+        if (!confirmPassword && addUserErrorEls.addConfirmPasswordEl) {
+          addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(firstName) && this.addUserErrorEls.addFirstNameEl) {
-          this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
+        if (!validateInputText(firstName) && addUserErrorEls.addFirstNameEl) {
+          addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
-          this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
+        if (!validateInputText(lastName) && addUserErrorEls.addLastNameEl) {
+          addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
-          this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
+        if (!validateInputText(userName) && addUserErrorEls.addUserNameEl) {
+          addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters the wrong phonenumber format
-        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
-          this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
+        if (!validatePhoneNumber(mobile) && addUserErrorEls.addMobileNoEl) {
+          addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
         //Displays an error if the user enters the wrong password format
-        if (!validatePassword(password) && this.addUserErrorEls.addPasswordEl) {
-          this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+        if (!validatePassword(password) && addUserErrorEls.addPasswordEl) {
+          addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+        if (!validateConfirmPassword(password, confirmPassword) && addUserErrorEls.addConfirmPasswordEl) {
+          addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
       }
@@ -208,14 +201,14 @@ export default class DashboardView {
     });
 
     // Clear error messages on input
-    this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
-    this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
-    this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
-    this.clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
-    this.clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
-    this.clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
-    this.clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
-    this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
+    this.clearErrorOnInput(addFirstNameEl, addUserErrorEls.addFirstNameEl);
+    this.clearErrorOnInput(addLastNameEl, addUserErrorEls.addLastNameEl);
+    this.clearErrorOnInput(addEmailIdEl, addUserErrorEls.addEmailIdEl);
+    this.clearErrorOnInput(addMobileNoEl, addUserErrorEls.addMobileNoEl);
+    this.clearErrorOnInput(addRoleEl, addUserErrorEls.addRoleEl);
+    this.clearErrorOnInput(addUserNameEl, addUserErrorEls.addUserNameEl);
+    this.clearErrorOnInput(addPasswordEl, addUserErrorEls.addPasswordEl);
+    this.clearErrorOnInput(addConfirmPasswordEl, addUserErrorEls.addConfirmPasswordEl);
   };
 
   /**
@@ -252,10 +245,11 @@ export default class DashboardView {
    * @param {Array} data - Array of user data.
    */
   renderTableListUsers = (data) => {
+    const tableContainer = document.querySelector('.list-user')
     const tableHTML = generateTableHTML(data);
     
-    if (this.tableContainer) {
-      this.tableContainer.innerHTML = tableHTML;
+    if (tableContainer) {
+      tableContainer.innerHTML = tableHTML;
     } else {
       console.error('Table container element not found.');
     }
@@ -266,7 +260,9 @@ export default class DashboardView {
    * @param {function} callback - Function to handle the logout event.
    */
   bindLogout(callback) {
-    this.logoutEl.addEventListener('click', callback);
+    const logoutEl = document.getElementById('logout');
+    
+    logoutEl.addEventListener('click', callback);
   };
 
   redirectPage = (page) => {
