@@ -12,8 +12,7 @@
         <header class="header-dashboard flex">
           <div class="flex-column">
             <div class="flex header-dashboard-hi-name-box">
-              <h2 class="header-dashboard-name">Hello,</h2>
-              <h2 id="headerName" class="header-dashboard-name"></h2>
+              <h2 class="header-dashboard-name"></h2>
             </div>
             <p class="header-dashboard-sub-name">Have a nice day</p>
           </div>
@@ -64,7 +63,6 @@
             </div>
             <button
               class="add-user-button primary-button"
-              id="openPopup"
               type="button"
             >
               Add user +
@@ -90,11 +88,11 @@
         </section>
         <section class="list-user"></section>
       </main>
-      <article class="popup-overlay">
-        <section id="popupContainer" class="popup-container">
+      <article class="popup-overlay-add-user">
+        <section class="popup-container">
           <div class="flex align-center space-between popup-heading-box">
             <h2 class="popup-heading">Add User</h2>
-            <div id="closePopup" class="close-popup-box">
+            <div class="close-popup-box">
               <img src="../assets/icons/alert-circle.svg" alt="" />
             </div>
           </div>
@@ -196,7 +194,6 @@
               <button
                 class="secondary-button popup-button-cancel"
                 type="button"
-                id="cancelForm"
               >
                 Cancel
               </button>

@@ -20,17 +20,6 @@ export const {
 
 export default class DashboardView {
   constructor() {
-    // Dashboard header elements
-    this.arrowEl = document.querySelector('.arrow');
-    this.fullNameEl = document.getElementById('fullName');
-    this.roleParent = this.fullNameEl.parentElement;
-    this.headerNameEl = document.getElementById('headerName');
-    this.openPopupEl = document.getElementById('openPopup');
-    this.closePopupEl = document.getElementById('closePopup');
-    this.popupContainerEl = document.getElementById('popupContainer');
-    this.roleEl = this.roleParent.nextElementSibling;
-    this.logoutEl = document.getElementById('logout')
-
     // Add User Form Element
     this.addUserFormEl = document.getElementById('addUserForm');
     this.addFirstNameEl = this.addUserFormEl.querySelector('input[name="firstName"]');
@@ -38,11 +27,10 @@ export default class DashboardView {
     this.addEmailIdEl = this.addUserFormEl.querySelector('input[name="email"]');
     this.addMobileNoEl = this.addUserFormEl.querySelector('input[name="mobileNo"]');
     this.addRoleEl = this.addUserFormEl.querySelector('select[name="addRole"]');
-    this.addRoleParent = this.addRoleEl.parentElement;
     this.addUserNameEl = this.addUserFormEl.querySelector('input[name="userName"]');
     this.addPasswordEl = this.addUserFormEl.querySelector('input[name="password"]');
     this.addConfirmPasswordEl = this.addUserFormEl.querySelector('input[name="confirmPassword"]');
-    this.cancelFormEl = document.getElementById('cancelForm');
+    this.cancelFormEl = this.addUserFormEl.querySelector('.popup-button-cancel');
     this.inputEl = this.addUserFormEl.querySelectorAll('input');
 
     // Error Add User Form Element
@@ -55,27 +43,26 @@ export default class DashboardView {
       addPasswordEl: this.addPasswordEl.nextElementSibling,
       addConfirmPasswordEl: this.addConfirmPasswordEl.nextElementSibling,
       addFirstNameEl: this.addFirstNameEl.nextElementSibling,
-      addRoleEl: this.addRoleParent.nextElementSibling,
+      addRoleEl: this.addRoleEl.closest('.input').nextElementSibling,
     };
 
     // Other Dashboard Element
-    this.selectWrapperEl = document.querySelector(
-      '.select-account-setting-list'
-    );
-    this.popupOverlayEl = document.querySelector('.popup-overlay');
-    this.tableContainer = document.querySelector('.list-user')
-    this.isArrowUp = true;
+    this.popupOverlayEl = document.querySelector('.popup-overlay-add-user');
+    
   }
 
   /**
    * After clicking on the arrow in the header, Logout will drop down.
    */
   toggleDropDownMenu = () => {
-    this.arrowEl.addEventListener('click', () => {
-      this.selectWrapperEl.classList.toggle('select-account-setting-active');
-      this.selectWrapperEl.classList.toggle('block');
-      this.arrowEl.classList.toggle('arrow-up');
-      this.isArrowUp = !this.isArrowUp;
+    const selectWrapperEl = document.querySelector('.select-account-setting-list');
+    const arrowEl = document.querySelector('.header-dashboard-profile-notification-box .arrow');
+    const isArrowUp = true;
+    arrowEl.addEventListener('click', () => {
+      selectWrapperEl.classList.toggle('select-account-setting-active');
+      selectWrapperEl.classList.toggle('block');
+      arrowEl.classList.toggle('arrow-up');
+      isArrowUp = !isArrowUp;
     });
   };
 
@@ -84,14 +71,17 @@ export default class DashboardView {
    * @param {object} userInfo - Object containing user information.
    */
   showUserInfo = (userInfo) => {
+    const fullNameEl = document.querySelector('.header-dashboard-profile-name');
+    const headerNameEl = document.querySelector('.header-dashboard-name');
+    const roleEl = fullNameEl.closest('.header-dashboard-profile-name-box').parentElement.querySelector('p');
     const firstName = localStorage.getItem(LOCAL_STORAGE.FIRST_NAME);
     const lastName = localStorage.getItem(LOCAL_STORAGE.LAST_NAME);
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
 
     if (firstName && lastName && role) {
-      this.headerNameEl.textContent = firstName;
-      this.fullNameEl.textContent = `${firstName} ${lastName}`;
-      this.roleEl.textContent = role;
+      headerNameEl.textContent = `Hello, ${firstName}`;
+      fullNameEl.textContent = `${firstName} ${lastName}`;
+      roleEl.textContent = role;
     }
   };
 
@@ -99,11 +89,13 @@ export default class DashboardView {
    * After clicking on the add user button, a popup containing the add user form appears.
    */
   bindPopupUser = () => {
-    this.openPopupEl.addEventListener('click', () => {
+    const openPopupEl = document.querySelector('.user-dashboard .add-user-button');
+    const closePopupEl = document.querySelector('.popup-overlay-add-user .close-popup-box');
+    openPopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
     });
 
-    this.closePopupEl.addEventListener('click', () => {
+    closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
   };
@@ -113,7 +105,7 @@ export default class DashboardView {
    */
   closePopupUser = () => {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
-  }
+  };
 
    /**
    * The function binds the submit event of the add user form to the provided callback. It validates the form fields and displays error messages if validation fails.
@@ -252,10 +244,11 @@ export default class DashboardView {
    * @param {Array} data - Array of user data.
    */
   renderTableListUsers = (data) => {
+    const tableContainer = document.querySelector('.list-user')
     const tableHTML = generateTableHTML(data);
     
-    if (this.tableContainer) {
-      this.tableContainer.innerHTML = tableHTML;
+    if (tableContainer) {
+      tableContainer.innerHTML = tableHTML;
     } else {
       console.error('Table container element not found.');
     }
@@ -266,7 +259,8 @@ export default class DashboardView {
    * @param {function} callback - Function to handle the logout event.
    */
   bindLogout(callback) {
-    this.logoutEl.addEventListener('click', callback);
+    const logoutEl = document.getElementById('logout');
+    logoutEl.addEventListener('click', callback);
   };
 
   redirectPage = (page) => {
