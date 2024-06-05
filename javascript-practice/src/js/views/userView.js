@@ -13,9 +13,9 @@ export default class UserView {
   constructor() {
     // DOM elements for login form
     this.loginFormEl = document.getElementById('loginForm');
-    this.emailFormEl = document.getElementById('email');
+    this.emailFormEl = this.loginFormEl.querySelector('input[name="email"]');
     this.emailErrorEl = this.emailFormEl.nextElementSibling;
-    this.passwordFormEl = document.getElementById('password');
+    this.passwordFormEl = this.loginFormEl.querySelector('input[name="password"]');
     this.passwordErrorEl = this.passwordFormEl.nextElementSibling;
   }
 

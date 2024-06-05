@@ -23,11 +23,12 @@ export default class DashboardView {
     // Dashboard header elements
     this.arrowEl = document.querySelector('.arrow');
     this.fullNameEl = document.getElementById('fullName');
-    this.headerNameEl = document.querySelector('.header-dashboard-name');
+    this.roleParent = this.fullNameEl.parentElement;
+    this.headerNameEl = document.getElementById('headerName');
     this.openPopupEl = document.getElementById('openPopup');
     this.closePopupEl = document.getElementById('closePopup');
     this.popupContainerEl = document.getElementById('popupContainer');
-    this.roleEl = document.getElementById('role');
+    this.roleEl = this.roleParent.nextElementSibling;
     this.logoutEl = document.getElementById('logout')
 
     // Add User Form Element
@@ -37,7 +38,7 @@ export default class DashboardView {
     this.addEmailIdEl = this.addUserFormEl.querySelector('input[name="email"]');
     this.addMobileNoEl = this.addUserFormEl.querySelector('input[name="mobileNo"]');
     this.addRoleEl = this.addUserFormEl.querySelector('select[name="addRole"]');
-    this.addRoleDiv = this.addRoleEl.parentElement;
+    this.addRoleParent = this.addRoleEl.parentElement;
     this.addUserNameEl = this.addUserFormEl.querySelector('input[name="userName"]');
     this.addPasswordEl = this.addUserFormEl.querySelector('input[name="password"]');
     this.addConfirmPasswordEl = this.addUserFormEl.querySelector('input[name="confirmPassword"]');
@@ -54,7 +55,7 @@ export default class DashboardView {
       addPasswordEl: this.addPasswordEl.nextElementSibling,
       addConfirmPasswordEl: this.addConfirmPasswordEl.nextElementSibling,
       addFirstNameEl: this.addFirstNameEl.nextElementSibling,
-      addRoleEl: this.addRoleDiv.nextElementSibling,
+      addRoleEl: this.addRoleParent.nextElementSibling,
     };
 
     // Other Dashboard Element
