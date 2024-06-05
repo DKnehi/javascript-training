@@ -33,6 +33,7 @@ export default class DashboardView {
     const selectWrapperEl = document.querySelector('.select-account-setting-list');
     const arrowEl = document.querySelector('.header-dashboard-profile-notification-box .arrow');
     const isArrowUp = true;
+
     arrowEl.addEventListener('click', () => {
       selectWrapperEl.classList.toggle('select-account-setting-active');
       selectWrapperEl.classList.toggle('block');
@@ -66,6 +67,7 @@ export default class DashboardView {
   bindPopupUser = () => {
     const openPopupEl = document.querySelector('.user-dashboard .add-user-button');
     const closePopupEl = document.querySelector('.popup-overlay-add-user .close-popup-box');
+
     openPopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
     });
@@ -259,6 +261,7 @@ export default class DashboardView {
    */
   bindLogout(callback) {
     const logoutEl = document.getElementById('logout');
+    
     logoutEl.addEventListener('click', callback);
   };
 
