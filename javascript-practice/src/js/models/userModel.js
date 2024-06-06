@@ -1,5 +1,6 @@
 export default class UserModel {
   constructor(
+    id,
     firstName,
     lastName,
     email,
@@ -9,6 +10,7 @@ export default class UserModel {
     password,
     addedDate
   ) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

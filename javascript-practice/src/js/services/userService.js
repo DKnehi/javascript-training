@@ -57,4 +57,19 @@ export default class UserService {
       throw new Error('Failed to add user.');
     }
   };
+
+  updateUser = async (id, user) => {
+    try {
+      const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      throw new Error('Failed to update user.');
+    }
+  };
 }

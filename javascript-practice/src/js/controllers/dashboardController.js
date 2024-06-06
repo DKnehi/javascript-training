@@ -6,7 +6,7 @@ import { URLS } from '../constants/urls';
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import { ROLES } from '../constants/role';
 
-const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
+const { ADD_USER_SUCCES, ADD_USER_FAILED, UPDATE_USER_SUCCES, UPDATE_USER_FAILED } = NOTIFY_MESSAGE;
 
 export default class DashboardController {
   constructor(view, model, service) {
@@ -15,7 +15,7 @@ export default class DashboardController {
     this.service = new UserService();
 
     this.checkAccess();
-    this.view.bindFormAddUser(this.addUser.bind(this));
+    this.view.bindFormAddUser(this.addUser.bind(this), this.updateUser.bind(this));
     this.view.bindLogout(this.handleLogout.bind(this));
     this.view.toggleDropDownMenu();
     this.view.showUserInfo();
@@ -76,9 +76,25 @@ export default class DashboardController {
   renderTableListUsers = async () => {
     try {
       const data = await this.service.getAllUser();
-      this.view.renderTableListUsers(data); 
+      this.view.renderTableListUsers(data);
+       this.view.bindEditUser();
     } catch (error) {
       console.error('Error rendering table:', error);
+    }
+  };
+
+  updateUser = async (userData) => {
+    try {
+      const updatedUser = await this.service.updateUser(userData.userId, userData);
+      this.view.addUserMessage(`${UPDATE_USER_SUCCES}`);
+      setTimeout(() => {
+        this.view.closePopupUser();
+        this.renderTableListUsers();
+      }, 1500);
+      return updatedUser;
+    } catch (error) {
+      this.view.addUserMessage(`${UPDATE_USER_FAILED}`, 'error');
+      throw new Error('Failed to update user.');
     }
   };
 
