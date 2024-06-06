@@ -33,14 +33,12 @@
               </div>
             </div>
             <div class="arrow-box">
-              <img
-                class="arrow"
-                src="../assets/icons/arrow.svg"
-                alt="arrow"
-              />
+              <img class="arrow" src="../assets/icons/arrow.svg" alt="arrow" />
               <ul class="select-account-setting-list">
                 <li class="select-account-setting-item">
-                  <p class="select-account-setting-heading" id="logout">Log out</p>
+                  <p class="select-account-setting-heading" id="logout">
+                    Log out
+                  </p>
                 </li>
               </ul>
             </div>
@@ -61,10 +59,7 @@
                 id=""
               />
             </div>
-            <button
-              class="add-user-button primary-button"
-              type="button"
-            >
+            <button class="add-user-button primary-button" type="button">
               Add user +
             </button>
             <div class="flex align-center dropdow-content">
@@ -88,6 +83,16 @@
         </section>
         <section class="list-user"></section>
       </main>
+      <div class="popup-overlay-delete-user">
+        <div class="popup-container-delete-user">
+          <h2 class="delete-user-heading">Confirm Delete</h2>
+          <p class="delete-user-sub-heading">Are you sure you want to delete this user?</p>
+          <div class="flex space-around">
+            <button class="secondary-button">No</button>
+            <button class="primary-button">Yes</button>
+          </div>
+        </div>
+      </div>
       <article class="popup-overlay-add-user">
         <section class="popup-container">
           <div class="flex align-center space-between popup-heading-box">
@@ -182,7 +187,7 @@
                   class="input popup-input"
                   type="password"
                   placeholder="Confirm Password *"
-                  name="confirmPassword" 
+                  name="confirmPassword"
                 />
                 <span class="error-message"></span>
               </div>

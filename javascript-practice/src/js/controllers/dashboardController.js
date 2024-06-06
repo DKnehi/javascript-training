@@ -6,7 +6,14 @@ import { URLS } from '../constants/urls';
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import { ROLES } from '../constants/role';
 
-const { ADD_USER_SUCCESS, ADD_USER_FAILED, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED } = NOTIFY_MESSAGE;
+const {
+  ADD_USER_SUCCESS,
+  ADD_USER_FAILED,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILED,
+} = NOTIFY_MESSAGE;
 
 export default class DashboardController {
   constructor(view, model, service) {
@@ -33,7 +40,7 @@ export default class DashboardController {
     if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
       window.location.href = URLS.INDEX;
     }
-  };
+  }
 
   /**
    * The function is used to add a new user to the system.
@@ -79,20 +86,24 @@ export default class DashboardController {
       const data = await this.service.getAllUser();
 
       this.view.renderTableListUsers(data);
-       this.view.bindEditUser();
+      this.view.bindEditUser();
+      this.view.bindDeleteUser(this.deleteUser.bind(this));
     } catch (error) {
       console.error('Error rendering table:', error);
     }
   };
 
   /**
- * This function updates an existing user in the system by sending a PUT request to the API with the user's updated data.
- * @param {Object} userData - The updated user data including userId and other fields.
- * @returns {Promise<Object>} - A promise that resolves to the updated user object.
- */
+   * This function updates an existing user in the system by sending a PUT request to the API with the user's updated data.
+   * @param {Object} userData - The updated user data including userId and other fields.
+   * @returns {Promise<Object>} - A promise that resolves to the updated user object.
+   */
   updateUser = async (userData) => {
     try {
-      const updatedUser = await this.service.updateUser(userData.userId, userData);
+      const updatedUser = await this.service.updateUser(
+        userData.userId,
+        userData
+      );
 
       this.view.addUserMessage(`${UPDATE_USER_SUCCESS}`);
       setTimeout(() => {
@@ -106,12 +117,27 @@ export default class DashboardController {
     }
   };
 
-   /**
+  /**
+   * Delete a user by their ID.
+   * @param {string} userId - The ID of the user to delete.
+   */
+  deleteUser = async (userId) => {
+    try {
+      await this.service.deleteUser(userId);
+      this.view.addUserMessage(`${DELETE_USER_SUCCESS}`, 'success');
+      this.renderTableListUsers();
+    } catch (error) {
+      this.view.addUserMessage(`${DELETE_USER_FAILED}`, 'error');
+      console.error('Failed to delete user:', error);
+    }
+  };
+
+  /**
    * Handle user logout.
    * Clear localStorage and redirect to the login page.
    */
   handleLogout() {
-    localStorage.clear(); 
-    window.location.href = URLS.LOGIN; 
-  };
+    localStorage.clear();
+    window.location.href = URLS.LOGIN;
+  }
 }
