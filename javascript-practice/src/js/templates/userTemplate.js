@@ -30,7 +30,7 @@ const generateTableRowHTML = (item) => {
         </div>
       </td>
       <td class="table-data table-cell">
-        <div class="table-data-icon list-user-table-icon">
+        <div class="table-data-icon list-user-table-icon edit-user" data-id="${item.id}">
           <img src="${editIcon}" alt="Edit" />
         </div>
         <div class="table-data-icon list-user-table-icon">

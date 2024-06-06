@@ -57,4 +57,25 @@ export default class UserService {
       throw new Error('Failed to add user.');
     }
   };
+
+  /**
+ * This function updates an existing user in the system by sending a PUT request to the API with the user's updated data.
+ * @param {string} id - The ID of the user to be updated.
+ * @param {Object} user - The updated user object.
+ * @returns {Promise<Object>} - A promise that resolves to the updated user object.
+ */
+  updateUser = async (id, user) => {
+    try {
+      const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      throw new Error('Failed to update user.');
+    }
+  };
 }

@@ -6,7 +6,7 @@ import { URLS } from '../constants/urls';
 import { LOCAL_STORAGE } from '../constants/localStorage';
 import { ROLES } from '../constants/role';
 
-const { ADD_USER_SUCCES, ADD_USER_FAILED } = NOTIFY_MESSAGE;
+const { ADD_USER_SUCCESS, ADD_USER_FAILED, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED } = NOTIFY_MESSAGE;
 
 export default class DashboardController {
   constructor(view, model, service) {
@@ -15,7 +15,7 @@ export default class DashboardController {
     this.service = new UserService();
 
     this.checkAccess();
-    this.view.bindFormAddUser(this.addUser.bind(this));
+    this.view.bindFormUser(this.addUser.bind(this), this.updateUser.bind(this));
     this.view.bindLogout(this.handleLogout.bind(this));
     this.view.toggleDropDownMenu();
     this.view.showUserInfo();
@@ -58,7 +58,8 @@ export default class DashboardController {
         password
       );
       const addedUser = await this.service.addUser(newUser);
-      this.view.addUserMessage(`${ADD_USER_SUCCES}`);
+
+      this.view.addUserMessage(`${ADD_USER_SUCCESS}`);
       setTimeout(() => {
         this.view.closePopupUser();
         this.renderTableListUsers();
@@ -76,9 +77,32 @@ export default class DashboardController {
   renderTableListUsers = async () => {
     try {
       const data = await this.service.getAllUser();
-      this.view.renderTableListUsers(data); 
+
+      this.view.renderTableListUsers(data);
+       this.view.bindEditUser();
     } catch (error) {
       console.error('Error rendering table:', error);
+    }
+  };
+
+  /**
+ * This function updates an existing user in the system by sending a PUT request to the API with the user's updated data.
+ * @param {Object} userData - The updated user data including userId and other fields.
+ * @returns {Promise<Object>} - A promise that resolves to the updated user object.
+ */
+  updateUser = async (userData) => {
+    try {
+      const updatedUser = await this.service.updateUser(userData.userId, userData);
+
+      this.view.addUserMessage(`${UPDATE_USER_SUCCESS}`);
+      setTimeout(() => {
+        this.view.closePopupUser();
+        this.renderTableListUsers();
+      }, 1500);
+      return updatedUser;
+    } catch (error) {
+      this.view.addUserMessage(`${UPDATE_USER_FAILED}`, 'error');
+      throw new Error('Failed to update user.');
     }
   };
 
