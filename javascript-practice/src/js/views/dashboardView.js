@@ -116,19 +116,20 @@ export default class DashboardView {
     this.addPasswordEl.value = '';
     this.addConfirmPasswordEl.value = '';
   };
-   /**
-   * After clicking on the x button, turn off the popup containing the add user form.
-   */
+  /**
+  * After clicking on the x button, turn off the popup containing the add user form.
+  */
   closePopupUser = () => {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
   };
 
-   /**
-   * The function binds the submit event of the add user form to the provided callback. It validates the form fields and displays error messages if validation fails.
-   * @param {function} submitAddUser - Function to handle the form submission event.
-   */
-
-  bindFormAddUser = (submitAddUser, submitUpdateUser) => {
+  /**
+ * Binds the add user form to the provided callback functions for adding and updating users. 
+ * Validates form fields and displays error messages if validation fails.
+ * @param {function} submitAddUser - Function to handle adding a new user.
+ * @param {function} submitUpdateUser - Function to handle updating an existing user.
+ */
+  bindFormUser = (submitAddUser, submitUpdateUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
       const userId = this.addUserIdEl.value;
@@ -185,7 +186,7 @@ export default class DashboardView {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
-        //Displays an error if the user enters the wrong phonenumber format
+        //Displays an error if the user enters the wrong phone number format
         if (!validatePhoneNumber(phoneNumber) && this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
@@ -241,6 +242,9 @@ export default class DashboardView {
     this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
   };
 
+  /**
+ * Binds the edit user functionality to edit buttons.
+ */
   bindEditUser = () => {
     document.querySelectorAll('.edit-user').forEach((editButton) => {
       editButton.addEventListener('click', (event) => {
@@ -250,6 +254,10 @@ export default class DashboardView {
     });
   };
 
+  /**
+ * Handles editing a user by populating the form fields with the user's data.
+ * @param {string} userId - The ID of the user to edit.
+ */
   handleEditUser = (userId) => {
     const userData = this.getUserDataById(userId); 
 
@@ -267,6 +275,11 @@ export default class DashboardView {
     this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
   };
 
+  /**
+ * Retrieves user data by user ID from the list of users stored in the component.
+ * @param {string} userId - The ID of the user to retrieve.
+ * @returns {Object | undefined} - The user object with the specified ID, or undefined if not found.
+ */
   getUserDataById = (userId) => {
     return this.users.find(user => user.id === userId);
   };
