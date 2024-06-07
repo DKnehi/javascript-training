@@ -51,7 +51,45 @@ export default class DashboardView {
     this.popupOverlayEl = document.querySelector('.popup-overlay-add-user');
     this.submitButtonEl = this.popupOverlayEl.querySelector('.primary-button');
     this.popupHeadingEl = this.popupOverlayEl.querySelector('.popup-heading');
+    this.popupOverlayDeleteEl = document.querySelector('.popup-overlay-delete-user');
+    this.deleteConfirmYesEl = this.popupOverlayDeleteEl.querySelector('.primary-button');
+    this.deleteConfirmNoEl = this.popupOverlayDeleteEl.querySelector('.secondary-button');
   }
+
+   /**
+   * Binds the delete button click event to the delete confirmation popup.
+   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
+   */
+   bindDeleteUser = (deleteUser) => {
+    document.querySelectorAll('.delete-user').forEach((deleteButton) => {
+      deleteButton.addEventListener('click', (event) => {
+        const userId = event.currentTarget.getAttribute('data-id');
+
+        this.bindPopUpDelete(userId, deleteUser);
+      });
+    });
+  };
+
+  /**
+   * Shows the delete confirmation popup.
+   * @param {string} userId - The ID of the user to delete.
+   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
+   */
+  bindPopUpDelete = (userId, deleteUser) => {
+    this.popupOverlayDeleteEl.classList.add('popup-overlay-active', 'block');
+    this.deleteConfirmYesEl.onclick = () => {
+      deleteUser(userId);
+      this.closePopUpDelete();
+    };
+    this.deleteConfirmNoEl.onclick = this.closePopUpDelete;
+  };
+
+  /**
+   * Closes the delete confirmation popup.
+   */
+  closePopUpDelete = () => {
+    this.popupOverlayDeleteEl.classList.remove('popup-overlay-active', 'block');
+  };
 
   /**
    * After clicking on the arrow in the header, Logout will drop down.
@@ -59,12 +97,11 @@ export default class DashboardView {
   toggleDropDownMenu = () => {
     const selectWrapperEl = document.querySelector('.select-account-setting-list');
     const arrowEl = document.querySelector('.header-dashboard-profile-notification-box .arrow');
-    const isArrowUp = true;
+
     arrowEl.addEventListener('click', () => {
       selectWrapperEl.classList.toggle('select-account-setting-active');
       selectWrapperEl.classList.toggle('block');
       arrowEl.classList.toggle('arrow-up');
-      isArrowUp = !isArrowUp;
     });
   };
 
@@ -93,6 +130,7 @@ export default class DashboardView {
   bindPopupUser = () => {
     const openPopupEl = document.querySelector('.user-dashboard .add-user-button');
     const closePopupEl = document.querySelector('.popup-overlay-add-user .close-popup-box');
+
     openPopupEl.addEventListener('click', () => {
       this.clearAddUserForm();
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
@@ -117,18 +155,18 @@ export default class DashboardView {
     this.addConfirmPasswordEl.value = '';
   };
   /**
-  * After clicking on the x button, turn off the popup containing the add user form.
-  */
+   * After clicking on the x button, turn off the popup containing the add user form.
+   */
   closePopupUser = () => {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
   };
 
   /**
- * Binds the add user form to the provided callback functions for adding and updating users. 
- * Validates form fields and displays error messages if validation fails.
- * @param {function} submitAddUser - Function to handle adding a new user.
- * @param {function} submitUpdateUser - Function to handle updating an existing user.
- */
+   * Binds the add user form to the provided callback functions for adding and updating users.
+   * Validates form fields and displays error messages if validation fails.
+   * @param {function} submitAddUser - Function to handle adding a new user.
+   * @param {function} submitUpdateUser - Function to handle updating an existing user.
+   */
   bindFormUser = (submitAddUser, submitUpdateUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -151,7 +189,7 @@ export default class DashboardView {
       if (
         !email ||
         !role ||
-        !validateInputText(firstName, lastName, userName ) ||
+        !validateInputText(firstName, lastName, userName) ||
         !validatePhoneNumber(phoneNumber) ||
         (!userId && !validatePassword(password)) ||
         !validateConfirmPassword(password, confirmPassword)
@@ -177,17 +215,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
+        if (!validateInputText(lastName) &&this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
+        if (!validateInputText(userName) &&this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters the wrong phone number format
-        if (!validatePhoneNumber(phoneNumber) && this.addUserErrorEls.addMobileNoEl) {
+        if (!validatePhoneNumber(phoneNumber) &&this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
@@ -197,7 +235,7 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!validateConfirmPassword(password, confirmPassword) &&this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
@@ -213,7 +251,7 @@ export default class DashboardView {
             phoneNumber,
             role,
             userName,
-            password
+            password,
           });
         } else {
           submitAddUser(
@@ -232,34 +270,35 @@ export default class DashboardView {
     });
 
     // Clear error messages on input
-    this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
-    this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
-    this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
-    this.clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
+    this.clearErrorOnInput(this.addFirstNameEl,this.addUserErrorEls.addFirstNameEl);
+    this.clearErrorOnInput(this.addLastNameEl,this.addUserErrorEls.addLastNameEl);
+    this.clearErrorOnInput(this.addEmailIdEl,this.addUserErrorEls.addEmailIdEl);
+    this.clearErrorOnInput(this.addMobileNoEl,this.addUserErrorEls.addMobileNoEl);
     this.clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
-    this.clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
-    this.clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
-    this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
+    this.clearErrorOnInput(this.addUserNameEl,this.addUserErrorEls.addUserNameEl);
+    this.clearErrorOnInput(this.addPasswordEl,this.addUserErrorEls.addPasswordEl);
+    this.clearErrorOnInput(this.addConfirmPasswordEl,this.addUserErrorEls.addConfirmPasswordEl);
   };
 
   /**
- * Binds the edit user functionality to edit buttons.
- */
+   * Binds the edit user functionality to edit buttons.
+   */
   bindEditUser = () => {
     document.querySelectorAll('.edit-user').forEach((editButton) => {
       editButton.addEventListener('click', (event) => {
         const userId = event.currentTarget.getAttribute('data-id');
+
         this.handleEditUser(userId);
       });
     });
   };
 
   /**
- * Handles editing a user by populating the form fields with the user's data.
- * @param {string} userId - The ID of the user to edit.
- */
+   * Handles editing a user by populating the form fields with the user's data.
+   * @param {string} userId - The ID of the user to edit.
+   */
   handleEditUser = (userId) => {
-    const userData = this.getUserDataById(userId); 
+    const userData = this.getUserDataById(userId);
 
     this.addUserIdEl.value = userData.id;
     this.addFirstNameEl.value = userData.firstName;
@@ -268,22 +307,22 @@ export default class DashboardView {
     this.addMobileNoEl.value = userData.phoneNumber;
     this.addRoleEl.value = userData.role;
     this.addUserNameEl.value = userData.userName;
-    this.addPasswordEl.value = userData.password; 
-    this.addConfirmPasswordEl.value = userData.password; 
+    this.addPasswordEl.value = userData.password;
+    this.addConfirmPasswordEl.value = userData.password;
     this.popupHeadingEl.textContent = 'Edit User';
     this.submitButtonEl.textContent = 'Update User';
     this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
   };
 
   /**
- * Retrieves user data by user ID from the list of users stored in the component.
- * @param {string} userId - The ID of the user to retrieve.
- * @returns {Object | undefined} - The user object with the specified ID, or undefined if not found.
- */
+   * Retrieves user data by user ID from the list of users stored in the component.
+   * @param {string} userId - The ID of the user to retrieve.
+   * @returns {Object | undefined} - The user object with the specified ID, or undefined if not found.
+   */
   getUserDataById = (userId) => {
-    return this.users.find(user => user.id === userId);
+    return this.users.find((user) => user.id === userId);
   };
-  
+
   /**
    * The function handles if the user re-enters from an input that is reporting an error, then clears that error.
    * @param {HTMLElement} inputEl - The input element being validated.
@@ -295,7 +334,7 @@ export default class DashboardView {
     });
   };
 
-   /**
+  /**
    * Clears entered data on input cells.
    */
   clearInputs = () => {
@@ -311,7 +350,7 @@ export default class DashboardView {
    */
   addUserMessage(message) {
     showToast(message);
-  };
+  }
 
   /**
    * The function generates and displays the table of users.
@@ -319,12 +358,11 @@ export default class DashboardView {
    */
   renderTableListUsers = (data) => {
     this.users = data;
-    const tableContainer = document.querySelector('.list-user')
+    const tableContainer = document.querySelector('.list-user');
     const tableHTML = generateTableHTML(data);
-    
+
     if (tableContainer) {
       tableContainer.innerHTML = tableHTML;
-      this.bindEditUser();
     } else {
       console.error('Table container element not found.');
     }
@@ -337,7 +375,7 @@ export default class DashboardView {
   bindLogout(callback) {
     const logoutEl = document.getElementById('logout');
     logoutEl.addEventListener('click', callback);
-  };
+  }
 
   redirectPage = (page) => {
     window.location.replace(page);

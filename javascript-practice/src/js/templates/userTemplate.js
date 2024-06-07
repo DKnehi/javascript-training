@@ -1,12 +1,14 @@
 import editIcon from '../../assets/icons/arrow-circle-down.svg';
 import deleteIcon from '../../assets/icons/arrow-circle-down-copy.svg';
-import { MONTH_NAMES} from '../constants/month';
+import { MONTH_NAMES } from '../constants/month';
 import { PRIMARY_ROLES } from '../constants/role';
 
 const generateTableRowHTML = (item) => {
   // Check the role value and assign the corresponding CSS class
   const role = item.role.toLowerCase();
-  const roleClass = PRIMARY_ROLES.includes(role) ? 'primary-role' : 'secondary-role';
+  const roleClass = PRIMARY_ROLES.includes(role)
+    ? 'primary-role'
+    : 'secondary-role';
 
   //The function contains a string representing a date formatted in the format "dd month, year".
   const addedDate = new Date(item.addedDate);
@@ -33,7 +35,7 @@ const generateTableRowHTML = (item) => {
         <div class="table-data-icon list-user-table-icon edit-user" data-id="${item.id}">
           <img src="${editIcon}" alt="Edit" />
         </div>
-        <div class="table-data-icon list-user-table-icon">
+        <div class="table-data-icon list-user-table-icon delete-user" data-id="${item.id}">
           <img src="${deleteIcon}" alt="Delete" />
         </div>
       </td>

@@ -13,9 +13,9 @@ export default class App {
     if (path.includes(PATHS.DASHBOARD)) {
       const view = new DashboardView();
       new DashboardController(view, model);
+    } else {
+      const view = new UserView();
+      new UserController(view, model);
     }
-
-    const view = new UserView();
-    new UserController(view, model);
   }
 }
