@@ -4,7 +4,7 @@ export default class UserModel {
     firstName,
     lastName,
     email,
-    phoneNumber,
+    mobile,
     role,
     userName,
     password,
@@ -14,7 +14,7 @@ export default class UserModel {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.phoneNumber = phoneNumber;
+    this.mobile = mobile;
     this.role = role;
     this.userName = userName;
     this.password = password;
