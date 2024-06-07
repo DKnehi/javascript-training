@@ -3,7 +3,7 @@
   "source": "src/pages/login.html",
   "scripts": {
     "start": "parcel src/pages/*.html",
-    "build": "rm -rf .parcel-cache && parcel build src/pages*.html"
+    "build": "rm -rf .parcel-cache && parcel build src/pages/*.html --dist-dir dist"
   },
   "devDependencies": {
     "parcel": "^2.12.0"
