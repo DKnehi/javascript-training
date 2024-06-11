@@ -258,7 +258,6 @@ export default class DashboardView {
           });
         } else {
           submitAddUser(
-            id,
             firstName,
             lastName,
             email,
@@ -341,7 +340,7 @@ export default class DashboardView {
    * Message notification function.
    * @param {string} message - The message to be displayed.
    */
-  dashboardMessage(message, type = 'success') {
+  dashboardMessage(message, type) {
     showToast(message, type);
   };
 

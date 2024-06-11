@@ -111,6 +111,13 @@ export default class DashboardController {
    */
   updateUser = async (userData) => {
     try {
+      const emailExists = await this.service.isEmailExists(userData.email, userData.id);
+
+      if (emailExists) {
+        this.view.dashboardMessage(`${EMAIL_EXISTS}`, 'error');
+        return;
+      }
+
       const updatedUser = await this.service.updateUser(userData.id, userData);
 
       this.view.dashboardMessage(`${UPDATE_USER_SUCCESS}`);
