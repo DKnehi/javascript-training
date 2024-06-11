@@ -33,8 +33,8 @@ validateConfirmPassword = (password, confirmPassword) => {
  * @param {string} text - The text string to be validated.
  * @returns {boolean} - Returns true if the text matches the format, otherwise false.
  */
-validateInputText = (text) => {
-  return REGEX.TEXT.test(text);
+validateInputText = (fistName, lastName, userName) => {
+  return REGEX.TEXT.test(fistName, lastName, userName);
 };
 
 export {
