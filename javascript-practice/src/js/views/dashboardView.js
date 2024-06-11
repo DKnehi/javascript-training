@@ -258,6 +258,7 @@ export default class DashboardView {
           });
         } else {
           submitAddUser(
+            id,
             firstName,
             lastName,
             email,
