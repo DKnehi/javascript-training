@@ -96,10 +96,27 @@ export default class UserService {
         }
       );
       if (!response.ok) {
-        throw new Error('Failed to delete user.');
+        return await response.json();
       }
     } catch (error) {
       throw new Error('Failed to delete user.');
+    }
+  };
+
+  /**
+   * Checks if an email exists in the user list, excluding a specific user ID if provided.
+   * @param {string} email - The email to check for existence.
+   * @param {string|null} excludeUserId - The user ID to exclude from the check.
+   * @returns {Promise<boolean>} - A promise that resolves to a boolean indicating if the email exists.
+   */
+  isEmailExists = async (email, excludeUserId = null) => {
+    try {
+      const users = await this.getAllUser();
+      const user = users.find(user => user.email.toLowerCase() === email.toLowerCase() && user.id !== excludeUserId);
+
+      return !!user;
+    } catch (error) {
+      throw new Error('Failed to check if email exists.');
     }
   };
 }

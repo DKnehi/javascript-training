@@ -16,6 +16,7 @@ const NOTIFY_MESSAGE = {
   UPDATE_USER_FAILED: 'Failed to update user!',
   DELETE_USER_SUCCESS: 'Delete user successfully!',
   DELETE_USER_FAILED: 'Failed to delete user!',
+  EMAIL_EXISTS: 'Email already exists, please enter another Email!',
 };
 
 export default NOTIFY_MESSAGE;
