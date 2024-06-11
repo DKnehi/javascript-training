@@ -71,9 +71,9 @@ export default class UserView {
    * Displays a toast message when the login fails.
    * @param {string} message - The message to be displayed.
    */
-  showLoginFailedMessage(message) {
-    showToast(message, 'error');
-  }
+  showLoginMessage(message, type) {
+    showToast(message, type);
+  };
 
   /**
    * Redirects the user to a specified page.

@@ -5,8 +5,8 @@ import { REGEX } from '../constants/regex';
  * @param {string} phoneNumber - The phone number string to be validated.
  * @returns {boolean} - Returns true if the phone number matches the format, otherwise false.
  */
-validatePhoneNumber = (phoneNumber) => {
-  return REGEX.PHONE_NUMBER.test(phoneNumber);
+validatePhoneNumber = (mobile) => {
+  return REGEX.PHONE_NUMBER.test(mobile);
 };
 
 /**

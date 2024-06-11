@@ -56,16 +56,16 @@ export default class DashboardView {
     this.deleteConfirmNoEl = this.popupOverlayDeleteEl.querySelector('.secondary-button');
   }
 
-   /**
+  /**
    * Binds the delete button click event to the delete confirmation popup.
    * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
    */
-   bindDeleteUser = (deleteUser) => {
+  bindDeleteUser = (deleteUser) => {
     document.querySelectorAll('.delete-user').forEach((deleteButton) => {
       deleteButton.addEventListener('click', (event) => {
-        const userId = event.currentTarget.getAttribute('data-id');
+        const id = event.currentTarget.getAttribute('data-id');
 
-        this.bindPopUpDelete(userId, deleteUser);
+        this.bindPopUpDelete(id, deleteUser);
       });
     });
   };
@@ -75,10 +75,10 @@ export default class DashboardView {
    * @param {string} userId - The ID of the user to delete.
    * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
    */
-  bindPopUpDelete = (userId, deleteUser) => {
+  bindPopUpDelete = (id, deleteUser) => {
     this.popupOverlayDeleteEl.classList.add('popup-overlay-active', 'block');
     this.deleteConfirmYesEl.onclick = () => {
-      deleteUser(userId);
+      deleteUser(id);
       this.closePopUpDelete();
     };
     this.deleteConfirmNoEl.onclick = this.closePopUpDelete;
@@ -141,6 +141,10 @@ export default class DashboardView {
     closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
+    
+    this.cancelFormEl.addEventListener('click', () => {
+      this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
+    });
   };
 
   clearAddUserForm = () => {
@@ -170,11 +174,11 @@ export default class DashboardView {
   bindFormUser = (submitAddUser, submitUpdateUser) => {
     this.addUserFormEl.addEventListener('submit', (e) => {
       e.preventDefault();
-      const userId = this.addUserIdEl.value;
+      const id = this.addUserIdEl.value;
       const firstName = this.addFirstNameEl.value;
       const lastName = this.addLastNameEl.value;
       const email = this.addEmailIdEl.value;
-      const phoneNumber = this.addMobileNoEl.value;
+      const mobile = this.addMobileNoEl.value;
       const role = this.addRoleEl.value;
       const userName = this.addUserNameEl.value;
       const password = this.addPasswordEl.value;
@@ -190,8 +194,8 @@ export default class DashboardView {
         !email ||
         !role ||
         !validateInputText(firstName, lastName, userName) ||
-        !validatePhoneNumber(phoneNumber) ||
-        (!userId && !validatePassword(password)) ||
+        !validatePhoneNumber(mobile) ||
+        !validatePassword(password) ||
         !validateConfirmPassword(password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
@@ -215,17 +219,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(lastName) &&this.addUserErrorEls.addLastNameEl) {
+        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(userName) &&this.addUserErrorEls.addUserNameEl) {
+        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters the wrong phone number format
-        if (!validatePhoneNumber(phoneNumber) &&this.addUserErrorEls.addMobileNoEl) {
+        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
@@ -235,35 +239,33 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(password, confirmPassword) &&this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
       }
 
       if (isValid) {
-        if (userId) {
+        if (id) {
           submitUpdateUser({
-            userId,
+            id,
             firstName,
             lastName,
             email,
-            phoneNumber,
+            mobile,
             role,
             userName,
             password,
           });
         } else {
           submitAddUser(
-            userId,
             firstName,
             lastName,
             email,
-            phoneNumber,
+            mobile,
             role,
             userName,
             password,
-            confirmPassword
           );
         }
       }
@@ -286,9 +288,9 @@ export default class DashboardView {
   bindEditUser = () => {
     document.querySelectorAll('.edit-user').forEach((editButton) => {
       editButton.addEventListener('click', (event) => {
-        const userId = event.currentTarget.getAttribute('data-id');
+        const id = event.currentTarget.getAttribute('data-id');
 
-        this.handleEditUser(userId);
+        this.handleEditUser(id);
       });
     });
   };
@@ -297,14 +299,14 @@ export default class DashboardView {
    * Handles editing a user by populating the form fields with the user's data.
    * @param {string} userId - The ID of the user to edit.
    */
-  handleEditUser = (userId) => {
-    const userData = this.getUserDataById(userId);
+  handleEditUser = (id) => {
+    const userData = this.getUserDataById(id);
 
     this.addUserIdEl.value = userData.id;
     this.addFirstNameEl.value = userData.firstName;
     this.addLastNameEl.value = userData.lastName;
     this.addEmailIdEl.value = userData.email;
-    this.addMobileNoEl.value = userData.phoneNumber;
+    this.addMobileNoEl.value = userData.mobile;
     this.addRoleEl.value = userData.role;
     this.addUserNameEl.value = userData.userName;
     this.addPasswordEl.value = userData.password;
@@ -319,8 +321,8 @@ export default class DashboardView {
    * @param {string} userId - The ID of the user to retrieve.
    * @returns {Object | undefined} - The user object with the specified ID, or undefined if not found.
    */
-  getUserDataById = (userId) => {
-    return this.users.find((user) => user.id === userId);
+  getUserDataById = (id) => {
+    return this.users.find((user) => user.id === id);
   };
 
   /**
@@ -335,22 +337,12 @@ export default class DashboardView {
   };
 
   /**
-   * Clears entered data on input cells.
-   */
-  clearInputs = () => {
-    this.cancelFormEl.addEventListener('click', this.clearInputs);
-    this.inputEl.forEach((input) => {
-      input.value = '';
-    });
-  };
-
-  /**
    * Message notification function.
    * @param {string} message - The message to be displayed.
    */
-  addUserMessage(message) {
-    showToast(message);
-  }
+  dashboardMessage(message, type) {
+    showToast(message, type);
+  };
 
   /**
    * The function generates and displays the table of users.
@@ -375,7 +367,7 @@ export default class DashboardView {
   bindLogout(callback) {
     const logoutEl = document.getElementById('logout');
     logoutEl.addEventListener('click', callback);
-  }
+  };
 
   redirectPage = (page) => {
     window.location.replace(page);

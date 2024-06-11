@@ -9,7 +9,7 @@ import { ROLES } from '../constants/role';
 const { LOGIN_FAILED } = NOTIFY_MESSAGE;
 
 export default class UserController {
-  constructor(view, model, service) {
+  constructor() {
     this.view = new UserView();
     this.model = new UserModel();
     this.service = new UserService();
@@ -36,7 +36,7 @@ export default class UserController {
           this.view.redirectPage(URLS.USER);
         }
       } else {
-        this.view.showLoginFailedMessage(`${LOGIN_FAILED}`);
+        this.view.showLoginMessage(`${LOGIN_FAILED}`, 'error');
       }
     } catch (error) {
       console.error(error);
