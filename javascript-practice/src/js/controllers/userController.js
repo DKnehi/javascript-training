@@ -9,7 +9,7 @@ import { ROLES } from '../constants/role';
 const { LOGIN_FAILED } = NOTIFY_MESSAGE;
 
 export default class UserController {
-  constructor(view, model, service) {
+  constructor() {
     this.view = new UserView();
     this.model = new UserModel();
     this.service = new UserService();

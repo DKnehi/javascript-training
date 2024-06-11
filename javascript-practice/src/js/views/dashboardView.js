@@ -141,6 +141,7 @@ export default class DashboardView {
     closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
+    
     this.cancelFormEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
@@ -258,7 +259,6 @@ export default class DashboardView {
           });
         } else {
           submitAddUser(
-            id,
             firstName,
             lastName,
             email,
@@ -266,7 +266,6 @@ export default class DashboardView {
             role,
             userName,
             password,
-            confirmPassword
           );
         }
       }

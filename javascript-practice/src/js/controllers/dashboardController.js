@@ -17,7 +17,7 @@ const {
 } = NOTIFY_MESSAGE;
 
 export default class DashboardController {
-  constructor(view, model, service) {
+  constructor() {
     this.view = new DashboardView();
     this.model = new UserModel();
     this.service = new UserService();
@@ -47,7 +47,6 @@ export default class DashboardController {
    * The function is used to add a new user to the system.
    */
   addUser = async (
-    id,
     firstName,
     lastName,
     email,
@@ -66,7 +65,6 @@ export default class DashboardController {
       };
 
       const newUser = new UserModel(
-        id,
         firstName,
         lastName,
         email,
