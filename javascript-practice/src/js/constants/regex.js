@@ -4,5 +4,5 @@ export const REGEX = {
   //Must be in the correct international phone number format
   PHONE_NUMBER: /^0[0-9]{9,10}$/,
   //Cannot contain numbers
-  TEXT: /^(?!.*\d).+$/,
+  TEXT: /^(?!.*\d).+$/
 };
