@@ -193,7 +193,9 @@ export default class DashboardView {
       if (
         !email ||
         !role ||
-        !validateInputText(firstName, lastName, userName) ||
+        !validateInputText(firstName) ||
+        !validateInputText(lastName) ||
+        !validateInputText(userName) ||
         !validatePhoneNumber(mobile) ||
         !validatePassword(password) ||
         !validateConfirmPassword(password, confirmPassword)
