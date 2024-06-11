@@ -73,7 +73,7 @@ export default class UserView {
    */
   showLoginFailedMessage(message) {
     showToast(message, 'error');
-  }
+  };
 
   /**
    * Redirects the user to a specified page.

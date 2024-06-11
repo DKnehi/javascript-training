@@ -36,11 +36,12 @@ export default class DashboardController {
    */
   checkAccess() {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
+
     //Redirect to the index page if the role is not SUPER_ADMIN
     if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
       window.location.href = URLS.INDEX;
     }
-  }
+  };
 
   /**
    * The function is used to add a new user to the system.
@@ -59,7 +60,7 @@ export default class DashboardController {
       const emailExists = await this.service.isEmailExists(email);
 
       if (emailExists) {
-        this.view.dashboardMessageError(`${EMAIL_EXISTS}`, 'error');
+        this.view.dashboardMessage(`${EMAIL_EXISTS}`, 'error');
 
         return;
       };
@@ -83,7 +84,7 @@ export default class DashboardController {
       }, 1500);
       return addedUser;
     } catch (error) {
-      this.view.dashboardMessageError(`${ADD_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(`${ADD_USER_FAILED}`, 'error');
       throw new Error('Failed to add user.');
     }
   };
@@ -119,7 +120,7 @@ export default class DashboardController {
       }, 1500);
       return updatedUser;
     } catch (error) {
-      this.view.dashboardMessageError(`${UPDATE_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(`${UPDATE_USER_FAILED}`, 'error');
       throw new Error('Failed to update user.');
     }
   };
@@ -134,7 +135,7 @@ export default class DashboardController {
       this.view.dashboardMessage(`${DELETE_USER_SUCCESS}`,);
       this.renderTableListUsers();
     } catch (error) {
-      this.view.dashboardMessageError(`${DELETE_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(`${DELETE_USER_FAILED}`, 'error');
       console.error('Failed to delete user:', error);
     }
   };
@@ -146,5 +147,5 @@ export default class DashboardController {
   handleLogout() {
     localStorage.clear();
     window.location.href = URLS.LOGIN;
-  }
+  };
 }

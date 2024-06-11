@@ -107,6 +107,7 @@ export default class UserService {
     try {
       const users = await this.getAllUser();
       const user = users.find(user => user.email.toLowerCase() === email.toLowerCase());
+      
       return !!user;
     } catch (error) {
       throw new Error('Failed to check if email exists.');

@@ -56,11 +56,11 @@ export default class DashboardView {
     this.deleteConfirmNoEl = this.popupOverlayDeleteEl.querySelector('.secondary-button');
   }
 
-   /**
+  /**
    * Binds the delete button click event to the delete confirmation popup.
    * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
    */
-   bindDeleteUser = (deleteUser) => {
+  bindDeleteUser = (deleteUser) => {
     document.querySelectorAll('.delete-user').forEach((deleteButton) => {
       deleteButton.addEventListener('click', (event) => {
         const id = event.currentTarget.getAttribute('data-id');
@@ -143,7 +143,7 @@ export default class DashboardView {
     });
     this.cancelFormEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
-    })
+    });
   };
 
   clearAddUserForm = () => {
@@ -194,7 +194,7 @@ export default class DashboardView {
         !role ||
         !validateInputText(firstName, lastName, userName) ||
         !validatePhoneNumber(mobile) ||
-        (!id && !validatePassword(password)) ||
+        !validatePassword(password) ||
         !validateConfirmPassword(password, confirmPassword)
       ) {
         //Show an error if the user enters nothing
@@ -218,17 +218,17 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(lastName) &&this.addUserErrorEls.addLastNameEl) {
+        if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
           this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters digits
-        if (!validateInputText(userName) &&this.addUserErrorEls.addUserNameEl) {
+        if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
           this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
         }
 
         //Displays an error if the user enters the wrong phone number format
-        if (!validatePhoneNumber(mobile) &&this.addUserErrorEls.addMobileNoEl) {
+        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
           this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
         }
 
@@ -238,7 +238,7 @@ export default class DashboardView {
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
-        if (!validateConfirmPassword(password, confirmPassword) &&this.addUserErrorEls.addConfirmPasswordEl) {
+        if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
           this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
         }
         isValid = false;
@@ -341,12 +341,8 @@ export default class DashboardView {
    * Message notification function.
    * @param {string} message - The message to be displayed.
    */
-  dashboardMessage(message) {
-    showToast(message);
-  };
-
-  dashboardMessageError(message) {
-    showToast(message, 'error');
+  dashboardMessage(message, type = 'success') {
+    showToast(message, type);
   };
 
   /**
@@ -372,7 +368,7 @@ export default class DashboardView {
   bindLogout(callback) {
     const logoutEl = document.getElementById('logout');
     logoutEl.addEventListener('click', callback);
-  }
+  };
 
   redirectPage = (page) => {
     window.location.replace(page);
