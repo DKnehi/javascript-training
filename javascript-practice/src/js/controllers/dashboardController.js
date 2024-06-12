@@ -23,7 +23,7 @@ export default class DashboardController {
     this.service = new UserService();
 
     this.checkAccess();
-    this.view.bindFormUser(this.addUser.bind(this), this.updateUser.bind(this));
+    this.view.bindFormUser(this.addUser.bind(this));
     this.view.bindLogout(this.handleLogout.bind(this));
     this.view.toggleDropDownMenu();
     this.view.showUserInfo();

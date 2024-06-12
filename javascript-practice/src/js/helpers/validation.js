@@ -5,7 +5,7 @@ import { REGEX } from '../constants/regex';
  * @param {string} phoneNumber - The phone number string to be validated.
  * @returns {boolean} - Returns true if the phone number matches the format, otherwise false.
  */
-validatePhoneNumber = (mobile) => {
+const validatePhoneNumber = (mobile) => {
   return REGEX.PHONE_NUMBER.test(mobile);
 };
 
@@ -14,7 +14,7 @@ validatePhoneNumber = (mobile) => {
  * @param {string} password - The password string to be validated.
  * @returns {boolean} - Returns true if the password matches the format, otherwise false.
  */
-validatePassword = (password) => {
+const validatePassword = (password) => {
   return REGEX.PASSWORD.test(password);
 };
 
@@ -24,7 +24,7 @@ validatePassword = (password) => {
  * @param {string} confirmPassword - The confirmation password string to be compared with the original password.
  * @returns {boolean} - Returns true if the password and confirmPassword match, otherwise false.
  */
-validateConfirmPassword = (password, confirmPassword) => {
+const validateConfirmPassword = (password, confirmPassword) => {
   return password === confirmPassword;
 };
 
@@ -33,7 +33,7 @@ validateConfirmPassword = (password, confirmPassword) => {
  * @param {string} text - The text string to be validated.
  * @returns {boolean} - Returns true if the text matches the format, otherwise false.
  */
-validateInputText = (text) => {
+const validateInputText = (text) => {
   return REGEX.TEXT.test(text);
 };
 
