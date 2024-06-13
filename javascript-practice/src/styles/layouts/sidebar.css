@@ -31,7 +31,7 @@
 }
 
 .sidebar-item-heading {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-largest);
   line-height: 24px;
   letter-spacing: 0.5px;

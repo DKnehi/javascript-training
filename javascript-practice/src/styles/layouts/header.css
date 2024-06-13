@@ -10,7 +10,7 @@
 
 .header-dashboard-name {
   font-size: var(--font-size-large);
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   line-height: 30px;
   color: var(--color-black);
   letter-spacing: 0.15px;
@@ -58,7 +58,7 @@
 }
 
 .header-dashboard-profile-name {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-largest);
   color: var(--color-black);
   line-height: 24px;

@@ -6,7 +6,7 @@
 }
 
 .table-data-name {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-smaller);
 }
 
@@ -15,7 +15,7 @@
 }
 
 .table-data-role {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-smaller);
 }
 

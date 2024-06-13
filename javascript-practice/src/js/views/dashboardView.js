@@ -10,7 +10,6 @@ import { ERROR_MESSAGE } from '../constants/message';
 import { generateTableHTML } from '../templates/userTemplate';
 
 export const {
-  REQUIRED_FIELD_PASSWORD,
   REQUIRED_FIELD,
   INVALID_PASSWORD,
   REQUIRED_TEXT,
@@ -133,6 +132,7 @@ export default class DashboardView {
 
     openPopupEl.addEventListener('click', () => {
       this.clearAddUserForm();
+      this.clearAllErrors();
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
       this.popupHeadingEl.textContent = 'Add User';
       this.submitButtonEl.textContent = 'Add User';
@@ -165,6 +165,16 @@ export default class DashboardView {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
   };
 
+  disableSubmitButton = () => {
+    this.submitButtonEl.disabled = true;
+    this.submitButtonEl.classList.add('disabled');
+  };
+
+  enableSubmitButton = () => {
+    this.submitButtonEl.disabled = false;
+    this.submitButtonEl.classList.remove('disabled');
+  };
+
   /**
    * Binds the add user form to the provided callback functions for adding and updating users.
    * Validates form fields and displays error messages if validation fails.
@@ -184,68 +194,55 @@ export default class DashboardView {
       const password = this.addPasswordEl.value;
       const confirmPassword = this.addConfirmPasswordEl.value;
 
-      Object.values(this.addUserErrorEls).forEach((el) => {
-        el.textContent = '';
-      });
+      this.clearAllErrors();
 
       let isValid = true;
 
-      if (
-        !email ||
-        !role ||
-        !validateInputText(firstName) ||
-        !validateInputText(lastName) ||
-        !validateInputText(userName) ||
-        !validatePhoneNumber(mobile) ||
-        !validatePassword(password) ||
-        !validateConfirmPassword(password, confirmPassword)
-      ) {
         //Show an error if the user enters nothing
         if (!email && this.addUserErrorEls.addEmailIdEl) {
-          this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addEmailIdEl.textContent = REQUIRED_FIELD;
         }
 
         //Show an error if the user enters nothing
         if (!role && this.addUserErrorEls.addRoleEl) {
-          this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addRoleEl.textContent = REQUIRED_FIELD;
         }
 
         //Show an error if the user enters nothing
         if (!confirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = REQUIRED_FIELD;
         }
 
         //Displays an error if the user enters digits
         if (!validateInputText(firstName) && this.addUserErrorEls.addFirstNameEl) {
-          this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addFirstNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters digits
         if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
-          this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addLastNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters digits
         if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
-          this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addUserNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters the wrong phone number format
-        if (!validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
-          this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
+        if (mobile && !validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
+          this.addUserErrorEls.addMobileNoEl.textContent = INVALID_PHONE_NUMBER;
         }
 
         //Displays an error if the user enters the wrong password format
         if (!validatePassword(password) && this.addUserErrorEls.addPasswordEl) {
-          this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+          this.addUserErrorEls.addPasswordEl.textContent = INVALID_PASSWORD;
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
         if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = INVALID_CONFIRM_PASSWORD;
         }
         isValid = false;
-      }
 
       if (isValid) {
         if (id) {
@@ -260,7 +257,7 @@ export default class DashboardView {
             password,
           });
         } else {
-          submitAddUser(
+          submitAddUser({
             firstName,
             lastName,
             email,
@@ -268,7 +265,7 @@ export default class DashboardView {
             role,
             userName,
             password,
-          );
+          });
         }
       }
     });
@@ -291,7 +288,7 @@ export default class DashboardView {
     document.querySelectorAll('.edit-user').forEach((editButton) => {
       editButton.addEventListener('click', (event) => {
         const id = event.currentTarget.getAttribute('data-id');
-
+        this.clearAllErrors();
         this.handleEditUser(id);
       });
     });
@@ -335,6 +332,12 @@ export default class DashboardView {
   clearErrorOnInput = (inputEl, errorEl) => {
     inputEl.addEventListener('input', () => {
       if (errorEl) errorEl.textContent = '';
+    });
+  };
+
+  clearAllErrors = () => {
+    Object.values(this.addUserErrorEls).forEach((el) => {
+      el.textContent = '';
     });
   };
 

@@ -36,7 +36,7 @@ export default class UserController {
           this.view.redirectPage(URLS.USER);
         }
       } else {
-        this.view.showLoginMessage(`${LOGIN_FAILED}`, 'error');
+        this.view.showLoginMessage(LOGIN_FAILED, 'error');
       }
     } catch (error) {
       console.error(error);

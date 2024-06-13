@@ -1,4 +1,3 @@
-import { validatePassword } from '../helpers/validation';
 import { ERROR_MESSAGE } from '../constants/message';
 import showToast from '../views/toast';
 
@@ -6,7 +5,6 @@ import showToast from '../views/toast';
 export const {
   REQUIRED_FIELD,
   REQUIRED_FIELD_PASSWORD,
-  INVALID_PASSWORD,
 } = ERROR_MESSAGE;
 
 export default class UserView {
@@ -29,38 +27,36 @@ export default class UserView {
       e.preventDefault();
       const email = this.emailFormEl.value;
       const password = this.passwordFormEl.value;
-
+  
+      // Clear previous error messages
       this.emailErrorEl.textContent = '';
       this.passwordErrorEl.textContent = '';
-
-      //Show an error if the user enters nothing
+  
+      let isValid = true;
+  
+      // Show an error if the user enters nothing
       if (!email) {
-        this.emailErrorEl.textContent = `${REQUIRED_FIELD}`;
+        this.emailErrorEl.textContent = REQUIRED_FIELD;
+        isValid = false;
       }
-
-      //Show an error if the user enters nothing
+  
+      // Show an error if the user enters nothing
       if (!password) {
-        this.passwordErrorEl.textContent = `${REQUIRED_FIELD_PASSWORD}`;
-
-        return;
+        this.passwordErrorEl.textContent = REQUIRED_FIELD_PASSWORD;
+        isValid = false;
       }
-
-      //Displays an error if the user enters the wrong password format
-      if (!validatePassword(password)) {
-        this.passwordErrorEl.textContent = `${INVALID_PASSWORD}`;
-
-        return;
+  
+      if (isValid) {
+        // Call the provided submitLogin callback with email and password
+        submitLogin(email, password);
       }
-
-      // Call the provided submitLogin callback with email and password
-      submitLogin(email, password);
     });
-
+  
     // Clear email error message on input
     this.emailFormEl.addEventListener('input', () => {
       this.emailErrorEl.textContent = '';
     });
-
+  
     // Clear password error message on input
     this.passwordFormEl.addEventListener('input', () => {
       this.passwordErrorEl.textContent = '';

@@ -8,7 +8,7 @@
 
 .table-caption {
   text-align: left;
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-larger);
   line-height: 16px;
   color: var(--color-cloud-bust);
@@ -29,7 +29,7 @@
 }
 
 .table-header {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-medium);
   color: var(--color-bali-hai);
 }

@@ -6,7 +6,7 @@
   padding: 5px 15px;
   border-radius: var(--boder-radius-input-button);
   font-size: var(--font-size-smaller);
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
 }
 
 .secondary-button {

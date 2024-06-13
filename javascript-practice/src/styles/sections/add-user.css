@@ -22,7 +22,7 @@
 }
 
 .popup-heading {
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-larger);
   line-height: 16px;
   color: var(--color-cloud-bust);
@@ -72,4 +72,8 @@
 
 .popup-button-cancel {
   padding: 0;
+}
+
+.disabled {
+  cursor: not-allowed;
 }

@@ -1,7 +1,7 @@
 .popup-overlay-delete-user {
-  z-index: 999;
   display: none;
   position: fixed;
+  margin: auto;
   padding-left: 500px;
   padding-right: 500px;
 }
@@ -9,13 +9,13 @@
 .popup-container-delete-user {
   background-color: var(--color-while);
   border-radius: 6px;
-  padding: 20px 100px;
   text-align: center;
+  padding: 20px 0;
 }
 
 .delete-user-heading {
   font-size: var(--font-size-large);
-  font-weight: var(--font-weight-nomal);
+  font-weight: var(--font-weight-normal);
   color: var(--color-black);
 }
 

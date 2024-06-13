@@ -55,11 +55,12 @@ export default class DashboardController {
     userName,
     password
   ) => {
+    this.view.disableSubmitButton();
     try {
       const emailExists = await this.service.isEmailExists(email);
 
       if (emailExists) {
-        this.view.dashboardMessage(`${EMAIL_EXISTS}`, 'error');
+        this.view.dashboardMessage(EMAIL_EXISTS, 'error');
 
         return;
       };
@@ -75,15 +76,17 @@ export default class DashboardController {
       );
       const addedUser = await this.service.addUser(newUser);
 
-      this.view.dashboardMessage(`${ADD_USER_SUCCESS}`);
+      this.view.dashboardMessage(ADD_USER_SUCCESS);
       setTimeout(() => {
         this.view.closePopupUser();
         this.renderTableListUsers();
       }, 1500);
       return addedUser;
     } catch (error) {
-      this.view.dashboardMessage(`${ADD_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(ADD_USER_FAILED, 'error');
       throw new Error('Failed to add user.');
+    } finally {
+      this.view.enableSubmitButton();
     }
   };
 
@@ -108,25 +111,28 @@ export default class DashboardController {
    * @returns {Promise<Object>} - A promise that resolves to the updated user object.
    */
   updateUser = async (userData) => {
+    this.view.disableSubmitButton();
     try {
       const emailExists = await this.service.isEmailExists(userData.email, userData.id);
 
       if (emailExists) {
-        this.view.dashboardMessage(`${EMAIL_EXISTS}`, 'error');
+        this.view.dashboardMessage(EMAIL_EXISTS, 'error');
         return;
       }
 
       const updatedUser = await this.service.updateUser(userData.id, userData);
 
-      this.view.dashboardMessage(`${UPDATE_USER_SUCCESS}`);
+      this.view.dashboardMessage(UPDATE_USER_SUCCESS);
       setTimeout(() => {
         this.view.closePopupUser();
         this.renderTableListUsers();
       }, 1500);
       return updatedUser;
     } catch (error) {
-      this.view.dashboardMessage(`${UPDATE_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(UPDATE_USER_FAILED, 'error');
       throw new Error('Failed to update user.');
+    } finally {
+      this.view.enableSubmitButton();
     }
   };
 
@@ -137,10 +143,10 @@ export default class DashboardController {
   deleteUser = async (id) => {
     try {
       await this.service.deleteUser(id);
-      this.view.dashboardMessage(`${DELETE_USER_SUCCESS}`,);
+      this.view.dashboardMessage(DELETE_USER_SUCCESS);
       this.renderTableListUsers();
     } catch (error) {
-      this.view.dashboardMessage(`${DELETE_USER_FAILED}`, 'error');
+      this.view.dashboardMessage(DELETE_USER_FAILED, 'error');
       console.error('Failed to delete user:', error);
     }
   };
