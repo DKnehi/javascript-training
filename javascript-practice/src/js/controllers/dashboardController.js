@@ -75,12 +75,9 @@ export default class DashboardController {
         password
       );
       const addedUser = await this.service.addUser(newUser);
-
+      this.view.closePopupUser();
       this.view.dashboardMessage(ADD_USER_SUCCESS);
-      setTimeout(() => {
-        this.view.closePopupUser();
-        this.renderTableListUsers();
-      }, 1500);
+      this.renderTableListUsers();
       return addedUser;
     } catch (error) {
       this.view.dashboardMessage(ADD_USER_FAILED, 'error');
@@ -122,11 +119,10 @@ export default class DashboardController {
 
       const updatedUser = await this.service.updateUser(userData.id, userData);
 
+      this.view.closePopupUser();
       this.view.dashboardMessage(UPDATE_USER_SUCCESS);
-      setTimeout(() => {
-        this.view.closePopupUser();
-        this.renderTableListUsers();
-      }, 1500);
+      this.renderTableListUsers();
+      
       return updatedUser;
     } catch (error) {
       this.view.dashboardMessage(UPDATE_USER_FAILED, 'error');
@@ -141,6 +137,7 @@ export default class DashboardController {
    * @param {string} userId - The ID of the user to delete.
    */
   deleteUser = async (id) => {
+    this.view.disableSubmitButton();
     try {
       await this.service.deleteUser(id);
       this.view.dashboardMessage(DELETE_USER_SUCCESS);
@@ -148,6 +145,8 @@ export default class DashboardController {
     } catch (error) {
       this.view.dashboardMessage(DELETE_USER_FAILED, 'error');
       console.error('Failed to delete user:', error);
+    } finally {
+      this.view.enableSubmitButton();
     }
   };
 

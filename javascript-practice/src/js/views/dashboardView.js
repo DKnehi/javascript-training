@@ -9,8 +9,7 @@ import showToast from '../views/toast';
 import { ERROR_MESSAGE } from '../constants/message';
 import { generateTableHTML } from '../templates/userTemplate';
 
-export const {
-  REQUIRED_FIELD_PASSWORD,
+const {
   REQUIRED_FIELD,
   INVALID_PASSWORD,
   REQUIRED_TEXT,
@@ -302,7 +301,7 @@ export default class DashboardView {
     document.querySelectorAll('.edit-user').forEach((editButton) => {
       editButton.addEventListener('click', (event) => {
         const id = event.currentTarget.getAttribute('data-id');
-        
+
         this.clearAllErrors();
         this.handleEditUser(id);
       });

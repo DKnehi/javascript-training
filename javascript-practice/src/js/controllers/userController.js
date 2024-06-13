@@ -23,6 +23,7 @@ export default class UserController {
    * @param {string} password - The password entered by the user for login.
    */
   handleFormLogin = async (email, password) => {
+    this.view.disableSubmitButton();
     try {
       const userData = await this.service.loginUser(email, password);
 
@@ -40,6 +41,8 @@ export default class UserController {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      this.view.enableSubmitButton();
     }
   };
 }

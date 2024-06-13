@@ -2,7 +2,7 @@ import { ERROR_MESSAGE } from '../constants/message';
 import showToast from '../views/toast';
 
 //Error messages from ERROR_MESSAGE constant
-export const {
+const {
   REQUIRED_FIELD,
   REQUIRED_FIELD_PASSWORD,
 } = ERROR_MESSAGE;
@@ -15,6 +15,7 @@ export default class UserView {
     this.emailErrorEl = this.emailFormEl.nextElementSibling;
     this.passwordFormEl = this.loginFormEl.querySelector('input[name="password"]');
     this.passwordErrorEl = this.passwordFormEl.nextElementSibling;
+    this.submitButtonEl = this.loginFormEl.querySelector('.primary-button');
   }
 
   /**
@@ -69,6 +70,16 @@ export default class UserView {
    */
   showLoginMessage(message, type) {
     showToast(message, type);
+  };
+
+  disableSubmitButton = () => {
+    this.submitButtonEl.disabled = true;
+    this.submitButtonEl.classList.add('disabled');
+  };
+
+  enableSubmitButton = () => {
+    this.submitButtonEl.disabled = false;
+    this.submitButtonEl.classList.remove('disabled');
   };
 
   /**
