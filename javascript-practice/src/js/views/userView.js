@@ -2,10 +2,7 @@ import { ERROR_MESSAGE } from '../constants/message';
 import showToast from '../views/toast';
 
 //Error messages from ERROR_MESSAGE constant
-const {
-  REQUIRED_FIELD,
-  REQUIRED_FIELD_PASSWORD,
-} = ERROR_MESSAGE;
+const { REQUIRED_FIELD, REQUIRED_FIELD_PASSWORD } = ERROR_MESSAGE;
 
 export default class UserView {
   constructor() {
@@ -28,36 +25,36 @@ export default class UserView {
       e.preventDefault();
       const email = this.emailFormEl.value;
       const password = this.passwordFormEl.value;
-  
+
       // Clear previous error messages
       this.emailErrorEl.textContent = '';
       this.passwordErrorEl.textContent = '';
-  
+
       let isValid = true;
-  
+
       // Show an error if the user enters nothing
       if (!email) {
         this.emailErrorEl.textContent = REQUIRED_FIELD;
         isValid = false;
       }
-  
+
       // Show an error if the user enters nothing
       if (!password) {
         this.passwordErrorEl.textContent = REQUIRED_FIELD_PASSWORD;
         isValid = false;
       }
-  
+
       if (isValid) {
         // Call the provided submitLogin callback with email and password
         submitLogin(email, password);
       }
     });
-  
+
     // Clear email error message on input
     this.emailFormEl.addEventListener('input', () => {
       this.emailErrorEl.textContent = '';
     });
-  
+
     // Clear password error message on input
     this.passwordFormEl.addEventListener('input', () => {
       this.passwordErrorEl.textContent = '';
@@ -70,7 +67,7 @@ export default class UserView {
    */
   showLoginMessage(message, type) {
     showToast(message, type);
-  };
+  }
 
   disableSubmitButton = () => {
     this.submitButtonEl.disabled = true;

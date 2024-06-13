@@ -137,17 +137,15 @@ export default class DashboardController {
    * @param {string} userId - The ID of the user to delete.
    */
   deleteUser = async (id) => {
-    this.view.disableSubmitButton();
     try {
       await this.service.deleteUser(id);
       this.view.dashboardMessage(DELETE_USER_SUCCESS);
       this.renderTableListUsers();
+      this.view.enableSubmitButton();
     } catch (error) {
       this.view.dashboardMessage(DELETE_USER_FAILED, 'error');
       console.error('Failed to delete user:', error);
-    } finally {
-      this.view.enableSubmitButton();
-    }
+    } 
   };
 
   /**

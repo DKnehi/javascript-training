@@ -56,41 +56,6 @@ export default class DashboardView {
   }
 
   /**
-   * Binds the delete button click event to the delete confirmation popup.
-   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
-   */
-  bindDeleteUser = (deleteUser) => {
-    document.querySelectorAll('.delete-user').forEach((deleteButton) => {
-      deleteButton.addEventListener('click', (event) => {
-        const id = event.currentTarget.getAttribute('data-id');
-
-        this.bindPopUpDelete(id, deleteUser);
-      });
-    });
-  };
-
-  /**
-   * Shows the delete confirmation popup.
-   * @param {string} userId - The ID of the user to delete.
-   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
-   */
-  bindPopUpDelete = (id, deleteUser) => {
-    this.popupOverlayDeleteEl.classList.add('popup-overlay-active', 'block');
-    this.deleteConfirmYesEl.onclick = () => {
-      deleteUser(id);
-      this.closePopUpDelete();
-    };
-    this.deleteConfirmNoEl.onclick = this.closePopUpDelete;
-  };
-
-  /**
-   * Closes the delete confirmation popup.
-   */
-  closePopUpDelete = () => {
-    this.popupOverlayDeleteEl.classList.remove('popup-overlay-active', 'block');
-  };
-
-  /**
    * After clicking on the arrow in the header, Logout will drop down.
    */
   toggleDropDownMenu = () => {
@@ -141,7 +106,7 @@ export default class DashboardView {
     closePopupEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
-    
+
     this.cancelFormEl.addEventListener('click', () => {
       this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
     });
@@ -165,16 +130,6 @@ export default class DashboardView {
     this.popupOverlayEl.classList.remove('popup-overlay-active', 'block');
   };
 
-  disableSubmitButton = () => {
-    this.submitButtonEl.disabled = true;
-    this.submitButtonEl.classList.add('disabled');
-  };
-
-  enableSubmitButton = () => {
-    this.submitButtonEl.disabled = false;
-    this.submitButtonEl.classList.remove('disabled');
-  };
-  
   /**
    * Binds the add user form to the provided callback functions for adding and updating users.
    * Validates form fields and displays error messages if validation fails.
@@ -194,9 +149,7 @@ export default class DashboardView {
       const password = this.addPasswordEl.value;
       const confirmPassword = this.addConfirmPasswordEl.value;
 
-      Object.values(this.addUserErrorEls).forEach((el) => {
-        el.textContent = '';
-      });
+      this.clearAllErrors();
 
       let isValid = true;
 
@@ -212,27 +165,27 @@ export default class DashboardView {
       ) {
         //Show an error if the user enters nothing
         if (!email && this.addUserErrorEls.addEmailIdEl) {
-          this.addUserErrorEls.addEmailIdEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addEmailIdEl.textContent = REQUIRED_FIELD;
         }
 
         //Show an error if the user enters nothing
         if (!role && this.addUserErrorEls.addRoleEl) {
-          this.addUserErrorEls.addRoleEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addRoleEl.textContent = REQUIRED_FIELD;
         }
 
         //Show an error if the user enters nothing
         if (!confirmPassword && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${REQUIRED_FIELD}`;
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = REQUIRED_FIELD;
         }
 
         //Displays an error if the user enters digits
         if (!validateInputText(firstName) && this.addUserErrorEls.addFirstNameEl) {
-          this.addUserErrorEls.addFirstNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addFirstNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters digits
         if (!validateInputText(lastName) && this.addUserErrorEls.addLastNameEl) {
-          this.addUserErrorEls.addLastNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addLastNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters digits
@@ -277,21 +230,21 @@ export default class DashboardView {
             mobile,
             role,
             userName,
-            password,
+            password
           );
         }
       }
     });
 
     // Clear error messages on input
-    this.clearErrorOnInput(this.addFirstNameEl,this.addUserErrorEls.addFirstNameEl);
-    this.clearErrorOnInput(this.addLastNameEl,this.addUserErrorEls.addLastNameEl);
-    this.clearErrorOnInput(this.addEmailIdEl,this.addUserErrorEls.addEmailIdEl);
-    this.clearErrorOnInput(this.addMobileNoEl,this.addUserErrorEls.addMobileNoEl);
+    this.clearErrorOnInput(this.addFirstNameEl, this.addUserErrorEls.addFirstNameEl);
+    this.clearErrorOnInput(this.addLastNameEl, this.addUserErrorEls.addLastNameEl);
+    this.clearErrorOnInput(this.addEmailIdEl, this.addUserErrorEls.addEmailIdEl);
+    this.clearErrorOnInput(this.addMobileNoEl, this.addUserErrorEls.addMobileNoEl);
     this.clearErrorOnInput(this.addRoleEl, this.addUserErrorEls.addRoleEl);
-    this.clearErrorOnInput(this.addUserNameEl,this.addUserErrorEls.addUserNameEl);
-    this.clearErrorOnInput(this.addPasswordEl,this.addUserErrorEls.addPasswordEl);
-    this.clearErrorOnInput(this.addConfirmPasswordEl,this.addUserErrorEls.addConfirmPasswordEl);
+    this.clearErrorOnInput(this.addUserNameEl, this.addUserErrorEls.addUserNameEl);
+    this.clearErrorOnInput(this.addPasswordEl, this.addUserErrorEls.addPasswordEl);
+    this.clearErrorOnInput(this.addConfirmPasswordEl, this.addUserErrorEls.addConfirmPasswordEl);
   };
 
   /**
@@ -356,12 +309,49 @@ export default class DashboardView {
   };
 
   /**
-   * Message notification function.
-   * @param {string} message - The message to be displayed.
+   * Binds the delete button click event to the delete confirmation popup.
+   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
    */
-  dashboardMessage(message, type) {
-    showToast(message, type);
+  bindDeleteUser = (deleteUser) => {
+    document.querySelectorAll('.delete-user').forEach((deleteButton) => {
+      deleteButton.addEventListener('click', (event) => {
+        const id = event.currentTarget.getAttribute('data-id');
+
+        this.bindPopUpDelete(id, deleteUser);
+      });
+    });
   };
+
+  /**
+   * Shows the delete confirmation popup.
+   * @param {string} userId - The ID of the user to delete.
+   * @param {Function} deleteUser - The function to call when a user is confirmed to be deleted.
+   */
+  bindPopUpDelete = (id, deleteUser) => {
+    this.popupOverlayDeleteEl.classList.add('popup-overlay-active', 'block');
+    this.deleteConfirmYesEl.onclick = () => {
+      deleteUser(id);
+      this.closePopUpDelete();
+    };
+    this.deleteConfirmNoEl.onclick = this.closePopUpDelete;
+  };
+
+  /**
+   * Closes the delete confirmation popup.
+   */
+  closePopUpDelete = () => {
+    this.popupOverlayDeleteEl.classList.remove('popup-overlay-active', 'block');
+  };
+
+  /**
+   * The function assigns a callback function to the click event on the logout element.
+   * @param {function} callback - Function to handle the logout event.
+   */
+  bindLogout(callback) {
+    const logoutEl = document.getElementById('logout');
+    
+    logoutEl.addEventListener('click', callback);
+  }
 
   /**
    * The function generates and displays the table of users.
@@ -380,12 +370,21 @@ export default class DashboardView {
   };
 
   /**
-   * The function assigns a callback function to the click event on the logout element.
-   * @param {function} callback - Function to handle the logout event.
+   * Message notification function.
+   * @param {string} message - The message to be displayed.
    */
-  bindLogout(callback) {
-    const logoutEl = document.getElementById('logout');
-    logoutEl.addEventListener('click', callback);
+  dashboardMessage(message, type) {
+    showToast(message, type);
+  }
+
+  disableSubmitButton = () => {
+    this.submitButtonEl.disabled = true;
+    this.submitButtonEl.classList.add('disabled');
+  };
+
+  enableSubmitButton = () => {
+    this.submitButtonEl.disabled = false;
+    this.submitButtonEl.classList.remove('disabled');
   };
 
   redirectPage = (page) => {
