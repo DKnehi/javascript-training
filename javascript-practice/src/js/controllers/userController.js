@@ -24,25 +24,20 @@ export default class UserController {
    */
   handleFormLogin = async (email, password) => {
     this.view.disableSubmitButton();
-    try {
-      const userData = await this.service.loginUser(email, password);
+    const userData = await this.service.loginUser(email, password);
 
-      if (userData) {
-        localStorage.setItem(LOCAL_STORAGE.FIRST_NAME, userData.firstName);
-        localStorage.setItem(LOCAL_STORAGE.LAST_NAME, userData.lastName);
-        localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
-        if (userData.role.toLowerCase() === ROLES.SUPER_ADMIN) {
-          this.view.redirectPage(URLS.DASHBOARD);
-        } else {
-          this.view.redirectPage(URLS.USER);
-        }
+    if (userData) {
+      localStorage.setItem(LOCAL_STORAGE.FIRST_NAME, userData.firstName);
+      localStorage.setItem(LOCAL_STORAGE.LAST_NAME, userData.lastName);
+      localStorage.setItem(LOCAL_STORAGE.ROLE, userData.role);
+      if (userData.role.toLowerCase() === ROLES.SUPER_ADMIN) {
+        this.view.redirectPage(URLS.DASHBOARD);
       } else {
-        this.view.showLoginMessage(LOGIN_FAILED, 'error');
+        this.view.redirectPage(URLS.USER);
       }
-    } catch (error) {
-      console.error('Failed to login', error);
-    } finally {
-      this.view.enableSubmitButton();
+    } else {
+      this.view.showLoginMessage(LOGIN_FAILED, 'error');
     }
+    this.view.enableSubmitButton();
   };
 }
