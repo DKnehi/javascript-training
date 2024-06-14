@@ -37,12 +37,10 @@ export default class DashboardController {
    */
   checkAccess() {
     const role = localStorage.getItem(LOCAL_STORAGE.ROLE);
-
-    //Redirect to the index page if the role is not SUPER_ADMIN
     if (!role || role.toLowerCase() !== ROLES.SUPER_ADMIN) {
       window.location.href = URLS.INDEX;
     }
-  };
+  }
 
   /**
    * The function is used to add a new user to the system.
@@ -57,52 +55,46 @@ export default class DashboardController {
     password
   ) => {
     this.view.disableSubmitButton();
-    try {
-      const emailExists = await this.service.isEmailExists(email);
+    const emailExists = await this.service.isEmailExists(email);
 
-      if (emailExists) {
-        this.view.dashboardMessage(EMAIL_EXISTS, 'error');
+    if (emailExists) {
+      this.view.dashboardMessage(EMAIL_EXISTS, 'error');
 
-        return;
-      };
+      return;
+    }
+    const newUser = new UserModel(
+      firstName,
+      lastName,
+      email,
+      mobile,
+      role,
+      userName,
+      password
+    );
 
-      const newUser = new UserModel(
-        firstName,
-        lastName,
-        email,
-        mobile,
-        role,
-        userName,
-        password
-      );
-      const addedUser = await this.service.addUser(newUser);
+    const addedUser = await this.service.addUser(newUser);
 
+    if (addedUser) {
       this.view.closePopupUser();
       this.view.dashboardMessage(ADD_USER_SUCCESS);
       this.renderTableListUsers();
-      
-      return addedUser;
-    } catch (error) {
+    } else {
       this.view.dashboardMessage(ADD_USER_FAILED, 'error');
-      throw new Error('Failed to add user.');
-    } finally {
-      this.view.enableSubmitButton();
     }
+    this.view.enableSubmitButton();
+
+    return addedUser;
   };
 
   /**
    * The function is used to display a list of users in a table on the user interface.
    */
   renderTableListUsers = async () => {
-    try {
-      const data = await this.service.getAllUser();
+    const data = await this.service.getAllUser();
 
-      this.view.renderTableListUsers(data);
-      this.view.bindEditUser();
-      this.view.bindDeleteUser(this.deleteUser.bind(this));
-    } catch (error) {
-      console.error('Error rendering table:', error);
-    }
+    this.view.renderTableListUsers(data);
+    this.view.bindEditUser();
+    this.view.bindDeleteUser(this.deleteUser.bind(this));
   };
 
   /**
@@ -112,31 +104,33 @@ export default class DashboardController {
    */
   updateUser = async (userData) => {
     this.view.disableSubmitButton();
-    try {
-      const emailExists = await this.service.isEmailExists(userData.email, userData.id);
+    const emailExists = await this.service.isEmailExists(
+      userData.email,
+      userData.id
+    );
 
-      if (emailExists) {
-        this.view.dashboardMessage(EMAIL_EXISTS, 'error');
-        return;
-      }
-      const updatedUser = await this.service.updateUser(userData.id, userData);
+    if (emailExists) {
+      this.view.dashboardMessage(EMAIL_EXISTS, 'error');
 
+      return;
+    }
+    const updatedUser = await this.service.updateUser(userData.id, userData);
+
+    if (updatedUser) {
       this.view.closePopupUser();
       this.view.dashboardMessage(UPDATE_USER_SUCCESS);
       this.renderTableListUsers();
-      
-      return updatedUser;
-    } catch (error) {
+    } else {
       this.view.dashboardMessage(UPDATE_USER_FAILED, 'error');
-      throw new Error('Failed to update user.');
-    } finally {
-      this.view.enableSubmitButton();
     }
+    this.view.enableSubmitButton();
+
+    return updatedUser;
   };
 
   /**
    * Delete a user by their ID.
-   * @param {string} userId - The ID of the user to delete.
+   * @param {string} id - The ID of the user to delete.
    */
   deleteUser = async (id) => {
     try {
@@ -145,7 +139,7 @@ export default class DashboardController {
       if (userData.role === 'Super Admin') {
         this.view.dashboardMessage(NOT_DELETE, 'error');
         return;
-      };
+      }
 
       await this.service.deleteUser(id);
       this.view.dashboardMessage(DELETE_USER_SUCCESS);
@@ -154,7 +148,7 @@ export default class DashboardController {
     } catch (error) {
       this.view.dashboardMessage(DELETE_USER_FAILED, 'error');
       console.error('Failed to delete user:', error);
-    } 
+    }
   };
 
   /**

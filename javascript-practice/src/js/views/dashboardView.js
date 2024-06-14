@@ -5,7 +5,7 @@ import {
   validateConfirmPassword,
   validatePhoneNumber,
 } from '../helpers/validation';
-import showToast from '../views/toast';
+import showToast from '../helpers/toast';
 import { ERROR_MESSAGE } from '../constants/message';
 import { generateTableHTML } from '../templates/userTemplate';
 
@@ -71,9 +71,8 @@ export default class DashboardView {
 
   /**
    * After successful login, the name and role will be displayed on the page header.
-   * @param {object} userInfo - Object containing user information.
    */
-  showUserInfo = (userInfo) => {
+  showUserInfo = () => {
     const fullNameEl = document.querySelector('.header-dashboard-profile-name');
     const headerNameEl = document.querySelector('.header-dashboard-name');
     const roleEl = fullNameEl.closest('.header-dashboard-profile-name-box').parentElement.querySelector('p');
@@ -96,8 +95,8 @@ export default class DashboardView {
     const closePopupEl = document.querySelector('.popup-overlay-add-user .close-popup-box');
 
     openPopupEl.addEventListener('click', () => {
-      this.clearAddUserForm();
       this.clearAllErrors();
+      this.addUserFormEl.reset();
       this.popupOverlayEl.classList.add('popup-overlay-active', 'block');
       this.popupHeadingEl.textContent = 'Add User';
       this.submitButtonEl.textContent = 'Add User';
@@ -112,17 +111,6 @@ export default class DashboardView {
     });
   };
 
-  clearAddUserForm = () => {
-    this.addUserIdEl.value = '';
-    this.addFirstNameEl.value = '';
-    this.addLastNameEl.value = '';
-    this.addEmailIdEl.value = '';
-    this.addMobileNoEl.value = '';
-    this.addRoleEl.value = '';
-    this.addUserNameEl.value = '';
-    this.addPasswordEl.value = '';
-    this.addConfirmPasswordEl.value = '';
-  };
   /**
    * After clicking on the x button, turn off the popup containing the add user form.
    */
@@ -190,22 +178,22 @@ export default class DashboardView {
 
         //Displays an error if the user enters digits
         if (!validateInputText(userName) && this.addUserErrorEls.addUserNameEl) {
-          this.addUserErrorEls.addUserNameEl.textContent = `${REQUIRED_TEXT}`;
+          this.addUserErrorEls.addUserNameEl.textContent = REQUIRED_TEXT;
         }
 
         //Displays an error if the user enters the wrong phone number format
         if (mobile && !validatePhoneNumber(mobile) && this.addUserErrorEls.addMobileNoEl) {
-          this.addUserErrorEls.addMobileNoEl.textContent = `${INVALID_PHONE_NUMBER}`;
+          this.addUserErrorEls.addMobileNoEl.textContent = INVALID_PHONE_NUMBER;
         }
 
         //Displays an error if the user enters the wrong password format
         if (!validatePassword(password) && this.addUserErrorEls.addPasswordEl) {
-          this.addUserErrorEls.addPasswordEl.textContent = `${INVALID_PASSWORD}`;
+          this.addUserErrorEls.addPasswordEl.textContent = INVALID_PASSWORD;
         }
 
         //Displays an error if the user enters a confirm password that is not the same as the password
         if (!validateConfirmPassword(password, confirmPassword) && this.addUserErrorEls.addConfirmPasswordEl) {
-          this.addUserErrorEls.addConfirmPasswordEl.textContent = `${INVALID_CONFIRM_PASSWORD}`;
+          this.addUserErrorEls.addConfirmPasswordEl.textContent = INVALID_CONFIRM_PASSWORD;
         }
         isValid = false;
       }

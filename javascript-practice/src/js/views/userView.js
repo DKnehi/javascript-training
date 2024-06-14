@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from '../constants/message';
-import showToast from '../views/toast';
+import showToast from '../helpers/toast';
 
 //Error messages from ERROR_MESSAGE constant
 const { REQUIRED_FIELD, REQUIRED_FIELD_PASSWORD } = ERROR_MESSAGE;
