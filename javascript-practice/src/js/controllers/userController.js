@@ -40,7 +40,7 @@ export default class UserController {
         this.view.showLoginMessage(LOGIN_FAILED, 'error');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Failed to login', error);
     } finally {
       this.view.enableSubmitButton();
     }
