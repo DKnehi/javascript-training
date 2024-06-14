@@ -13,6 +13,7 @@ const {
   UPDATE_USER_FAILED,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILED,
+  NOT_DELETE,
   EMAIL_EXISTS,
 } = NOTIFY_MESSAGE;
 
@@ -75,9 +76,11 @@ export default class DashboardController {
         password
       );
       const addedUser = await this.service.addUser(newUser);
+
       this.view.closePopupUser();
       this.view.dashboardMessage(ADD_USER_SUCCESS);
       this.renderTableListUsers();
+      
       return addedUser;
     } catch (error) {
       this.view.dashboardMessage(ADD_USER_FAILED, 'error');
@@ -116,7 +119,6 @@ export default class DashboardController {
         this.view.dashboardMessage(EMAIL_EXISTS, 'error');
         return;
       }
-
       const updatedUser = await this.service.updateUser(userData.id, userData);
 
       this.view.closePopupUser();
@@ -138,6 +140,13 @@ export default class DashboardController {
    */
   deleteUser = async (id) => {
     try {
+      const userData = await this.service.getUserById(id);
+
+      if (userData.role === 'Super Admin') {
+        this.view.dashboardMessage(NOT_DELETE, 'error');
+        return;
+      };
+
       await this.service.deleteUser(id);
       this.view.dashboardMessage(DELETE_USER_SUCCESS);
       this.renderTableListUsers();

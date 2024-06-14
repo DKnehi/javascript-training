@@ -20,6 +20,7 @@
 - Get familiar with JavaScript syntax
 - Know the basic differences between asynchronous and synchronous
 - Briefly introduction basic DOM manipulation
+- Structure project following MVC pattern
 
 ## TECHNICAL STACK
 

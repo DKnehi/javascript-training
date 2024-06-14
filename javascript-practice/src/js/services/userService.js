@@ -20,6 +20,25 @@ export default class UserService {
   };
 
   /**
+   * Retrieves a user by ID.
+   * @param {string} id - The ID of the user to retrieve.
+   * @returns {Promise<Object>} - A promise that resolves to the user object.
+   */
+  getUserById = async (id) => {
+    try {
+      const response = await fetch(`${API.BASE_URL}/${API.ENDPOINT_USERS}/${id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      throw new Error('Failed to get user by ID.');
+    }
+  };
+
+  /**
    * This function provides a convenient way to authenticate users by matching email and password with data from the API.
    * @param {string} email - The user's email.
    * @param {string} password - The user's password.
